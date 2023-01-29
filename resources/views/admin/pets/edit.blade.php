@@ -18,8 +18,7 @@
         @enderror
       </div>
       <div class="mb-3">
-        <label for="slug" class="form-label">Slug</label>
-        <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug"
+        <input type="hidden" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug"
         required value="{{ old('slug', $pet->slug) }}">
         @error('slug')
             <div class="invalid-feedback">
@@ -67,7 +66,7 @@
       <div class="mb-3">
         <label for="quantity" class="form-label">quantity</label>
         <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity"
-        required autofocus value="{{ old('quantity', $pet->quantity) }}">
+        required value="{{ old('quantity', $pet->quantity) }}">
         @error('quantity')
             <div class="invalid-feedback">
               {{ $message }}

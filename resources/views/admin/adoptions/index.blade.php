@@ -3,23 +3,46 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Data Adoptions</h1>
   </div>
-  <form action="/dashboard/adoptions" method="get" style="display: inline-block;">
-    <input type="text" name="search" placeholder="Search by name" value="{{ request('search') }}">
-    <button type="submit">search</button>
-  </form>
+  <div class="col">
+    <form action="/dashboard/adoptions" method="get" style="display: inline-block;">
+  <div class="input-group mb-3">
+    <input type="text" name="search" class="form-control rounded-0" placeholder="Search Adoptions" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ request('search') }}">
+    <button class="input-group-text rounded-0" style="background-color: #193A6A; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;"  type="submit"><i class="bi bi-search"></i></button>
+  </div>
+    </form>
+  </div>
   @foreach ($categories as $category)
-  <div class="col" style="display: inline-block; ">
+    <div class="col mb-3" style="display: inline-block; ">
 
-  <a href="/dashboard/adoptions?category={{ $category->slug }}" class="btn btn-secondary btn-sm">{{ $category->name }}</a>
-</div>
+    <a href="/dashboard/adoptions?category={{ $category->slug }}" style=" 
+      color: #193A6A;
+      padding: 5px 10px;
+      border: solid 1px #193A6A  ;
+      font-size: 13px;
+      cursor: pointer;"  class="text-decoration-none mb-3">{{ $category->name }}</a>
+  </div>
 
 @endforeach
 <div class="table-responsive">
-  <div class="tab-container">
-    <button class="tab-button" data-status="pending">Pending</button>
-    <button class="tab-button" data-status="approved">Approved</button>
-    <button class="tab-button" data-status="declined">Declined</button>
-  </div>
+    <select  style=" 
+      color: #193A6A;
+      padding: 5px 10px;
+      border: solid 1px #193A6A  ;
+      font-size: 13px;
+      cursor: pointer;"  id="status-select">
+        <option value="all">All</option>
+        <option value="pending">Pending</option>
+        <option value="inprogress">Inprogress</option>
+        <option value="approved">Approved</option>
+        <option value="declined">Declined</option>
+        <option value="completed">Complete</option>
+    </select>
+</div>
 @if ($adoptions->count())
 
       <table class="table table-striped table-sm">
@@ -30,6 +53,7 @@
           <th scope="col">Email</th>
           <th scope="col">Pet Category</th>
           <th scope="col">Pet Name</th>
+          <th scope="col">Quantity</th>
           <th scope="col">Status</th>
           <th scope="col">Action</th>
         </tr>
@@ -38,17 +62,22 @@
         @foreach ($adoptions as $adoption)
         <tr class="adoption-row" data-status="{{ $adoption->status }}">
           <td>{{ $loop->iteration }}</td>
-              <td>{{ $adoption->name}}</td>
-              <td>{{ $adoption->email }}
+              <td>{{ $adoption->user->name}}</td>
+              <td>{{ $adoption->user->email }}
               <td>{{ $adoption->category->name }}</td>
               <td>{{ $adoption->pet->name }}</td>
+              <td>{{ $adoption->quantity }}</td>
               <td>{{ $adoption->status }}</td>
 
               <td>
 
                                 
                 <a href="/dashboard/adoption/{{ $adoption->id }}" class="btn btn-primary"><i class="bi bi-eye"></i></a>
-                {{-- <a href="/dashboard/adoption/{{ $adoption->id }}/delete" class="btn btn-danger"><i class="bi bi-trash"></i></a> --}}
+                {{-- <form action="/dashboard/adoptions/{{ $adoptions->id }}" method="POST" class="d-inline">
+                  @method('delete')
+                  @csrf
+                  <button class="btn btn-danger" onclick="return confirm('Are U Sure ?')"><span data-feather="x-circle"></span> Delete</button>
+                  </form> --}}
 
      
                 @if($adoption->status === 'pending')
@@ -65,32 +94,36 @@
   <p class="text-center fs-4">No. Adoption Found.</p>
 @endif
   <script>
-    window.addEventListener('load', () => {
-    let adoptionRows = document.querySelectorAll('.adoption-row');
+
+// window.addEventListener('load', () => {
+//     let adoptionRows = document.querySelectorAll('.adoption-row');
   
+//     adoptionRows.forEach(row => {
+//       if (row.dataset.status !== 'pending') {
+//         row.style.display = 'none';
+//       }
+//     });
+//   });
+let tabSelect = document.getElementById("status-select");
+let adoptionRows = document.querySelectorAll('.adoption-row');
+
+tabSelect.addEventListener('change', event => {
+  let status = event.target.value;
+
+  if (status === 'all') {
     adoptionRows.forEach(row => {
-      if (row.dataset.status !== 'pending') {
-        row.style.display = 'none';
-      }
+      row.style.display = 'table-row';
     });
+    return;
+  }
+  adoptionRows.forEach(row => {
+    if (row.dataset.status === status) {
+      row.style.display = 'table-row';
+    } else {
+      row.style.display = 'none';
+    }
   });
-  
-    let tabButtons = document.querySelectorAll('.tab-button');
-  let adoptionRows = document.querySelectorAll('.adoption-row');
-  
-  tabButtons.forEach(button => {
-    button.addEventListener('click', event => {
-      let status = event.target.dataset.status;
-  
-      adoptionRows.forEach(row => {
-        if (row.dataset.status === status) {
-          row.style.display = 'table-row';
-        } else {
-          row.style.display = 'none';
-        }
-      });
-    });
-  });
-  
+});
+
   </script>
 @endsection

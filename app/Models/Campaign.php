@@ -58,21 +58,17 @@ class Campaign extends Model
 
     public function percentage()
     {
-        $total_donation = DB::table('donates')
-            ->where('campaign_id', $this->id)
-            ->sum('amount');
+        $total_donation = Donate::where('campaign_id', $this->id)->sum('amount');
     
-        if($total_donation >= $this->donation_target || $this->date_target <= now()){
+        if($total_donation == $this->donation_target || $this->date_target <= now()){
             $this->update(['status' => 'completed']);
         }
         return round($total_donation / $this->donation_target * 100, 2);
     }
     public function remaining()
 {
-    $total_donation = DB::table('donates')
-        ->where('campaign_id', $this->id)
-        ->sum('amount');
-    return $this->donation_target - $total_donation;
+    $total_donation = Donate::where('campaign_id', $this->id)->sum('amount');
+    return number_format($this->donation_target - $total_donation);
 }
 
     

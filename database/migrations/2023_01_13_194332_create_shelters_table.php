@@ -17,13 +17,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('category_id');
-            $table->string('name');
-            $table->string('email');
             $table->string('image');
             $table->string('file');
-            $table->string('ktp');
             $table->text('reason')->nullable();
-            $table->enum('status', ['pending', 'approved', 'declined'])->default('pending');
+            $table->enum('status', ['pending', 'inprogress', 'declined','approved', 'completed'])->default('pending');
+            $table->string('code')->nullable();
+            $table->string('approval_file')->nullable();
             $table->timestamps();
         });
     }

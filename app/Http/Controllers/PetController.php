@@ -19,14 +19,14 @@ class PetController extends Controller
     {
         return view('admin.pets.index',[
             'pets' =>  Pet::latest()->filter(request(['search', 'category']))->get(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
         ]);
     }
 
     public function petAll(){
         $categories = Category::all();
         return view('pets.index', compact('categories'), [
-            "pets" => Pet::latest()->filter(request(['search' , 'category']))->paginate(7)->withQueryString(),
+            "pets" => Pet::latest()->filter(request(['search' , 'category']))->paginate(6)->withQueryString(),
         ]);
     }
     public function pet(Pet $pet){
@@ -97,17 +97,15 @@ class PetController extends Controller
 
         }
         $validatedData = $request->validate($rules);
-
+  
         if($request->file('image')){
             $validatedData['image'] = $request->file('image')->store('images');
+            if($pet->image){
+                Storage::delete($pet->image);
+            }
         }
-
-        if($pet->image){
-            Storage::delete($pet->image);
-}
-
         $validatedData['admin_id'] = Auth::guard('admin')->user()->id;
-        $validatedData['short_description'] = Str::limit(strip_tags ($request->description), 200);
+        $validatedData['short_description'] = Str::limit(strip_tags ($request->description), 50);
 
         Pet::where('id', $pet->id)
         ->update($validatedData);

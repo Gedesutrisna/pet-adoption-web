@@ -29,7 +29,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        
+        $date_target = "2023-02-01";
+
         Admin::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
@@ -46,13 +47,234 @@ class DatabaseSeeder extends Seeder
 
         Category::create([
             'name' => 'Anjing',
-            'slug' => 'anjing'
+            'slug' => 'anjing',
+            'admin_id' => 1,
+
         ]);
         Category::create([
             'name' => 'Kucing',
-            'slug' => 'kucing'
+            'slug' => 'kucing',
+            'admin_id' => 1,
+
+        ]);
+        
+        Pet::create([
+            'name' => 'Hewan Kucing',
+            'slug' => 'hewan-kucing',
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+        ',
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
+             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'quantity' => 9,
+             'category_id' => 2,
+             'admin_id' => 1,
+             'status' => 'available',
+        ]);
+        Pet::create([
+            'name' => 'Hewan Kucing2',
+            'slug' => 'hewan-kucing2',
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+        ',
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
+             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'quantity' => 9,
+             'category_id' => 2,
+             'admin_id' => 1,
+             'status' => 'available',
+        ]);
+        Pet::create([
+            'name' => 'Hewan Kucing3',
+            'slug' => 'hewan-kucing3',
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+        ',
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
+             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'quantity' => 9,
+             'category_id' => 2,
+             'admin_id' => 1,
+             'status' => 'available',
+        ]);
+        Pet::create([
+            'name' => 'Hewan Anjing',
+            'slug' => 'hewan-anjing',
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+        ',
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
+             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'quantity' => 8,
+             'category_id' => 1,
+             'admin_id' => 1,
+             'status' => 'available',
+        ]);
+        Pet::create([
+            'name' => 'Hewan Anjing2',
+            'slug' => 'hewan-anjing2',
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+        ',
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
+             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'quantity' => 8,
+             'category_id' => 1,
+             'admin_id' => 1,
+             'status' => 'available',
+        ]);
+        Pet::create([
+            'name' => 'Hewan Anjing3',
+            'slug' => 'hewan-anjing3',
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+        ',
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
+             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'quantity' => 8,
+             'category_id' => 1,
+             'admin_id' => 1,
+             'status' => 'available',
         ]);
 
+        Campaign::create([
+            'title' => 'Penyelamatan Anjing Jalanan',
+            'slug' => 'penyelamatan-anjing-jalanan',
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+        ',
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
+             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
+             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'category_id' => 1,
+             'admin_id' => 1,
+             'status' => 'ongoing',
+             'donation_target' => 5000000,
+             'date_target' => $date_target,
+        ]);
+        Campaign::create([
+            'title' => 'Penyelamatan Anjing Rabies',
+            'slug' => 'penyelamatan-anjing-rabies',
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+        ',
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
+             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
+             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'category_id' => 1,
+             'admin_id' => 1,
+             'status' => 'ongoing',
+             'donation_target' => 6000000,
+             'date_target' => $date_target,
+        ]);
+        Campaign::create([
+            'title' => 'Penyelamatan Anjing Sakit',
+            'slug' => 'penyelamatan-anjing-sakit',
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+        ',
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
+             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
+             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'category_id' => 1,
+             'admin_id' => 1,
+             'status' => 'ongoing',
+             'donation_target' => 7000000,
+             'date_target' => $date_target,
+        ]);
+        Campaign::create([
+            'title' => 'Penyelamatan Kucing Jalanan',
+            'slug' => 'penyelamatan-kucing-jalanan',
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+        ',
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
+             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
+             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'category_id' => 2,
+             'admin_id' => 1,
+             'status' => 'ongoing',
+             'donation_target' => 5000000,
+             'date_target' => $date_target,
+        ]);
+        Campaign::create([
+            'title' => 'Penyelamatan Kucing Rabies',
+            'slug' => 'penyelamatan-kucing-rabies',
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+        ',
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
+             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
+             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'category_id' => 2,
+             'admin_id' => 1,
+             'status' => 'ongoing',
+             'donation_target' => 6000000,
+             'date_target' => $date_target,
+        ]);
+        Campaign::create([
+            'title' => 'Penyelamatan Kucing Sakit',
+            'slug' => 'penyelamatan-kucing-sakit',
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+        ',
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
+             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
+             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'category_id' => 2,
+             'admin_id' => 1,
+             'status' => 'ongoing',
+             'donation_target' => 7000000,
+             'date_target' => $date_target,
+        ]);
     }
 
 }

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pet;
 use App\Models\User;
 use App\Models\Shelter;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ShelterController extends Controller
 {
@@ -19,17 +23,7 @@ class ShelterController extends Controller
     }
     public function dataShelter(Request $request)
     {
-      
-        $shelters = Shelter::where('status', 'pending')->get();
-        $shelters = Shelter::all();
-        $shelter = Shelter::all();
-
-        if(request('category')){
-            $category = Category::firstWhere('slug', request('category'));
-        }
-
-
-        return view('admin.shelters.index', compact('shelters','shelter'),[
+        return view('admin.shelters.index',[
             "shelters" => Shelter::latest()->filter(request(['search' , 'category']))->paginate(7)->withQueryString(),
             'categories' => Category::all()
         ]);       
@@ -49,20 +43,14 @@ class ShelterController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|max:255',
             'category_id' => 'required',
             'image' => 'required|file',
-            'ktp' => 'required|file',
             'file' => 'required|file:pdf,word',
             'reason' => 'nullable',
         ]);
 
         if($request->file('image')){
             $validatedData['image'] = $request->file('image')->store('images');
-        }
-        if($request->file('ktp')){
-            $validatedData['ktp'] = $request->file('ktp')->store('ktps');
         }
         if($request->file('file')){
             $validatedData['file'] = $request->file('file')->store('files');
@@ -72,12 +60,48 @@ class ShelterController extends Controller
 
         Shelter::create($validatedData);
 
-        return back()->with('success', 'Shelter Succesfully');
+        return redirect('/profile')->with('success', 'Shelter Succesfully');
     }
-
-    public function approve($id)
+    public function update(Request $request,$id)
     {
         $shelter = Shelter::findOrFail($id);
+
+
+        $rules = [
+            'approval_file' => 'required|file:pdf,word',
+        ];
+
+    $validatedData = $request->validate($rules);
+    if($request->file('approval_file')){
+        $validatedData['approval_file'] = $request->file('approval_file')->store('files');
+    }
+
+    $validatedData['user_id'] = Auth()->user()->id;
+    Shelter::where('id', $shelter->id)
+    ->update($validatedData);
+    $shelter->code = rand(5,99999); // generate kode unik
+    $shelter->status = 'approved'; // generate kode unik
+        $shelter->save();
+    return back()->with('success', 'file has been Submited!');
+    }
+
+
+    public function approve(Request $request,$id)
+    {
+        $shelter = Shelter::findOrFail($id);
+        // $shelter->code = rand(5,99999); // generate kode unik
+// mendapatkan path file
+$filePath = public_path('storage/files/file.pdf');
+
+// mengecek apakah file ada
+if (File::exists($filePath)) {
+    // mengambil file dan mengubahnya menjadi binary
+    $file = File::get($filePath);
+    $file = base64_encode($file);
+    $filePath = 'storage/files/file.pdf';
+    $shelter->approval_file = $filePath;    
+    }
+        $shelter->save();
         $shelter->approve();
         return redirect()->back()->with('succes', 'shelter request approved!');
     }

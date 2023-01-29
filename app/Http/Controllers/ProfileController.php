@@ -23,9 +23,7 @@ class ProfileController extends Controller
     }
     public function dataAdoption()
     {  
-        return view('profile.dataAdoption',[
-            'adoption' => Adoption::where('user_id', Auth::user()->id)->get(),
-        ]);
+        return view('profile.dataAdoption');
     }
     public function dataShelter()
     {    
@@ -38,24 +36,30 @@ class ProfileController extends Controller
             $validatedData = $request->validate([
                 'name' => 'nullable|max:255',
                 'username' => 'nullable|max:255',
-                'password' => 'nullable|max:100',
                 'email' => 'nullable|max:100|email:dns',
                 'phone' => 'nullable|digits_between:10,15',
                 'image' => 'nullable|image|file',
+                'ktp' => 'nullable|file',
             ]);
             if($request->file('image')){
-                $validatedData['image'] = $request->file('image')->store('images');
+                $validatedData['image'] = $request->file('image')->store('avatars');
+            }
+            if($request->file('ktp')){
+                $validatedData['ktp'] = $request->file('ktp')->store('ktps');
             }
     
             if($user->image){
                 Storage::delete($user->image);
     }
-
-            $validatedData['password'] = bcrypt($validatedData['password']);
+    
+            if($user->ktp){
+                Storage::delete($user->ktp);
+    }
     
             Auth()->user()->update($validatedData);
             
             return back()->with('toast_success', 'Profile Update Successfully!');
    
     }
+
 }

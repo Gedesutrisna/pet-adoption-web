@@ -14,16 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('donates', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignId('user_id');
             $table->foreignId('adoption_id')->nullable();
             $table->foreignId('shelter_id')->nullable();
             $table->foreignId('campaign_id')->nullable();
             $table->integer('amount');
-            $table->string('name');
-            $table->string('email');
             $table->text('comment')->nullable();
-            $table->enum('status', ['unpaid', 'paid',])->default('unpaid');
+            $table->enum('status', ['unpaid', 'paid'])->default('unpaid');
             $table->timestamps();
         });
     }

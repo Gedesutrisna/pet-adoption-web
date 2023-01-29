@@ -1,87 +1,139 @@
 @extends('layouts.main')
 @section('container')
 <div class="container">
+  <div class="back mb-3">
+    <a href="/campaigns"><i   style="font-size: 2rem; color:#193A6A" class="bi bi-arrow-left-circle-fill"></i></a>
+  </div>
     <div class="row my-3">
-      <div class="col-lg-8">
-        <h1 class="mb-3">{{ $campaign->title}}</h1>
-      <div style="max-height: 350px; overflow: hidden; ">
+      <h1>{{ $campaign->title}}</h1>
+      <p class="mb-3">{{ $campaign->category->name}}</p>
+      <div class="col-lg-5">
+        <div class="position-absolute px-4 py-4 text-white">
+          {{ $campaign->status }}
+        </div>
+      <div class="mb-3" style="max-height: 350px; overflow: hidden; ">
         <img src="{{ asset('storage/' . $campaign->image ) }}" alt="{{ $campaign->category->name }}"
         class="img-fluid mt-2">
       </div>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: {{ $campaign->percentage() }}%" aria-valuenow="{{ $campaign->percentage() }}" aria-valuemin="0" aria-valuemax="100"></div>
+        <span class="progress-bar-label position-absolute">{{ $campaign->percentage() }}%</span>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-5">
+          <p style="font-size: .8rem; text-align:left;">Raised:
+            @if($campaign->donations)
+            Rp{{ number_format($campaign->donations->sum('amount'), 0, ',', '.') }}
+            @else
+            Rp0
+            @endif
+          </p>
+        </div>
+        <div class="col">
+          <p style="font-size: .8rem; text-align:right;"> 
+            Goal:Rp{{ number_format($campaign->donation_target, 0, ',', '.') }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
 
-  <article class="my-3 fs-5">
-    {!! $campaign->body !!}
-  </article>
-
+      <article class="my-3 fs-6">
+        {!! $campaign->body !!}
+      </article>
+    </div>
+    
+    </div>
   @if ($campaign->status !== 'completed')
+  @if (auth()->check())
       
-  <form method="POST" action="/donates/create" class="mb-5">
-    @csrf
-    <div class="mb-3">
-        <label for="amount" class="form-label">Amount</label>
-        <input type="number" name="amount"  class="form-control @error('amount') is-invalid @enderror"  id="amount" min="50000" step="1000" required value="{{ old('amount') }}">
-        
-        @error('amount')
-        <div class="invalid-feedback">
-            {{ $message }}
-          </div>
-          @enderror
-<br>
-<button class="nominal" value="50000">Rp {{ number_format(50000, 0, ',', '.') }}</button>
-<button class="nominal" value="100000">Rp {{ number_format(100000, 0, ',', '.') }}</button>
-<button class="nominal" value="500000">Rp {{ number_format(500000, 0, ',', '.') }}</button>
+  <div class="row">
+   <div class="col-5">
 
-      </div>
-    <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
-      <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-      required autofocus value="{{ old('name') }}">
-      @error('name')
-          <div class="invalid-feedback">
-            {{ $message }}
-          </div>
-      @enderror
-    </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email"
-      required  value="{{ old('email') }}">
-      @error('email')
-          <div class="invalid-feedback">
-            {{ $message }}
-          </div>
-      @enderror
-    </div>
-      <div class="mb-3">
-        <label for="comment" class="form-label">comment</label>
-        <input type="text" class="form-control @error('comment') is-invalid @enderror" id="comment" name="comment"  value="{{ old('comment') }}">
-        @error('comment')
-            <div class="invalid-feedback">
-              {{ $message }}
-            </div>
-        @enderror
-      </div>
-      <div class="mb-3">
-        <input type="hidden" class="form-control @error('campaign_id') is-invalid @enderror" id="campaign_id" name="campaign_id"  value="{{ old('campaign_id', $campaign->id) }}">
-        @error('campaign_id')
-            <div class="invalid-feedback">
-              {{ $message }}
-            </div>
-        @enderror
-      </div>
-   
-    <button type="submit" class="btn btn-primary">Donate Now</button>
-  </form>
+     <form method="POST" action="/donates/create" class="mb-5">
+       @csrf
+       <div class="mb-3">
+           <label for="amount" class="form-label">Amount</label>
+           <input type="number" name="amount"  class="form-control @error('amount') is-invalid @enderror"  id="amount" min="50000" max="{{ $campaign->donate_target }}" step="1000" required value="{{ old('amount') }}">
+           
+           @error('amount')
+           <div class="invalid-feedback">
+               {{ $message }}
+             </div>
+             @enderror
+             <br>
+             <button style=" 
+             color: #193A6A;
+             padding: 8px 36px;
+             border: solid 1px #193A6A;
+             font-size: 13px;
+             cursor: pointer;" class="nominal" value="50000" onclick="setAmount(50000); return false;">Rp {{ number_format(50000, 0, ',', '.') }}</button>
+             <button style=" 
+             color: #193A6A;
+             padding: 8px 36px;
+             border: solid 1px #193A6A;
+             font-size: 13px;
+             cursor: pointer;" class="nominal" value="100000" onclick="setAmount(100000); return false;">Rp {{ number_format(100000, 0, ',', '.') }}</button>
+             <button style=" 
+             color: #193A6A;
+             padding: 8px 36px;
+             border: solid 1px #193A6A;
+             font-size: 13px;
+             cursor: pointer;" class="nominal" value="500000" onclick="setAmount(500000); return false;">Rp {{ number_format(500000, 0, ',', '.') }}</button>
+         </div>
+         <div class="mb-3">
+           <label for="reason" class="form-label">Reason <span style="color: red">*</span></label>
+           <textarea name="reason" class="form-control @error('reason') is-invalid @enderror" id="reason" value="{{ old('reason') }}" rows="4" placeholder="Alasan anda menitipkan hewan kepada kami.." style="resize: none"></textarea>
+           @error('reason')
+               <div class="invalid-feedback">
+                 {{ $message }}
+               </div>
+           @enderror
+         </div>
+         <div class="mb-3">
+           <input type="hidden" class="form-control @error('campaign_id') is-invalid @enderror" id="campaign_id" name="campaign_id"  value="{{ old('campaign_id', $campaign->id) }}">
+           @error('campaign_id')
+               <div class="invalid-feedback">
+                 {{ $message }}
+               </div>
+           @enderror
+         </div>
+      
+         <div class="row justify-content-between">
+           <div class="col-auto">
+             <button type="button" id="reset-btn" style=" 
+             color: #193A6A;
+             padding: 8px 36px;
+             border-radius: .3rem;
+             border: solid 1px #193A6A;
+             font-size: 13px;
+             cursor: pointer;">Cancel</button>
+           </div>
+           <div class="col-auto">
+         <button type="submit" id="submit-btn"  style="background-color: #193A6A; 
+         color: white;
+         padding: 8px 36px;
+         border-radius: .3rem;
+         border: solid 1px #193A6A;
+         font-size: 13px;
+         cursor: pointer;">Submit</button>
+           </div>
+     </form>
+   </div>
+ </div> 
   @else
       
   @endif
-</div>
-</div>
+  @else
+      
+  @endif
+
 </div>
 <script>
   let nominal = document.querySelectorAll('.nominal');
   let amount = document.getElementById('amount');
-
+  function setAmount(amount) {
+        document.getElementById("amount").value = amount;
+    }
   nominal.forEach(function(el) {
       el.addEventListener('click', function() {
           amount.value = this.value;

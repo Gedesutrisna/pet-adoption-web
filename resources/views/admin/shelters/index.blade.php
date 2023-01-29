@@ -3,25 +3,46 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Data Shelters</h1>
   </div>
-  <form action="/dashboard/shelters" method="get" style="display: inline-block;">
-    <input type="text" name="search" placeholder="Search by name" value="{{ request('search') }}">
-    <button type="submit">search</button>
-  </form>
+  <div class="col">
+    <form action="/dashboard/shelters" method="get" style="display: inline-block;">
+  <div class="input-group mb-3">
+    <input type="text" name="search" class="form-control rounded-0" placeholder="Search Shelters" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ request('search') }}">
+    <button class="input-group-text rounded-0" style="background-color: #193A6A; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;"  type="submit">search</button>
+  </div>
+    </form>
+  </div>
   @foreach ($categories as $category)
-  <div class="col" style="display: inline-block; ">
+    <div class="col mb-3" style="display: inline-block; ">
 
-  <a href="/dashboard/shelters?category={{ $category->slug }}" class="btn btn-secondary btn-sm">{{ $category->name }}</a>
-</div>
+    <a href="/dashboard/shelters?category={{ $category->slug }}" style=" 
+      color: #193A6A;
+      padding: 5px 10px;
+      border: solid 1px #193A6A  ;
+      font-size: 13px;
+      cursor: pointer;"  class="text-decoration-none mb-3">{{ $category->name }}</a>
+  </div>
 
 @endforeach
-@if ($shelters->count())
-
-  <div class="table-responsive">
-    <div class="tab-container">
-      <button class="tab-button" data-status="pending">Pending</button>
-      <button class="tab-button" data-status="approved">Approved</button>
-      <button class="tab-button" data-status="declined">Declined</button>
-    </div>
+<div class="table-responsive">
+  <select  style=" 
+  color: #193A6A;
+  padding: 5px 10px;
+  border: solid 1px #193A6A  ;
+  font-size: 16px;
+  cursor: pointer;"  id="status-select">
+    <option value="all">All</option>
+    <option value="pending">Pending</option>
+    <option value="inprogress">Inprogress</option>
+    <option value="approved">Approved</option>
+    <option value="declined">Declined</option>
+    <option value="completed">Complete</option>
+</select>
+    @if ($shelters->count())
     <table class="table table-striped table-sm">
       <thead>
         <tr>
@@ -38,8 +59,8 @@
               <tr class="shelter-row" data-status="{{ $shelter->status }}">
 
               <td>{{ $loop->iteration }}</td>
-              <td>{{ $shelter->name}}</td>
-              <td>{{ $shelter->email }}
+              <td>{{ $shelter->user->name}}</td>
+              <td>{{ $shelter->user->email }}
               <td>{{ $shelter->category->name }}</td>
               <td>{{ $shelter->status }}</td>
 
@@ -47,8 +68,11 @@
 
                                 
                 <a href="/dashboard/shelters/{{ $shelter->id }}" class="btn btn-primary"><i class="bi bi-eye"></i></a>
-                {{-- <a href="/dashboard/shelters/{{ $shelter->id }}/delete" class="btn btn-danger"><i class="bi bi-trash"></i></a> --}}
-
+                {{-- <form action="/dashboard/shelters/{{ $shelters->id }}" method="POST" class="d-inline">
+                  @method('delete')
+                  @csrf
+                  <button class="btn btn-danger" onclick="return confirm('Are U Sure ?')"><span data-feather="x-circle"></span> Delete</button>
+                  </form> --}}
      
                 @if($shelter->status === 'pending')
                 <a href="{{ route('shelters.approve', $shelter->id) }}" class="btn btn-success" id="approve-{{ $shelter->id }}">Approve</a>
@@ -65,30 +89,25 @@
   <p class="text-center fs-4">No. Shelter Found.</p>
 @endif
 <script>
-  window.addEventListener('load', () => {
-  let shelterRows = document.querySelectorAll('.shelter-row');
-
-  shelterRows.forEach(row => {
-    if (row.dataset.status !== 'pending') {
-      row.style.display = 'none';
-    }
-  });
-});
-
-  let tabButtons = document.querySelectorAll('.tab-button');
+ 
+ let tabSelect = document.getElementById("status-select");
 let shelterRows = document.querySelectorAll('.shelter-row');
 
-tabButtons.forEach(button => {
-  button.addEventListener('click', event => {
-    let status = event.target.dataset.status;
+tabSelect.addEventListener('change', event => {
+  let status = event.target.value;
 
+  if (status === 'all') {
     shelterRows.forEach(row => {
-      if (row.dataset.status === status) {
-        row.style.display = 'table-row';
-      } else {
-        row.style.display = 'none';
-      }
+      row.style.display = 'table-row';
     });
+    return;
+  }
+  shelterRows.forEach(row => {
+    if (row.dataset.status === status) {
+      row.style.display = 'table-row';
+    } else {
+      row.style.display = 'none';
+    }
   });
 });
 

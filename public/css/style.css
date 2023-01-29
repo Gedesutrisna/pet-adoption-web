@@ -1,4 +1,75 @@
+:root{
+    --primary-color: #193A6A;
+    --Btn-color: #FFDA47;
+
+    --heading-font: 'Lato', sans-serif;
+    --main-font: 'Nunito', sans-serif;
+}
+
+
 
 .container{
+    width: 1500px;
+}
+
+.container .navbar-brand{
+    font-family: var(--heading-font);
+    color: var(--primary-color);
+    font-size: 2.125rem;
+    font-weight: 800;
+}
+
+.container .navbar-brand span{
+    font-family: var(--heading-font);
+    color: var(--Btn-color);
+    font-size: 2.125rem;
+}
+
+.container .navbar-nav .nav-item-custom .nav-link{
+    color: black;
+    font-family: var(--main-font);
+}
+
+section{
     margin-top: 100px;
+    margin-left: 50px;
+}
+ .row .left .heading{
+    font-variant: var(--main-font);
+    font-weight: 800;
+    font-size: 3.25rem;
+    color: var(--primary-color);
+    text-align: center;
+ }
+
+.row .left .subheading{
+    font-family: var(--heading-font);
+    width: 500px;
+    margin-left: 50px;
+}
+
+.left .btn-learn{
+    margin-left: 40px;
+    margin-top: 150px;
+    padding: 16px 50px;
+    border-radius: 8px;
+    font-family: var(--heading-font);
+    font-weight: 600;
+    font-weight: 18px;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    text-decoration: none;
+    list-style: none;
+}
+
+.left .btn-learn:hover{
+    background-color: var(--primary-color);
+    color: #fff;
+    transition: all .3s ease-in-out;
+    
+}
+
+.left .btn-learn img{
+    margin-right: 20px;
+    
 }

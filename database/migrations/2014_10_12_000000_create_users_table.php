@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('image')->default('user.png');
+            $table->string('image')->nullable();
+            $table->string('ktp')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

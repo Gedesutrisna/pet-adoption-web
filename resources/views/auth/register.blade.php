@@ -1,59 +1,70 @@
 @extends('layouts.main')
 @section('container')
-
-<div class="row justify-content-center">
-
-    <div class="col-md-5 rounded-end" style="background-color: #BAD7E9">
-        <main class="form-registration w-100 m-auto " >
-          <div class="text" style="text-align: center; padding-top: 20px">
-            <h1 class="h3 mb-3 fw-normal">Create your account</h1>
-            <p class="text-muted">it’s free and easy</p>
+<div class="container">
+  <div class="card mb-3 border-0 rounded-0" style="box-shadow: 3px 3px 10px #ccc">
+    <div class="row g-0">
+      <div class="col-md-6">
+        <img src="assets/login-register.png" class="img-fluid w-100 h-100 rounded-end" alt="...">
+      </div>
+      <div class="col-md-6">
+        <div class="card-body">
+          <div class="col mt-5" style="padding-left: 3rem; ">
+            <h5 class="card-title mb-3">Sign up</h5>
+            <p class="mb-0">If you already have an account register</p>
+            <p>You can <a href="/login" class="text-decoration-none"> Login here !</a></p>
           </div>
-            <form action="/register" method="POST" style="margin-left: 50px; margin-right: 50px;">
-              @csrf
-              <div class="form-floating">
-                <div class="form-group">
-                  <strong>Name</strong>
-                  <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name" required value="{{ old('name') }}">
-                  @error('name')
-                <div class="invalid-feedback">
-                  {{ $message }}
-                </div>  
-                @enderror
-              </div>
-              </div>
-             
-              <div class="form-floating" style="padding-top: 20px">
-                <div class="form-group">
-                  <strong>Email</strong>
-                  <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" required value="{{ old('email') }}">
-                  @error('email')
-                <div class="invalid-feedback">
-                  {{ $message }}
-                </div>  
-                @enderror
-              </div>
-              </div>
-              <div class="form-floating" style="padding-top: 20px">
-                <div class="form-group">
-                  <strong>Password</strong>
-                  <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Password" required>
-                  @error('password')
-                <div class="invalid-feedback">
-                  {{ $message }}
-                </div>  
-                @enderror
-              </div>
-              </div>
-            <div class="click" style="padding-top: 20px">
-
-              <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
-            </div>
-              
-            </form>
-            <small style="padding-bottom: 20px" class="d-block text-center mt-3">Already Registered?<a href="/login">Login</a></small>
-          </main>
+          <form action="/register" method="POST" style="margin-left: 50px; margin-right: 50px; margin-top:30px">
+            @csrf
+            <div class="mb-3">
+              <label for="name" class="form-label"><i class="bi bi-person"></i> Name</label>
+              <input type="text" name="name" style="border: 2px " class="form-control border-bottom rounded-0 @error('name') is-invalid @enderror" id="name" placeholder="Enter Your Name" required value="{{ old('name') }}">
+              @error('name')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+              @enderror
+            </div>  
+            <div class="mb-3">
+              <label for="email" class="form-label"><i class="bi bi-envelope"></i> Email</label>
+              <input type="text" name="email" style="border: 2px " class="form-control border-bottom rounded-0 @error('email') is-invalid @enderror" id="email" placeholder="Enter Your Email Address" required value="{{ old('email') }}">
+              @error('email')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+              @enderror
+            </div>  
+            <div class="mb-3">
+              <label for="password" class="form-label"><img src="assets/padlock.png" alt=""> Password</label>
+              <input type="password" name="password" style="border: 2px " class="form-control border-bottom rounded-0 @error('password') is-invalid @enderror" id="password" placeholder="Enter Your Password" required>
+              @error('password')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+              @enderror
+            </div>  
+            <div class="mb-5">
+              <label for="confirm_password" class="form-label"><img src="assets/padlock.png" alt="">Confirm Password</label>
+              <input type="password" name="confirm_password" style="border: 2px " class="form-control border-bottom rounded-0 @error('confirm_password') is-invalid @enderror" id="confirm_password" placeholder="Enter Your confirm_password" required>
+              @error('confirm_password')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+              @enderror
+            </div>  
+          <div class="form-submit mb-5">
+            <button type="submit" id="submit-btn" style="background-color: #193A6A; 
+            color: white;
+            width: 100%;
+            height:40px;
+            border-radius: 1rem;
+            border: solid 1px #193A6A;
+            font-size: 13px;
+            cursor: pointer;">Register</button>            
+          </div>     
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
-
 @endsection

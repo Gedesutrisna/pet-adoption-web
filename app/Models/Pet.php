@@ -23,7 +23,8 @@ class Pet extends Model
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
             return $query->where('name', 'like', '%' . $search . '%')
-                ->orWhere('description', 'like', '%' . $search . '%');
+                ->orWhere('description', 'like', '%' . $search . '%')
+                ->orWhere('status', 'like', '%' . $search . '%');
         });
         $query->when($filters['category'] ?? false, function ($query, $category) {
             return $query->whereHas('category', function ($query) use ($category) {

@@ -3,84 +3,86 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Http\Requests\StoreCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return view('admin.categories.index',[
+            'categories' => Category::all(),
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
-        //
+        return view('admin.categories.create', [
+            'categories' => Category::all(),
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreCategoryRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreCategoryRequest $request)
+    
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+        ]);
+
+        $validatedData['admin_id'] = Auth::guard('admin')->user()->id;
+
+        Category::create($validatedData);
+
+        return redirect('/dashboard/categories')->with('success', 'New Category Has Been Added!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show(Category $category)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit',[
+            'category' => $category ,
+        ]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateCategoryRequest  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(Request $request, Category $category)
     {
-        //
+        $rules = [
+            'name' => 'required|max:255',
+        ];
+
+    if($request->slug  != $category->slug){
+        $rules['slug'] = 'required|unique:categories';
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+        $validatedData = $request->validate($rules);
+        $validatedData['admin_id'] = Auth::guard('admin')->user()->id;
+
+        Category::where('id', $category->id)->update($validatedData);
+
+        return redirect('dashboard/categories')->with('success', 'Ctategory Has Been Updated !');
+
+    }
+
+   
     public function destroy(Category $category)
     {
-        //
+        Category::destroy($category->id);
+        return back()->with('success', 'Category Has Been Deleted');
     }
+
+    
+    public function checkSlug(Request $request){
+        $slug = SlugService::createSlug(Category::class, 'slug', $request->name);
+        return response()->json(['slug' => $slug]);
+    }
+   
 }

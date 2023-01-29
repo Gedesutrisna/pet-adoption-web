@@ -3,8 +3,8 @@
 <div class="container">
     <div class="row my-3">
       <div class="col-lg-8">
-        <h1 class="mb-3">{{ $adoption->name}}</h1>
-       <p>{{ $adoption->email }}</p>
+        <h1 class="mb-3">{{ $adoption->user->name}}</h1>
+       <p>{{ $adoption->user->email }}</p>
        <h1 class="mb-3">{{ $adoption->pet->name}}</h1>
       
        <div style="max-height: 350px; overflow: hidden; ">

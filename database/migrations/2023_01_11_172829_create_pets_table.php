@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('pets', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique();
             $table->string('short_description');
             $table->text('description');
-            $table->string('slug')->unique();
             $table->string('image')->nullable();
             $table->integer('quantity');
             $table->foreignId('category_id');

@@ -3,18 +3,14 @@
 <div class="card mb-3 border-0" style="margin-top:100px;">
   
   <div class="row g-5" >
-    
-      
-      <div class="back">
-        <a href="/" class="btn btn-secondary">Back</a>
-      </div>
+
       <div class="col-md-3 mt-3">
         <div class="card-body border border-1 rounded-start">
 
             <h3>Profile     @if(Auth::user()->image)
               <img class="image rounded-circle" src="{{ asset('storage/' . Auth::user()->image ) }}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
-         @endif
-            </h3>
+         @endif  
+        </h3>
 
             <hr>
           <p>Nama : {{ Auth::user()->name }}<p>
@@ -30,7 +26,12 @@
       </div>
       <div class="col-md-8  mt-3">
         <!-- Tombol untuk menampilkan tampilan edit profile -->
-        <button id="toggle-view-button" onclick="toggleView()">Edit Profile</button>
+        <button  style=" 
+        color: #193A6A;
+        padding: 8px 16px;
+        border: solid 1px #193A6A;
+        font-size: 13px;
+        cursor: pointer;" id="toggle-view-button" onclick="toggleView()">Edit Profile</button>
 
 
   <!-- HTML untuk tampilan dashboard -->
@@ -42,7 +43,12 @@
         <div class="card-body">
           <h5 class="card-title">Data Donasi</h5>
           <p class="card-text">{{ Auth::user()->donate->count() }}</p>
-          <a href="/data/donation">See</a>
+          <a  style="background-color: #193A6A; 
+              color: white;
+              padding: 8px 16px;
+              border: none;
+              font-size: 13px;
+              cursor: pointer;" class="text-decoration-none" href="/data/donation">See</a>
         </div>
       </div>
     </div>
@@ -51,7 +57,12 @@
         <div class="card-body">
           <h5 class="card-title">Data Adopsi</h5>
           <p class="card-text">{{ Auth::user()->adoption->count() }}</p>
-          <a href="/data/adoption">See</a>
+          <a  style="background-color: #193A6A; 
+              color: white;
+              padding: 8px 16px;
+              border: none;
+              font-size: 13px;
+              cursor: pointer;" class="text-decoration-none" href="/data/adoption">See</a>
         </div>
       </div>
     </div>
@@ -60,7 +71,12 @@
         <div class="card-body">
           <h5 class="card-title">Data Shelter</h5>
           <p class="card-text">{{ Auth::user()->shelter->count() }}</p>
-          <a href="/data/shelter">See</a>
+          <a  style="background-color: #193A6A; 
+              color: white;
+              padding: 8px 16px;
+              border: none;
+              font-size: 13px;
+              cursor: pointer;" class="text-decoration-none" href="/data/shelter">See</a>
         </div>
       </div>
     </div>
@@ -73,7 +89,8 @@
   <div class="row g-5">
     <div class="col-sm-6">
       <div class="card border border-0">
-        <form action="/profile/update" method="POST" enctype="multipart/form-data">
+          <form action="/profile/{{ Auth::user()->id }}" method="POST" enctype="multipart/form-data">
+            @method('put')
             @csrf
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Nama</label>
@@ -86,7 +103,7 @@
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Username</label>
-              <input name="username" type="text" class="form-control @error('username') is-invalid @enderror" id="username" aria-describedby="emailHelp" autofocus value="{{ old('username', Auth::user()->username ) }}">    
+              <input name="username" type="text" class="form-control @error('username') is-invalid @enderror" id="username" aria-describedby="emailHelp" value="{{ old('username', Auth::user()->username ) }}">    
               @error('username')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -104,6 +121,16 @@
               @enderror
             </div>
             <div class="mb-3">
+              <label for="ktp" class="form-label">Ktp</label>
+              <img class="img-preview img-fluid mb-3 col-sm-5" id="ktp-preview">
+              <input class="form-control @error('ktp') is-invalid @enderror" type="file" id="ktp" name="ktp" onchange="previewImage()">
+              @error('ktp')
+              <div class="invalid-feedback">
+                {{ $message }}
+              </div>
+              @enderror
+            </div>
+            <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">No Telp</label>
               <input name="phone" type="text" class="form-control  @error('phone') is-invalid @enderror" id="phone" aria-describedby="emailHelp" value="{{ old('phone', Auth::user()->phone ) }}">               
               @error('phone')
@@ -112,22 +139,13 @@
               </div>
               @enderror     
             </div>  
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email</label>
-              <input name="email" type="text" class="form-control  @error('email') is-invalid @enderror" id="email" aria-describedby="emailHelp" value="{{ old('email', Auth::user()->email ) }}">               
-              @error('email')
-              <div class="invalid-feedback">
-                {{ $message }}
-              </div>
-              @enderror     
-            </div>  
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Password</label>
-              <input name="password" type="password" class="form-control" id="password" aria-describedby="emailHelp" >     
-            </div>   
               <div class="modal-footer">
-  
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" style="background-color: #193A6A; 
+              color: white;
+              padding: 8px 16px;
+              border: none;
+              font-size: 13px;
+              cursor: pointer;" class="text-decoration-none">Update</button>
               </div>
             </form>    
       </div>
@@ -150,7 +168,12 @@
           </div>
           <div class="modal-footer">
         
-            <button type="submit" class="btn btn-primary">Update Password</button>
+            <button type="submit" style="background-color: #193A6A; 
+              color: white;
+              padding: 8px 16px;
+              border: none;
+              font-size: 13px;
+              cursor: pointer;" class="text-decoration-none">Update Password</button>
           </div>
         </form>
       </div>
@@ -170,6 +193,13 @@
 
       const blob = URL.createObjectURL(image.files[0]);
 imgPreview.src = blob;
+      
+    
+      const ktp = document.querySelector('#ktp');
+      const ktpPreview = document.querySelector('#ktp-preview');
+      ktpPreview.style.display = 'block';
+      const ktpBlob = URL.createObjectURL(ktp.files[0]);
+      ktpPreview.src = ktpBlob;
       }
     
 
@@ -177,7 +207,7 @@ imgPreview.src = blob;
   var currentView = "dashboard";
 
   function toggleView() {
-    if (currentView === "dashboard") {
+    if (currentView == "dashboard") {
       document.getElementById("dashboard").style.display = "none";
       document.getElementById("edit-profile").style.display = "block";
       document.getElementById("toggle-view-button").innerHTML = "Back";

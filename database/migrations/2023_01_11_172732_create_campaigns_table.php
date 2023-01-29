@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('short_body');
-            $table->string('body');
             $table->string('slug')->unique();
+            $table->string('short_body');
+            $table->text('body');
             $table->string('image')->nullable();
             $table->foreignId('category_id');
             $table->foreignId('admin_id');

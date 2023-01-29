@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use Money\Money;
+use Midtrans\Snap;
+use App\Models\Pet;
 use Money\Currency;
+use Midtrans\Config;
 use App\Models\Donate;
+use App\Models\Shelter;
+use App\Models\Adoption;
 use App\Models\Campaign;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Client\Events\RequestSending;
 
 class DonateController extends Controller
 {
@@ -16,15 +22,90 @@ class DonateController extends Controller
     {
         return view('donates.index',[
             'donates' => Donate::where('user_id', Auth()->user())->get(),
-            'campaigns' => Campaign::latest()->take(1)->get()
+            'main_campaigns' => Campaign::latest()->take(1)->get(),
+            'submain_campaigns' => Campaign::latest()->take(5)->get()
         ]);
     }
+    public function transaction(Donate $donate,$id)
+    {
+        $donate = Donate::find($id);
+                // Set your Merchant Server Key
+\Midtrans\Config::$serverKey = config('app.server_key');
+// Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+\Midtrans\Config::$isProduction = false;
+// Set sanitization on (default)
+\Midtrans\Config::$isSanitized = true;
+// Set 3DS transaction for credit card to true
+\Midtrans\Config::$is3ds = true;
+ 
+$params = array(
+    'transaction_details' => array(
+        'order_id' => $donate->id,
+        'gross_amount' => $donate->amount,
+        'adoption_id' => $donate->adoption_id,
+    ),
+    'items_details' => array(
+        'campaign_id' => $donate->campaign_id,
+        'shelter_id' => $donate->shelter_id,
+    ),
+    'customer_details' => array(
+        'name' => Auth()->user()->name,
+        'email' => Auth()->user()->email,
+        'phone' => Auth()->user()->phone,
+    ),
+);
+$snapToken = \Midtrans\Snap::getSnapToken($params);
+return view('donate', compact( 'snapToken', 'donate'))->with('success', 'Donate Succesfully');
+}
+
+    public function callBack(Request $request)
+    {
+        $serverKey = config('app.server_key');
+        $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
+        if ($hashed == $request->signature_key) {
+            if ($request->transaction_status == 'capture') {
+                $donate = Donate::find($request->order_id);
+                $donate->update(['status' => 'paid']);
+                if($donate->adoption_id){
+                    $adoption = Adoption::where('code', $request->adoption_id)->first();
+                    if($adoption && $adoption->status !== 'completed'){
+                        $adoption->update(['status' => 'completed']);
+                    }
+                }
+            }
+        }
+    }
+
     public function datadonate()
     {
         $donates = Donate::all();
-        return view('admin.donates.index', compact('donates'));       
- 
-    }
+      
+    
+        return view('admin.donates.index', compact('donates',),[
+            
+            'donates' => Donate::latest()->filter(request(['search']))->get(),
+            $donates = Donate::whereNotNull('campaign_id')->get(),
+            $donates = Donate::whereNotNull('adoption_id')->get(),
+            $donates = Donate::whereNotNull('shelter_id')->get(),
+        ]);
+    } 
+    public function data()
+    {
+        $pets = Pet::all();
+        $campaigns = Campaign::all();
+        $shelters = Shelter::all();
+        $adoptions = Adoption::all();
+        $donates = Donate::all();
+        $total_amount = Donate::sum('amount');
+        $total_amount_others = Donate::whereNull('adoption_id')->whereNull('shelter_id')->whereNull('campaign_id')->sum('amount');
+        $total_amount_campaign = Donate::whereNotNull('campaign_id')->sum('amount');
+        $total_amount_adoption = Donate::whereNotNull('adoption_id')->sum('amount');
+        $total_amount_shelter = Donate::whereNotNull('shelter_id')->sum('amount');
+
+        return view('admin.index', compact('donates', 'pets','campaigns','shelters','adoptions','total_amount','total_amount_others','total_amount_campaign','total_amount_adoption','total_amount_shelter'));
+
+    } 
+
     public function show(Donate $donate, $id)
     {
         $donate = Donate::find($id);
@@ -37,21 +118,73 @@ class DonateController extends Controller
     {         
 
         $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'adoption_id' => 'nullable',
+            'adoption_id' => 'nullable|unique:donates,shelter_id',
+            'shelter_id' => 'nullable|unique:donates,adoption_id',
             'campaign_id' => 'nullable',
-            'shelter_id' => 'nullable',
-            'email' => 'required|max:255',
             'amount' => 'required|numeric|min:50000',
-            'comment' => 'nullable',
+            'comment' => 'nullable',            
         ]);
 
+        //validasi donasi target pada campaign
+        if($request->campaign_id){
+            $campaign = Campaign::find($request->campaign_id);
+            if($validatedData['amount'] >= $campaign->donation_target){
+                return redirect()->back()->with(['error' => 'Jumlah donasi melebihi target donasi campaign']);
+            }
+        }
+        //status
+        if($request->adoption_id){
+            $adoption = Adoption::where('code', $request->adoption_id)->first();
+            if($adoption && $adoption->status !== 'completed'){
+                $validatedData['adoption_id'] = $adoption->id;
+                $adoption->status = 'completed';
+                $adoption->save();
+            }
+        }
+    
+        if($request->shelter_id){
+            $shelter = Shelter::where('code', $request->shelter_id)->first();
+            if($shelter && $shelter->status !== 'completed'){
+                $validatedData['shelter_id'] = $shelter->id;
+                $shelter->status = 'completed';
+                $shelter->save();
+            }
+        }
 
         $validatedData['user_id'] = Auth()->user()->id;
+       $donate = Donate::create($validatedData);
 
-        Donate::create($validatedData);
 
-        return back()->with('success', 'Donate Succesfully');
+// Set your Merchant Server Key
+\Midtrans\Config::$serverKey = config('app.server_key');
+// Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+\Midtrans\Config::$isProduction = false;
+// Set sanitization on (default)
+\Midtrans\Config::$isSanitized = true;
+// Set 3DS transaction for credit card to true
+\Midtrans\Config::$is3ds = true;
+ 
+$params = array(
+    'transaction_details' => array(
+        'order_id' => $donate->id,
+        'gross_amount' => $donate->amount,
+        'adoption_id' => $donate->adoption_id,
+    ),
+
+    'items_details' => array(
+        'campaign_id' => $donate->campaign_id,
+        'shelter_id' => $donate->shelter_id,
+    ),
+    
+    'customer_details' => array(
+        'name' => Auth::user()->name,
+        'email' => Auth::user()->email,
+        'phone' => Auth::user()->phone,
+    ),
+);
+
+$snapToken = \Midtrans\Snap::getSnapToken($params);
+        return view('donate', compact('snapToken', 'donate'))->with('success', 'Donate Succesfully');
     }
 
 
