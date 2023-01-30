@@ -32,9 +32,11 @@ Route::get('/', function () {
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/profile', [ProfileController::class, 'index']);
-Route::get('/data/donation', [ProfileController::class, 'datadonate']);
-Route::get('/data/adoption', [ProfileController::class, 'dataadoption']);
-Route::get('/data/shelter', [ProfileController::class, 'datashelter']);
+Route::get('/data/donations', [ProfileController::class, 'datadonate']);
+Route::get('/data/adoptions', [ProfileController::class, 'dataadoption']);
+Route::get('/data/shelters', [ProfileController::class, 'datashelter']);
+Route::get('/data/adoption/{id}', [ProfileController::class, 'adoptionsingle']);
+Route::get('/data/shelter/{id}', [ProfileController::class, 'sheltersingle']);
 Route::resource('/profile', ProfileController::class);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');

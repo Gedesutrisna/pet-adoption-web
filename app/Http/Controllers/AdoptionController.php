@@ -34,15 +34,20 @@ class AdoptionController extends Controller
     {       
         $validatedData = $request->validate([
             'reason' => 'required',
+            'approval_file' => 'required|file:pdf,word',
             'quantity' => 'required|integer|min:1',
             'confirm' => 'required'
         ]);
-    
+        
+        if($request->file('approval_file')){
+            $validatedData['approval_file'] = $request->file('approval_file')->store('files');
+        }
         $pet = Pet::find($id);
         $validatedData['pet_id'] = $pet->id;
         $validatedData['category_id'] = $pet->category->id;
         $validatedData['user_id'] = Auth()->user()->id;
         Adoption::create($validatedData);
+
         return redirect('/profile')->with('success', 'adoption Succesfully');
     }
     
@@ -55,19 +60,10 @@ class AdoptionController extends Controller
             $pet->status = 'unavailable';
             $pet->save();
         }
-  // mendapatkan path file
-$filePath = public_path('storage/files/file.pdf');
-
-// mengecek apakah file ada
-if (File::exists($filePath)) {
-    // mengambil file dan mengubahnya menjadi binary
-    $file = File::get($filePath);
-    $file = base64_encode($file);
-    $filePath = 'storage/files/file.pdf';
-    $adoption->approval_file = $filePath;    
-    }
-        $adoption->save();
+ 
         $adoption->approve();
+        $adoption->code = rand(5,99999); // generate kode unik
+        $adoption->save();
         return redirect()->back()->with('succes', 'adoption request approved!');
     }
     public function decline($id)
@@ -77,12 +73,6 @@ if (File::exists($filePath)) {
         return redirect()->back()->with('succes', 'adoption request declined!');
     }
 
-
-
-    public function edit(Adoption $adoption)
-    {
-        //
-    }
 
     public function update(Request $request,$id)
     {
@@ -101,16 +91,17 @@ if (File::exists($filePath)) {
     $validatedData['user_id'] = Auth()->user()->id;
     Adoption::where('id', $adoption->id)
     ->update($validatedData);
-    $adoption->code = rand(5,99999); // generate kode unik
-    $adoption->status = 'approved'; // generate kode unik
+    $adoption->status = 'inprogress'; // generate kode unik
         $adoption->save();
     return back()->with('success', 'file has been Submited!');
     }
 
-    public function destroy(Adoption $adoption,  Pet $pet)
+    public function destroy($id)    
     {
-
-    }
+        $adoption = Adoption::find($id);
+        $adoption->delete($adoption);
+        return back()->with('success', 'adoption Berhasil Dihapus');
+    } 
 }
 
 

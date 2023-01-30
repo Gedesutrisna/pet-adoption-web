@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('donates', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignId('user_id');
-            $table->foreignId('adoption_id')->nullable();
-            $table->foreignId('shelter_id')->nullable();
+            $table->enum('method',['campaign','adoption','shelter'])->default('campaign');
             $table->foreignId('campaign_id')->nullable();
             $table->integer('amount');
+            $table->string('code')->nullable();
             $table->text('comment')->nullable();
             $table->enum('status', ['unpaid', 'paid'])->default('unpaid');
             $table->timestamps();

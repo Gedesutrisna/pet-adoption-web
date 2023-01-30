@@ -46,6 +46,7 @@ class ShelterController extends Controller
             'category_id' => 'required',
             'image' => 'required|file',
             'file' => 'required|file:pdf,word',
+            'approval_file' => 'required|file:pdf,word',
             'reason' => 'nullable',
         ]);
 
@@ -55,54 +56,23 @@ class ShelterController extends Controller
         if($request->file('file')){
             $validatedData['file'] = $request->file('file')->store('files');
         }
+        if($request->file('approval_file')){
+            $validatedData['approval_file'] = $request->file('approval_file')->store('files');
+        }
 
         $validatedData['user_id'] = Auth()->user()->id;
 
         Shelter::create($validatedData);
-
         return redirect('/profile')->with('success', 'Shelter Succesfully');
     }
-    public function update(Request $request,$id)
-    {
-        $shelter = Shelter::findOrFail($id);
-
-
-        $rules = [
-            'approval_file' => 'required|file:pdf,word',
-        ];
-
-    $validatedData = $request->validate($rules);
-    if($request->file('approval_file')){
-        $validatedData['approval_file'] = $request->file('approval_file')->store('files');
-    }
-
-    $validatedData['user_id'] = Auth()->user()->id;
-    Shelter::where('id', $shelter->id)
-    ->update($validatedData);
-    $shelter->code = rand(5,99999); // generate kode unik
-    $shelter->status = 'approved'; // generate kode unik
-        $shelter->save();
-    return back()->with('success', 'file has been Submited!');
-    }
-
+    
 
     public function approve(Request $request,$id)
     {
         $shelter = Shelter::findOrFail($id);
-        // $shelter->code = rand(5,99999); // generate kode unik
-// mendapatkan path file
-$filePath = public_path('storage/files/file.pdf');
-
-// mengecek apakah file ada
-if (File::exists($filePath)) {
-    // mengambil file dan mengubahnya menjadi binary
-    $file = File::get($filePath);
-    $file = base64_encode($file);
-    $filePath = 'storage/files/file.pdf';
-    $shelter->approval_file = $filePath;    
-    }
-        $shelter->save();
         $shelter->approve();
+        $shelter->code = rand(5,99999); // generate kode unik
+        $shelter->save();
         return redirect()->back()->with('succes', 'shelter request approved!');
     }
     public function decline($id)
@@ -111,6 +81,31 @@ if (File::exists($filePath)) {
         $shelter->decline();
         return redirect()->back()->with('succes', 'shelter request declined!');
     }
+
+
+    // public function update(Request $request,$id)
+    // {
+    //     $shelter = Shelter::findOrFail($id);
+
+
+    //     $rules = [
+    //         'approval_file' => 'required|file:pdf,word',
+    //     ];
+
+    // $validatedData = $request->validate($rules);
+    // if($request->file('approval_file')){
+    //     $validatedData['approval_file'] = $request->file('approval_file')->store('files');
+    // }
+
+    // $validatedData['user_id'] = Auth()->user()->id;
+    // Shelter::where('id', $shelter->id)
+    // ->update($validatedData);
+    // $shelter->status = 'inprogress'; // generate kode unik
+    //     $shelter->save();
+    // return back()->with('success', 'file has been Submited!');
+    // }
+
+
     public function destroy($id)    
     {
         $shelter = Shelter::find($id);

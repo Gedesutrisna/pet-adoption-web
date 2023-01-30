@@ -36,7 +36,6 @@
   font-size: 16px;
   cursor: pointer;"  id="status-select">
     <option value="all">All</option>
-    <option value="pending">Pending</option>
     <option value="inprogress">Inprogress</option>
     <option value="approved">Approved</option>
     <option value="declined">Declined</option>
@@ -74,7 +73,7 @@
                   <button class="btn btn-danger" onclick="return confirm('Are U Sure ?')"><span data-feather="x-circle"></span> Delete</button>
                   </form> --}}
      
-                @if($shelter->status === 'pending')
+                @if($shelter->status === 'inprogress')
                 <a href="{{ route('shelters.approve', $shelter->id) }}" class="btn btn-success" id="approve-{{ $shelter->id }}">Approve</a>
                 <a href="{{ route('shelters.decline', $shelter->id )}}" class="btn btn-danger" id="decline-{{ $shelter->id }}">Decline</a>
               @endif

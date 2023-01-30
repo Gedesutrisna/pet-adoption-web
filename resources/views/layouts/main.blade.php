@@ -93,6 +93,39 @@ section{
     margin-right: 20px;
     
 }
+
+.progress-container {
+  display: flex;
+  align-items: center;
+}
+
+.progress-bar {
+  height: 8px;
+  width: 100%;
+  background-color: lightgray;
+  position: relative;
+}
+
+.step {
+  position: absolute;
+  font-size: 14px;
+  color: gray;
+  text-align: center;
+  width: 33.33%;
+}
+
+#step-1 {
+  left: 0;
+}
+
+#step-2 {
+  left: 33.33%;
+}
+
+#step-3 {
+  right: 0;
+}
+
     </style>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">

@@ -3,15 +3,24 @@
 <div class="card mb-3 border-0" style="margin-top:100px;">
   
   <div class="row g-5" >
-
-      <div class="col-md-3 mt-3">
+    @if (Session::has('success'))
+    <script>
+        Swal.fire({
+            title: "{{ Session::get('success') }}",
+            type: 'success'
+        });
+    </script>
+    @endif
+    
+      <div class="col-md-4 mt-3">
         <div class="card-body border border-1 rounded-start">
 
-            <h3>Profile     @if(Auth::user()->image)
+            <h3>Profile         <button id="toggle-view-button" onclick="toggleView()" class="border-0" style="background: none;"><i class="bi bi-gear"></i></button>
+              @if(Auth::user()->image)
               <img class="image rounded-circle" src="{{ asset('storage/' . Auth::user()->image ) }}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
          @endif  
-        </h3>
-
+            </h3>
+        <!-- Tombol untuk menampilkan tampilan edit profile -->
             <hr>
           <p>Nama : {{ Auth::user()->name }}<p>
           <p>Username : {{ Auth::user()->username }}<p>
@@ -25,13 +34,7 @@
       </div>
       </div>
       <div class="col-md-8  mt-3">
-        <!-- Tombol untuk menampilkan tampilan edit profile -->
-        <button  style=" 
-        color: #193A6A;
-        padding: 8px 16px;
-        border: solid 1px #193A6A;
-        font-size: 13px;
-        cursor: pointer;" id="toggle-view-button" onclick="toggleView()">Edit Profile</button>
+
 
 
   <!-- HTML untuk tampilan dashboard -->
@@ -48,7 +51,7 @@
               padding: 8px 16px;
               border: none;
               font-size: 13px;
-              cursor: pointer;" class="text-decoration-none" href="/data/donation">See</a>
+              cursor: pointer;" class="text-decoration-none" href="/data/donations">See</a>
         </div>
       </div>
     </div>
@@ -62,7 +65,7 @@
               padding: 8px 16px;
               border: none;
               font-size: 13px;
-              cursor: pointer;" class="text-decoration-none" href="/data/adoption">See</a>
+              cursor: pointer;" class="text-decoration-none" href="/data/adoptions">See</a>
         </div>
       </div>
     </div>
@@ -76,7 +79,7 @@
               padding: 8px 16px;
               border: none;
               font-size: 13px;
-              cursor: pointer;" class="text-decoration-none" href="/data/shelter">See</a>
+              cursor: pointer;" class="text-decoration-none" href="/data/shelters">See</a>
         </div>
       </div>
     </div>
@@ -183,6 +186,11 @@
     </div>
   </div>
 </div>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
+
   <script>
 
     function previewImage(){
@@ -195,7 +203,7 @@
 imgPreview.src = blob;
       
     
-      const ktp = document.querySelector('#ktp');
+      const ktp = document  .querySelector('#ktp');
       const ktpPreview = document.querySelector('#ktp-preview');
       ktpPreview.style.display = 'block';
       const ktpBlob = URL.createObjectURL(ktp.files[0]);
@@ -207,20 +215,19 @@ imgPreview.src = blob;
   var currentView = "dashboard";
 
   function toggleView() {
-    if (currentView == "dashboard") {
-      document.getElementById("dashboard").style.display = "none";
-      document.getElementById("edit-profile").style.display = "block";
-      document.getElementById("toggle-view-button").innerHTML = "Back";
-      currentView = "edit-profile";
-    } else {
-      document.getElementById("edit-profile").style.display = "none";
-      document.getElementById("dashboard").style.display = "block";
-      document.getElementById("toggle-view-button").innerHTML = "Edit Profile";
-      currentView = "dashboard";
-    }
+  if (currentView == "dashboard") {
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("edit-profile").style.display = "block";
+    document.getElementById("toggle-view-button").innerHTML = '<i class="bi bi-gear-fill"></i>';
+    currentView = "edit-profile";
+  } else {
+    document.getElementById("edit-profile").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+    document.getElementById("toggle-view-button").innerHTML = '<i class="bi bi-gear"></i>';
+    currentView = "dashboard";
   }
+}
 </script>
-
 
 
 

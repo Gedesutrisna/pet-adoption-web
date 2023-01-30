@@ -34,6 +34,15 @@
           <form method="POST" action="/adoptions/create/{{ $pet->id }}" class="mb-5" enctype="multipart/form-data">
               @csrf
               <div class="mb-3">
+                <label for="approval_file" class="form-label">File Aproval <span style="color: red">*</span></label>
+                <input class="form-control @error('approval_file') is-invalid @enderror" type="file" id="file-input" name="approval_file">
+                @error('approval_file')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+                @enderror
+              </div>
+              <div class="mb-3">
                 <label for="quantity" class="form-label">Quantity <span style="color: red">*</span></label>
                 <input type="number" name="quantity" min="1" max="{{ $pet->quantity }}" value="1" required value="{{ old('quantity') }}">
                 @error('quantity')

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('file');
             $table->text('reason')->nullable();
-            $table->enum('status', ['pending', 'inprogress', 'declined','approved', 'completed'])->default('pending');
+            $table->enum('status', ['inprogress', 'declined', 'approved', 'completed'])->default('inprogress');
             $table->string('code')->nullable();
             $table->string('approval_file')->nullable();
             $table->timestamps();

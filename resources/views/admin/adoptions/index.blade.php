@@ -36,7 +36,6 @@
       font-size: 13px;
       cursor: pointer;"  id="status-select">
         <option value="all">All</option>
-        <option value="pending">Pending</option>
         <option value="inprogress">Inprogress</option>
         <option value="approved">Approved</option>
         <option value="declined">Declined</option>
@@ -80,10 +79,9 @@
                   </form> --}}
 
      
-                @if($adoption->status === 'pending')
-                <a href="{{ route('adoptions.approve', $adoption->id) }}" class="btn btn-success" id="approve-{{ $adoption->id }}">Approve</a>
-                <a href="{{ route('adoptions.decline', $adoption->id )}}" class="btn btn-danger" id="decline-{{ $adoption->id }}">Decline</a>
-              @endif
+                @if($adoption->status === 'inprogress')
+                <a href="{{ route('adoptions.approve', $adoption->id) }}" class="btn btn-success" id="approve-{{ $adoption->id }}" onclick="return confirm('Apakah Anda yakin ingin menyetujui?');">Approve</a>
+                <a href="{{ route('adoptions.decline', $adoption->id )}}" class="btn btn-danger" id="decline-{{ $adoption->id }}" onclick="return confirm('Apakah Anda yakin ingin Menolak?');">Decline</a>              @endif
             </td>
             </tr>
         @endforeach
@@ -94,16 +92,6 @@
   <p class="text-center fs-4">No. Adoption Found.</p>
 @endif
   <script>
-
-// window.addEventListener('load', () => {
-//     let adoptionRows = document.querySelectorAll('.adoption-row');
-  
-//     adoptionRows.forEach(row => {
-//       if (row.dataset.status !== 'pending') {
-//         row.style.display = 'none';
-//       }
-//     });
-//   });
 let tabSelect = document.getElementById("status-select");
 let adoptionRows = document.querySelectorAll('.adoption-row');
 

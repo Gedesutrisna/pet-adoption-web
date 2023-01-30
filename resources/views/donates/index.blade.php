@@ -57,30 +57,31 @@
         @endforeach
       </div>
       @endforeach
-  </div>
-  <div class="row">
-    <div class="col">
-      <!-- Button trigger modal -->
-      @if (auth()->check())
-      <button type="button" style="background-color: #193A6A; color:white" class="btn rounded-0 btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Online Donation 
-       </button>
-       <a href="#how" class="btn btn-secondary rounded-0 btn-sm mb-3">Offline Donation</a>
-       @else
-       <a style="background-color: #193A6A; border: solid 1px #193A6A;  padding: 8px 16px; font-size:13px; color:white" class="text-decoration-none rounded-0 btn-sm mb-3"  href="/login"> Online Donation</a>
-       <a href="#how" style="border: solid 1px#193A6A; padding: 8px 16px; font-size:13px; color:#193A6A" class="text-decoration-none rounded-0 btn-sm mb-3"  >Offline Donation</a>  
-       @endif
-   <!-- Modal -->
-       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog">
-           <div class="modal-content" style="background-color: #EDF7F5">
-             <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel">Your Donation</h5>
-                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-             </div>
-       <div class="modal-body">
-         <form action="/donates/create" method="POST">
-          @csrf
+    </div>
+    <div class="row">
+      <div class="col">
+        <!-- Button trigger modal -->
+        @if (auth()->check())
+        <button type="button" style="background-color: #193A6A; color:white" class="btn rounded-0 btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Online Donation 
+        </button>
+        <a href="#how" class="btn btn-secondary rounded-0 btn-sm mb-3">Offline Donation</a>
+        @else
+        <a style="background-color: #193A6A; border: solid 1px #193A6A;  padding: 8px 16px; font-size:13px; color:white" class="text-decoration-none rounded-0 btn-sm mb-3"  href="/login"> Online Donation</a>
+        <a href="#how" style="border: solid 1px#193A6A; padding: 8px 16px; font-size:13px; color:#193A6A" class="text-decoration-none rounded-0 btn-sm mb-3"  >Offline Donation</a>  
+        @endif
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content" style="background-color: #EDF7F5">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Your Donation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action="/donates/create" method="POST">
+                  @csrf
+                 
           <div class="mb-3">
               <label for="amount" class="form-label">Amount</label>
               <input type="number" name="amount"  class="form-control rounded-0 @error('amount') is-invalid @enderror"  id="amount" min="50000" step="1000" required value="{{ old('amount') }}">

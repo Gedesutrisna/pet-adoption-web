@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Adoption;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Shelter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,7 +15,6 @@ class ProfileController extends Controller
 {
     public function index()
     {    
-
         return view('profile.index');
     }
     public function dataDonate()
@@ -28,6 +28,16 @@ class ProfileController extends Controller
     public function dataShelter()
     {    
         return view('profile.dataShelter');
+    }
+    public function adoptionSingle($id)
+    {
+        $adoption = Adoption::find($id);
+        return view('profile.Adoption',compact('adoption'));
+    }
+    public function shelterSingle($id)
+    {    
+        $shelter = Shelter::find($id);
+        return view('profile.Shelter',compact('shelter'));
     }
     
 

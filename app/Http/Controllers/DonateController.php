@@ -42,11 +42,9 @@ $params = array(
     'transaction_details' => array(
         'order_id' => $donate->id,
         'gross_amount' => $donate->amount,
-        'adoption_id' => $donate->adoption_id,
     ),
     'items_details' => array(
-        'campaign_id' => $donate->campaign_id,
-        'shelter_id' => $donate->shelter_id,
+        'code' => $donate->code, 
     ),
     'customer_details' => array(
         'name' => Auth()->user()->name,
@@ -84,9 +82,6 @@ return view('donate', compact( 'snapToken', 'donate'))->with('success', 'Donate 
         return view('admin.donates.index', compact('donates',),[
             
             'donates' => Donate::latest()->filter(request(['search']))->get(),
-            $donates = Donate::whereNotNull('campaign_id')->get(),
-            $donates = Donate::whereNotNull('adoption_id')->get(),
-            $donates = Donate::whereNotNull('shelter_id')->get(),
         ]);
     } 
     public function data()
@@ -96,13 +91,13 @@ return view('donate', compact( 'snapToken', 'donate'))->with('success', 'Donate 
         $shelters = Shelter::all();
         $adoptions = Adoption::all();
         $donates = Donate::all();
-        $total_amount = Donate::sum('amount');
-        $total_amount_others = Donate::whereNull('adoption_id')->whereNull('shelter_id')->whereNull('campaign_id')->sum('amount');
-        $total_amount_campaign = Donate::whereNotNull('campaign_id')->sum('amount');
-        $total_amount_adoption = Donate::whereNotNull('adoption_id')->sum('amount');
-        $total_amount_shelter = Donate::whereNotNull('shelter_id')->sum('amount');
+        // $total_amount = Donate::sum('amount');
+        // $total_amount_others = Donate::whereNull('adoption_id')->whereNull('shelter_id')->whereNull('campaign_id')->sum('amount');
+        // $total_amount_campaign = Donate::whereNotNull('campaign_id')->sum('amount');
+        // $total_amount_adoption = Donate::whereNotNull('adoption_id')->sum('amount');
+        // $total_amount_shelter = Donate::whereNotNull('shelter_id')->sum('amount');
 
-        return view('admin.index', compact('donates', 'pets','campaigns','shelters','adoptions','total_amount','total_amount_others','total_amount_campaign','total_amount_adoption','total_amount_shelter'));
+        return view('admin.index', compact('donates', 'pets','campaigns','shelters','adoptions'));
 
     } 
 
@@ -118,8 +113,7 @@ return view('donate', compact( 'snapToken', 'donate'))->with('success', 'Donate 
     {         
 
         $validatedData = $request->validate([
-            'adoption_id' => 'nullable|unique:donates,shelter_id',
-            'shelter_id' => 'nullable|unique:donates,adoption_id',
+            'code' => 'nullable',
             'campaign_id' => 'nullable',
             'amount' => 'required|numeric|min:50000',
             'comment' => 'nullable',            
@@ -133,23 +127,23 @@ return view('donate', compact( 'snapToken', 'donate'))->with('success', 'Donate 
             }
         }
         //status
-        if($request->adoption_id){
-            $adoption = Adoption::where('code', $request->adoption_id)->first();
-            if($adoption && $adoption->status !== 'completed'){
-                $validatedData['adoption_id'] = $adoption->id;
-                $adoption->status = 'completed';
-                $adoption->save();
-            }
-        }
+        // if($request->adoption_id){
+        //     $adoption = Adoption::where('code', $request->adoption_id)->first();
+        //     if($adoption && $adoption->status !== 'completed'){
+        //         $validatedData['adoption_id'] = $adoption->id;
+        //         $adoption->status = 'completed';
+        //         $adoption->save();
+        //     }
+        // }
     
-        if($request->shelter_id){
-            $shelter = Shelter::where('code', $request->shelter_id)->first();
-            if($shelter && $shelter->status !== 'completed'){
-                $validatedData['shelter_id'] = $shelter->id;
-                $shelter->status = 'completed';
-                $shelter->save();
-            }
-        }
+        // if($request->shelter_id){
+        //     $shelter = Shelter::where('code', $request->shelter_id)->first();
+        //     if($shelter && $shelter->status !== 'completed'){
+        //         $validatedData['shelter_id'] = $shelter->id;
+        //         $shelter->status = 'completed';
+        //         $shelter->save();
+        //     }
+        // }
 
         $validatedData['user_id'] = Auth()->user()->id;
        $donate = Donate::create($validatedData);
@@ -168,13 +162,13 @@ $params = array(
     'transaction_details' => array(
         'order_id' => $donate->id,
         'gross_amount' => $donate->amount,
-        'adoption_id' => $donate->adoption_id,
     ),
 
-    'items_details' => array(
-        'campaign_id' => $donate->campaign_id,
-        'shelter_id' => $donate->shelter_id,
-    ),
+    // 'items_details' => array(
+    //     'campaign_id' => $donate->campaign_id,
+    //     'shelter_id' => $donate->shelter_id,
+    //     'adoption_id' => $donate->adoption_id,
+    // ),
     
     'customer_details' => array(
         'name' => Auth::user()->name,

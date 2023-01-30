@@ -52,6 +52,6 @@ class Shelter extends Model
     }
 
     protected $attributes = [
-        'status' => 'pending'
+        'status' => 'inprogress'
     ];
 }
