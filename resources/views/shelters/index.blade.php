@@ -127,14 +127,14 @@
       imgPreview.src = blob;
    }
 
-      let submitBtn = document.getElementById("submit-btn");
-      let downloadBtn = document.getElementById("download-btn");
+//       let submitBtn = document.getElementById("submit-btn");
+//       let downloadBtn = document.getElementById("download-btn");
 
-      submitBtn.disabled = true;
+//       submitBtn.disabled = true;
 
-      if(localStorage.getItem("isDownloaded") === "true") {
-        submitBtn.disabled = false;
-      }
+//       if(localStorage.getItem("isDownloaded") === "true") {
+//         submitBtn.disabled = false;
+//       }
       
 
 //reset button

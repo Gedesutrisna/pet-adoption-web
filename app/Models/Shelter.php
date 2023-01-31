@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\User;
-use App\Models\Donate;
 use App\Models\Category;
+use App\Models\DonateShelter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -36,8 +36,8 @@ class Shelter extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function donate(){
-        return $this->hasMany(Donate::class);
+    public function donateShelter(){
+        return $this->hasMany(DonateShelter::class);
     }
     
     public function approve()

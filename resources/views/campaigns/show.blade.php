@@ -81,9 +81,9 @@
              cursor: pointer;" class="nominal" value="500000" onclick="setAmount(500000); return false;">Rp {{ number_format(500000, 0, ',', '.') }}</button>
          </div>
          <div class="mb-3">
-           <label for="reason" class="form-label">Reason <span style="color: red">*</span></label>
-           <textarea name="reason" class="form-control @error('reason') is-invalid @enderror" id="reason" value="{{ old('reason') }}" rows="4" placeholder="Alasan anda menitipkan hewan kepada kami.." style="resize: none"></textarea>
-           @error('reason')
+           <label for="comment" class="form-label">Comment <span style="color: red">*</span></label>
+           <textarea name="comment" class="form-control @error('comment') is-invalid @enderror" id="comment" value="{{ old('comment') }}" rows="4" placeholder="Alasan anda menitipkan hewan kepada kami.." style="resize: none"></textarea>
+           @error('comment')
                <div class="invalid-feedback">
                  {{ $message }}
                </div>

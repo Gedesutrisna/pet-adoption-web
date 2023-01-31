@@ -13,6 +13,8 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DonateShelterController;
+use App\Http\Controllers\AdoptionDonateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +50,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/donates', [DonateController::class, 'index']);
 Route::post('/donates/create', [DonateController::class, 'store'])->middleware('auth');
+Route::post('/donates/adoption/create', [AdoptionDonateController::class, 'store'])->middleware('auth');
+Route::post('/donates/shelter/create', [DonateShelterController::class, 'store'])->middleware('auth');
 
 Route::post('/adoptions/create/{id}', [AdoptionController::class, 'store'])->middleware('auth');
 Route::post('/adoptions/update/{id}', [AdoptionController::class, 'update'])->middleware('auth');
@@ -64,6 +68,7 @@ Route::post('change-password', [PasswordController::class, 'update'])->name('cha
 
 //midtrans
 Route::get('/transaction/{id}', [DonateController::class, 'transaction']);
+Route::post('/donates/adoption/{id}', [AdoptionDonateController::class, 'transaction'])->middleware('auth');
 
 
 

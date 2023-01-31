@@ -2,7 +2,7 @@
 @section('container')
 <div class="container mb-3">
   <div class="row">
-      @foreach ($main_campaigns as $campaign)
+      @foreach ($mainCampaigns as $campaign)
       <h1 class="card-title mb-3">{{ $campaign->title }}</h1>
       <div class="col-md-8 mb-3">
         <div class="card border-0 rounded-0 mb-3" style="box-shadow: 3px 3px 10px #ccc;">
@@ -43,7 +43,7 @@
       </div>
       <div class="col mb-3" style="background-color: #EDF7F5">
         <h2 style="margin: 1rem 1rem">More Campaigns</h2>
-        @foreach ($submain_campaigns->skip(1) as $campaign)
+        @foreach ($submainCampaigns->skip(1) as $campaign)
         <div class="row">
           <div class="col">
             <img src="{{ asset('storage/' . $campaign->image ) }}" alt="{{ $campaign->category->name }}"

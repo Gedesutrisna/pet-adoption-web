@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
              'quantity' => 9,
              'category_id' => 2,
              'admin_id' => 1,
@@ -86,7 +86,7 @@ class DatabaseSeeder extends Seeder
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
              'quantity' => 9,
              'category_id' => 2,
              'admin_id' => 1,
@@ -103,7 +103,7 @@ class DatabaseSeeder extends Seeder
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
              'quantity' => 9,
              'category_id' => 2,
              'admin_id' => 1,
@@ -120,7 +120,7 @@ class DatabaseSeeder extends Seeder
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
              'quantity' => 8,
              'category_id' => 1,
              'admin_id' => 1,
@@ -137,7 +137,7 @@ class DatabaseSeeder extends Seeder
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
              'quantity' => 8,
              'category_id' => 1,
              'admin_id' => 1,
@@ -154,7 +154,7 @@ class DatabaseSeeder extends Seeder
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
              'quantity' => 8,
              'category_id' => 1,
              'admin_id' => 1,
@@ -173,7 +173,7 @@ class DatabaseSeeder extends Seeder
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
              'category_id' => 1,
              'admin_id' => 1,
              'status' => 'ongoing',
@@ -192,7 +192,7 @@ class DatabaseSeeder extends Seeder
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
              'category_id' => 1,
              'admin_id' => 1,
              'status' => 'ongoing',
@@ -211,7 +211,7 @@ class DatabaseSeeder extends Seeder
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
              'category_id' => 1,
              'admin_id' => 1,
              'status' => 'ongoing',
@@ -230,7 +230,7 @@ class DatabaseSeeder extends Seeder
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
              'category_id' => 2,
              'admin_id' => 1,
              'status' => 'ongoing',
@@ -249,7 +249,7 @@ class DatabaseSeeder extends Seeder
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
              'category_id' => 2,
              'admin_id' => 1,
              'status' => 'ongoing',
@@ -268,7 +268,7 @@ class DatabaseSeeder extends Seeder
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/6eVVvJ5u4EkCilTGvMaexDcBjS1mlrFM8kBMRr3W.jpg',
+             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
              'category_id' => 2,
              'admin_id' => 1,
              'status' => 'ongoing',

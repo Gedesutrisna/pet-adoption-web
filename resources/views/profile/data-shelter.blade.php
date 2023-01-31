@@ -37,25 +37,21 @@
                   </div>
   
                 <div style="max-height: 350px; overflow: hidden; ">
-                    <div class="position-absolute px-3 py-2 text-white">
-                      {{ $adoption->status }}
-                    </div>
-                    <img src="{{ asset('storage/' . $adoption->pet->image ) }}" alt="{{ $adoption->pet->category->name }}"
-                    class="img-fluid mt-2">
+                      {{ $shelter->status }}
                   </div>
-                  <p> kode untuk donasi : {{ $adoption->code }}</p>
-                  @if ($adoption->status == 'pending')              
-                  <a href="{{ asset($adoption->approval_file) }}" download>Download File</a>
+                  <p> kode untuk donasi : {{ $shelter->code }}</p>
+                  @if ($shelter->status == 'pending')              
+                  <a href="{{ asset($shelter->approval_file) }}" download>Download File</a>
                   @else
                   @endif
-                <p class="card-text">{{ $adoption->reason }}</p>
-                @if ($adoption->status == 'approved')      
-                <form method="POST" action="/donates/adoption/create" class="mb-5">
+                <p class="card-text">{{ $shelter->reason }}</p>
+                @if ($shelter->status == 'approved')      
+                <form method="POST" action="/donates/shelter/create" class="mb-5">
                     @csrf
-                    <div class="mb-3" id="adoption-input" style="display: none">
-                      <label for="adoption_id" class="form-label">adoption_id</label>
-                      <input type="text" class="form-control rounded-0 @error('adoption_id') is-invalid @enderror" id="adoption_id" name="adoption_id"  value="{{ old('adoption_id',$adoption->id) }}" required>
-                      @error('adoption_id')
+                    <div class="mb-3" id="shelter-input" style="display: none">
+                      <label for="shelter_id" class="form-label">shelter_id</label>
+                      <input type="text" class="form-control rounded-0 @error('shelter_id') is-invalid @enderror" id="shelter_id" name="shelter_id"  value="{{ old('shelter_id',$shelter->id) }}" required>
+                      @error('shelter_id')
                           <div class="invalid-feedback">
                             {{ $message }}
                           </div>
@@ -92,7 +88,7 @@
       font-size: 13px;
       cursor: pointer;" class="nominal" value="500000" onclick="setAmount(500000); return false;">Rp {{ number_format(500000, 0, ',', '.') }}</button>
                   </div>
-                  <div class="mb-3" id="adoption-input">
+                  <div class="mb-3" id="shelter-input">
                     <label for="code" class="form-label">Code</label>
                     <input type="text" class="form-control rounded-0 @error('code') is-invalid @enderror" id="code" name="code"  value="{{ old('code') }}" required>
                     @error('code')
@@ -162,7 +158,7 @@ function updateProgress(status) {
   }
 }
 
-updateProgress("{{ $adoption->status }}");
+updateProgress("{{ $shelter->status }}");
 
   </script>
 @endsection

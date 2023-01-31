@@ -22,8 +22,8 @@ class DonateController extends Controller
     {
         return view('donates.index',[
             'donates' => Donate::where('user_id', Auth()->user())->get(),
-            'main_campaigns' => Campaign::latest()->take(1)->get(),
-            'submain_campaigns' => Campaign::latest()->take(5)->get()
+            'mainCampaigns' => Campaign::latest()->take(1)->get(),
+            'submainCampaigns' => Campaign::latest()->take(5)->get()
         ]);
     }
     public function transaction(Donate $donate,$id)
@@ -44,6 +44,7 @@ $params = array(
         'gross_amount' => $donate->amount,
     ),
     'items_details' => array(
+        'campaign_id' => $donate->campaign_id,
         'code' => $donate->code, 
     ),
     'customer_details' => array(
@@ -53,10 +54,10 @@ $params = array(
     ),
 );
 $snapToken = \Midtrans\Snap::getSnapToken($params);
-return view('donate', compact( 'snapToken', 'donate'))->with('success', 'Donate Succesfully');
+return view('profile.donate', compact( 'snapToken', 'donate'))->with('success', 'Donate Succesfully');
 }
 
-    public function callBack(Request $request)
+    public function callbackCampaign(Request $request)
     {
         $serverKey = config('app.server_key');
         $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
@@ -64,17 +65,11 @@ return view('donate', compact( 'snapToken', 'donate'))->with('success', 'Donate 
             if ($request->transaction_status == 'capture') {
                 $donate = Donate::find($request->order_id);
                 $donate->update(['status' => 'paid']);
-                if($donate->adoption_id){
-                    $adoption = Adoption::where('code', $request->adoption_id)->first();
-                    if($adoption && $adoption->status !== 'completed'){
-                        $adoption->update(['status' => 'completed']);
-                    }
-                }
             }
         }
     }
 
-    public function datadonate()
+    public function dataDonate()
     {
         $donates = Donate::all();
       
@@ -91,11 +86,6 @@ return view('donate', compact( 'snapToken', 'donate'))->with('success', 'Donate 
         $shelters = Shelter::all();
         $adoptions = Adoption::all();
         $donates = Donate::all();
-        // $total_amount = Donate::sum('amount');
-        // $total_amount_others = Donate::whereNull('adoption_id')->whereNull('shelter_id')->whereNull('campaign_id')->sum('amount');
-        // $total_amount_campaign = Donate::whereNotNull('campaign_id')->sum('amount');
-        // $total_amount_adoption = Donate::whereNotNull('adoption_id')->sum('amount');
-        // $total_amount_shelter = Donate::whereNotNull('shelter_id')->sum('amount');
 
         return view('admin.index', compact('donates', 'pets','campaigns','shelters','adoptions'));
 
@@ -126,24 +116,6 @@ return view('donate', compact( 'snapToken', 'donate'))->with('success', 'Donate 
                 return redirect()->back()->with(['error' => 'Jumlah donasi melebihi target donasi campaign']);
             }
         }
-        //status
-        // if($request->adoption_id){
-        //     $adoption = Adoption::where('code', $request->adoption_id)->first();
-        //     if($adoption && $adoption->status !== 'completed'){
-        //         $validatedData['adoption_id'] = $adoption->id;
-        //         $adoption->status = 'completed';
-        //         $adoption->save();
-        //     }
-        // }
-    
-        // if($request->shelter_id){
-        //     $shelter = Shelter::where('code', $request->shelter_id)->first();
-        //     if($shelter && $shelter->status !== 'completed'){
-        //         $validatedData['shelter_id'] = $shelter->id;
-        //         $shelter->status = 'completed';
-        //         $shelter->save();
-        //     }
-        // }
 
         $validatedData['user_id'] = Auth()->user()->id;
        $donate = Donate::create($validatedData);
@@ -164,11 +136,11 @@ $params = array(
         'gross_amount' => $donate->amount,
     ),
 
-    // 'items_details' => array(
-    //     'campaign_id' => $donate->campaign_id,
-    //     'shelter_id' => $donate->shelter_id,
-    //     'adoption_id' => $donate->adoption_id,
-    // ),
+    'items_details' => array(
+        'campaign_id' => $donate->campaign_id,
+        'code' => $donate->code, 
+
+    ),
     
     'customer_details' => array(
         'name' => Auth::user()->name,
@@ -178,7 +150,7 @@ $params = array(
 );
 
 $snapToken = \Midtrans\Snap::getSnapToken($params);
-        return view('donate', compact('snapToken', 'donate'))->with('success', 'Donate Succesfully');
+        return view('profile.donate', compact('snapToken', 'donate'))->with('success', 'Donate Succesfully');
     }
 
 

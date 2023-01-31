@@ -58,7 +58,7 @@ class PetController extends Controller
         }
 
         $validatedData['admin_id'] = Auth::guard('admin')->user()->id;
-        $validatedData['short_description'] = Str::limit(strip_tags ($request->description), 200);
+        $validatedData['short_description'] = Str::limit(strip_tags ($request->description), 50);
 
         Pet::create($validatedData);
 

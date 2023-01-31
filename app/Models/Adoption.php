@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Models\Pet;
 use App\Models\User;
-use App\Models\Donate;
 use App\Models\Category;
+use App\Models\AdoptionDonate;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -38,8 +38,8 @@ class Adoption extends Model
     public function pet(){
         return $this->belongsTo(Pet::class);
     }
-    public function donate(){
-        return $this->hasMany(Donate::class);
+    public function adoptionDonate(){
+        return $this->hasMany(AdoptionDonate::class);
     }
     public function category(){
         return $this->belongsTo(Category::class);

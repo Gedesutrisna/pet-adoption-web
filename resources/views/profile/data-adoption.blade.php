@@ -7,6 +7,7 @@
     <div class="col-sm-4 mb-3 mb-sm-0">
         <div class="card">
             <div class="card-body">
+              
                 <div style="max-height: 350px; overflow: hidden; ">
                     <div class="position-absolute px-3 py-2 text-white">
                       {{ $adoption->status }}

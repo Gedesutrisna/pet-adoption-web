@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('donates', function (Blueprint $table) {
+        Schema::create('donate_shelters', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignId('user_id');
-            $table->foreignId('campaign_id')->nullable();
+            $table->foreignId('shelter_id')->nullable();
             $table->integer('amount');
+            $table->string('code')->nullable();
             $table->text('comment')->nullable();
             $table->enum('status', ['unpaid', 'paid'])->default('unpaid');
             $table->timestamps();
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('donates');
+        Schema::dropIfExists('donate_shelters');
     }
 };

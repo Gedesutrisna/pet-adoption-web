@@ -19,15 +19,15 @@ class ProfileController extends Controller
     }
     public function dataDonate()
     {    
-        return view('profile.dataDonate');
+        return view('profile.data-Donate');
     }
     public function dataAdoption()
     {  
-        return view('profile.dataAdoption');
+        return view('profile.data-Adoption');
     }
     public function dataShelter()
     {    
-        return view('profile.dataShelter');
+        return view('profile.data-Shelter');
     }
     public function adoptionSingle($id)
     {

@@ -5,12 +5,10 @@ namespace App\Models;
 use App\Models\User;
 use Ramsey\Uuid\Uuid;
 use App\Models\Shelter;
-use App\Models\Adoption;
-use App\Models\Campaign;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Donate extends Model
+class DonateShelter extends Model
 {
     use HasFactory;
     protected $guarded = [
@@ -18,10 +16,8 @@ class Donate extends Model
     ];
     public function scopeFilter($query, array $filters)
 {
-    $query->when($filters['search'] ?? false, function ($query, $search) {
-        return $query->where('adoption_id', 'like', '%' . $search . '%')
-            ->orWhere('shelter_id', 'like', '%' . $search . '%')
-            ->orWhere('campaign_id', 'like', '%' . $search . '%');
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where('shelter_id', 'like', '%' . $search . '%');
     });
 
 }
@@ -42,12 +38,11 @@ class Donate extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function campaign(){
-        return $this->belongsTo(Campaign::class);
+    public function shelter(){
+        return $this->belongsTo(Shelter::class);
     }
 
     public function totalAmount()
     {
         return $this->sum('amount');
-    }
-}
+    }}

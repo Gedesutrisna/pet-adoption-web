@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdoptionDonateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DonateController;
+use App\Http\Controllers\DonateShelterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('midtrans-callback', [DonateController::class, 'callback']);
+Route::post('midtrans-callback', [DonateController::class, 'callbackCampaign']);
+Route::post('midtrans-callback', [DonateShelterController::class, 'callbackShelter']);
+Route::post('midtrans-callback', [AdoptionDonateController::class, 'callbackAdoption']);
+
 

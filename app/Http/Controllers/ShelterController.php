@@ -83,29 +83,6 @@ class ShelterController extends Controller
     }
 
 
-    // public function update(Request $request,$id)
-    // {
-    //     $shelter = Shelter::findOrFail($id);
-
-
-    //     $rules = [
-    //         'approval_file' => 'required|file:pdf,word',
-    //     ];
-
-    // $validatedData = $request->validate($rules);
-    // if($request->file('approval_file')){
-    //     $validatedData['approval_file'] = $request->file('approval_file')->store('files');
-    // }
-
-    // $validatedData['user_id'] = Auth()->user()->id;
-    // Shelter::where('id', $shelter->id)
-    // ->update($validatedData);
-    // $shelter->status = 'inprogress'; // generate kode unik
-    //     $shelter->save();
-    // return back()->with('success', 'file has been Submited!');
-    // }
-
-
     public function destroy($id)    
     {
         $shelter = Shelter::find($id);
