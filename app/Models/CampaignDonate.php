@@ -4,13 +4,11 @@ namespace App\Models;
 
 use App\Models\User;
 use Ramsey\Uuid\Uuid;
-use App\Models\Shelter;
-use App\Models\Adoption;
 use App\Models\Campaign;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Donate extends Model
+class CampaignDonate extends Model
 {
     use HasFactory;
     protected $guarded = [
@@ -19,9 +17,9 @@ class Donate extends Model
     public function scopeFilter($query, array $filters)
 {
     $query->when($filters['search'] ?? false, function ($query, $search) {
-        return $query->where('adoption_id', 'like', '%' . $search . '%')
-            ->orWhere('shelter_id', 'like', '%' . $search . '%')
-            ->orWhere('campaign_id', 'like', '%' . $search . '%');
+        return $query->join('users', 'users.id', '=', 'campaign_donates.user_id')
+        ->where('users.name', 'like', '%' . $search . '%')
+        ->orWhere('users.email', 'like', '%' . $search . '%');
     });
 
 }
@@ -37,17 +35,11 @@ class Donate extends Model
         });
     }
 
-
     public function user(){
         return $this->belongsTo(User::class);
     }
 
     public function campaign(){
         return $this->belongsTo(Campaign::class);
-    }
-
-    public function totalAmount()
-    {
-        return $this->sum('amount');
     }
 }

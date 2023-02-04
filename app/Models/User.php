@@ -3,9 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Donate;
 use App\Models\Shelter;
 use App\Models\Adoption;
+use App\Models\Notification;
+use App\Models\AdoptionDonate;
+use App\Models\CampaignDonate;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
@@ -44,14 +46,31 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function donate(){
-        return $this->hasMany(Donate::class);
+    public function donateShelter(){
+        return $this->hasMany(donateShelter::class);
+    }
+    public function adoptionDonate(){
+        return $this->hasMany(AdoptionDonate::class);
+    }
+    public function campaignDonate(){
+        return $this->hasMany(CampaignDonate::class);
     }
     public function adoption(){
         return $this->hasMany(Adoption::class);
     }
     public function shelter(){
         return $this->hasMany(Shelter::class);
+    }
+    public function notification(){
+        return $this->hasMany(Notification::class);
+    }
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%');
+        });
+    
     }
 
     

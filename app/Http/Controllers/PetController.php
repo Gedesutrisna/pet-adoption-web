@@ -18,7 +18,7 @@ class PetController extends Controller
     public function index(Request $request)
     {
         return view('admin.pets.index',[
-            'pets' =>  Pet::latest()->filter(request(['search', 'category']))->get(),
+            'pets' =>  Pet::latest()->filter(request(['search', 'category']))->Paginate(7)->withQueryString(),
             'categories' => Category::all(),
         ]);
     }

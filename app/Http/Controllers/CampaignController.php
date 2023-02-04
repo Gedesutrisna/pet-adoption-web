@@ -17,7 +17,7 @@ class CampaignController extends Controller
     public function index()
     {
         return view('admin.campaigns.index',[
-            'campaigns' =>  Campaign::latest()->filter(request(['search', 'category']))->get(),
+            'campaigns' =>  Campaign::latest()->filter(request(['search', 'category']))->paginate(7)->withQueryString(),
             'categories' => Category::all()
         ]);
     }

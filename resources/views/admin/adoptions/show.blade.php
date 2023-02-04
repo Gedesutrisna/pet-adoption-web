@@ -1,5 +1,8 @@
 @extends('admin.layouts.main')
 @section('container')
+<div class="back mt-3">
+  <a href="/dashboard/adoptions"><i   style="font-size: 2rem; color:#193A6A" class="bi bi-arrow-left-circle-fill"></i></a>
+</div>
 <div class="container">
     <div class="row my-3">
       <div class="col-lg-8">

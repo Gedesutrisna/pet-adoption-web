@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PetController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DonateController;
 use App\Http\Controllers\ContactController;
@@ -13,8 +14,6 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\DonateShelterController;
-use App\Http\Controllers\AdoptionDonateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +25,7 @@ use App\Http\Controllers\AdoptionDonateController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
@@ -50,8 +47,6 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/donates', [DonateController::class, 'index']);
 Route::post('/donates/create', [DonateController::class, 'store'])->middleware('auth');
-Route::post('/donates/adoption/create', [AdoptionDonateController::class, 'store'])->middleware('auth');
-Route::post('/donates/shelter/create', [DonateShelterController::class, 'store'])->middleware('auth');
 
 Route::post('/adoptions/create/{id}', [AdoptionController::class, 'store'])->middleware('auth');
 Route::post('/adoptions/update/{id}', [AdoptionController::class, 'update'])->middleware('auth');
@@ -67,17 +62,17 @@ Route::post('change-password', [PasswordController::class, 'update'])->name('cha
 
 
 //midtrans
-Route::get('/transaction/{id}', [DonateController::class, 'transaction']);
-Route::post('/donates/adoption/{id}', [AdoptionDonateController::class, 'transaction'])->middleware('auth');
+Route::get('/transaction/{id}/{type}', [DonateController::class, 'transaction']);
 
-
+//notif
+Route::patch('notification/{notification}/read', [ProfileController::class,'read'])->name('notification.read');
 
 
 
 Route::get('/dashboard', [DonateController::class, 'data'])->middleware('auth:admin'); 
     
 Route::get('/dashboard/donates', [DonateController::class, 'datadonate'])->middleware('auth:admin')->name('donates.index');
-Route::get('/dashboard/donate/{id}', [DonateController::class, 'show'])->middleware('auth:admin');
+Route::get('/dashboard/donate/{type}/{id}', [DonateController::class, 'show'])->middleware('auth:admin');
 Route::delete('/dashboard/donates/{id}', [DonateController::class, 'destroy'])->middleware('auth:admin');
 
 Route::get('/dashboard/adoptions', [AdoptionController::class, 'dataadoption'])->middleware('auth:admin');

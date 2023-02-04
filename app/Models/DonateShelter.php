@@ -16,8 +16,10 @@ class DonateShelter extends Model
     ];
     public function scopeFilter($query, array $filters)
 {
-        $query->when($filters['search'] ?? false, function ($query, $search) {
-            return $query->where('shelter_id', 'like', '%' . $search . '%');
+    $query->when($filters['search'] ?? false, function ($query, $search) {
+        return $query->join('users', 'users.id', '=', 'donate_shelters.user_id')
+        ->where('users.name', 'like', '%' . $search . '%')
+        ->orWhere('users.email', 'like', '%' . $search . '%');
     });
 
 }
@@ -33,16 +35,10 @@ class DonateShelter extends Model
         });
     }
 
-
     public function user(){
         return $this->belongsTo(User::class);
     }
-
     public function shelter(){
         return $this->belongsTo(Shelter::class);
     }
-
-    public function totalAmount()
-    {
-        return $this->sum('amount');
-    }}
+}

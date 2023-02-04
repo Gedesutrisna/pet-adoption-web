@@ -3,14 +3,43 @@
 <div class="card mb-3 border-0" style="margin-top:100px;">
   
   <div class="row g-5" >
-    @if (Session::has('success'))
-    <script>
-        Swal.fire({
-            title: "{{ Session::get('success') }}",
-            type: 'success'
-        });
-    </script>
-    @endif
+    @if (session('success'))
+    <div class="alert alert-success">
+      {{ session('success') }}
+    </div>
+  @endif
+  
+
+<ul class="list-unstyled">
+  @foreach (Auth::user()->notification as $notification)
+  @if (!$notification->read_at)
+  @if ($notification->type == 'Adoption Declined')
+  <div class="alert alert-danger d-flex justify-content-between" role="alert">
+    {{ $notification->data }}
+    <form action="{{ route('notification.read', $notification) }}" method="post">
+      @csrf
+      @method('PATCH')
+      <button class="btn btn-sm btn-primary" type="submit">Mark as Read</button>
+    </form>
+  </div>
+      
+  @else
+      
+      
+  <div class="alert alert-success d-flex justify-content-between" role="alert">
+    {{ $notification->data }}
+    <form action="{{ route('notification.read', $notification) }}" method="post">
+      @csrf
+      @method('PATCH')
+      <button class="btn btn-sm btn-primary" type="submit">Mark as Read</button>
+    </form>
+  </div>
+  @endif
+  @endif
+  @endforeach
+</ul> 
+
+
     
       <div class="col-md-4 mt-3">
         <div class="card-body border border-1 rounded-start">
@@ -45,7 +74,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Data Donasi</h5>
-          <p class="card-text">{{ Auth::user()->donate->count() }}</p>
+          <p class="card-text">{{ Auth::user()->campaigndonate->count() + Auth::user()->adoptiondonate->count() + Auth::user()->donateshelter->count() }}</p>
           <a  style="background-color: #193A6A; 
               color: white;
               padding: 8px 16px;

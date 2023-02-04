@@ -14,7 +14,10 @@
         
     @endif
 @endif
-<h1 class="mb-3" style="text-align: center">Pets</h1>
+<div class="container" style="margin-bottom:2rem">
+  <h1 class="text-center" style="font-family: Playfair Display">Every Pet Deserves a Loving Home. <br> <span style="color: #193A6A">Adopt</span> a Pet Today </h1>
+  <p class="text-center" style="font-family: Roboto">Browse our available animals and learn more about the adoption process. Together, we can rescue, rehabilitate, and <br> rehome pets in need. Thank you for supporting our mission to bring joy to families through pet adoption.</p>
+  </div>
 <div class="row justify-content-center mb-3">
   <div class="col text-center">
     <form action="/pets" method="get" style="display: inline-block;">
@@ -44,8 +47,13 @@
     @foreach ($pets as $pet)
     <div class="col-md-4 mb-3">
       <div class="card border-0">
-        <div class="position-absolute px-3 py-2 text-white">
-{{ $pet->status }}
+        <div class="position-absolute px-2 py-2 text-white">
+          <p style="background-color: #193A6A; 
+          color: white;
+          padding: 5px 10px;
+          border: none;
+          font-size: 13px;
+          cursor: pointer;">{{ $pet->status }}</p> 
         </div>
           <img src="{{ asset('storage/' . $pet->image ) }}" alt="{{ $pet->category->name }}"
           class="img-fluid rounded-top" style="max-width:400px; height:300px;">

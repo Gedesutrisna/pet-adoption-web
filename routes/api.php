@@ -22,8 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('midtrans-callback', [DonateController::class, 'callbackCampaign']);
-Route::post('midtrans-callback', [DonateShelterController::class, 'callbackShelter']);
-Route::post('midtrans-callback', [AdoptionDonateController::class, 'callbackAdoption']);
+Route::post('midtrans-callback', [DonateController::class, 'callBack']);
 
 

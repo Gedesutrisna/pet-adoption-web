@@ -4,19 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Pet;
 use App\Models\User;
+use App\Models\Shelter;
 use App\Models\Adoption;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Shelter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
     public function index()
-    {    
-        return view('profile.index');
+    {       
+        $notifications = Notification::all();
+        return view('profile.index',compact('notifications'));
     }
+    public function read(Notification $notification)
+{
+    $notification->update(['read_at' => now()]);
+    return back();
+}
+
     public function dataDonate()
     {    
         return view('profile.data-Donate');

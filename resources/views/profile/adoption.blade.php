@@ -25,6 +25,9 @@
       font-weight: bold;
     }
   </style>
+<div class="back mt-3 mb-3">
+  <a href="/data/adoptions"><i   style="font-size: 2rem; color:#193A6A" class="bi bi-arrow-left-circle-fill"></i></a>
+  </div>
 <div class="row">        
     <div class="col-sm-4 mb-3 mb-sm-0">
         <div class="card">
@@ -44,86 +47,99 @@
                     class="img-fluid mt-2">
                   </div>
                   <p> kode untuk donasi : {{ $adoption->code }}</p>
-                  @if ($adoption->status == 'pending')              
-                  <a href="{{ asset($adoption->approval_file) }}" download>Download File</a>
-                  @else
-                  @endif
-                <p class="card-text">{{ $adoption->reason }}</p>
-                @if ($adoption->status == 'approved')      
-                <form method="POST" action="/donates/adoption/create" class="mb-5">
-                    @csrf
-                    <div class="mb-3" id="adoption-input" style="display: none">
-                      <label for="adoption_id" class="form-label">adoption_id</label>
-                      <input type="text" class="form-control rounded-0 @error('adoption_id') is-invalid @enderror" id="adoption_id" name="adoption_id"  value="{{ old('adoption_id',$adoption->id) }}" required>
+                <p class="card-text">Alasan : {{ $adoption->reason }}</p>
+             </div>
+        </div>
+    </div>
+    <div class="col-sm-6 mb-3 mb-sm-0">
+      @if ($adoption->status == 'approved')      
+      <div class="card">
+        <div class="card-body">
+                <form method="POST" action="/donates/create">
+                  @csrf
+                  <div class="mb-3">
+                      <label for="amount" class="form-label">Amount</label>
+                      <input type="number" name="amount"  class="form-control @error('amount') is-invalid @enderror"  id="amount" min="50000" step="10000" required value="{{ old('amount') }}">
+                      
+                      @error('amount')
+                      <div class="invalid-feedback">
+                          {{ $message }}
+                        </div>
+                        @enderror
+                        <br>
+                        <button style=" 
+                        color: #193A6A;
+                        padding: 8px 36px;
+                        border: solid 1px #193A6A;
+                        font-size: 13px;
+                        cursor: pointer;" class="nominal" value="50000" onclick="setAmount(50000); return false;">Rp {{ number_format(50000, 0, ',', '.') }}</button>
+                        <button style=" 
+                        color: #193A6A;
+                        padding: 8px 36px;
+                        border: solid 1px #193A6A;
+                        font-size: 13px;
+                        cursor: pointer;" class="nominal" value="100000" onclick="setAmount(100000); return false;">Rp {{ number_format(100000, 0, ',', '.') }}</button>
+                        <button style=" 
+                        color: #193A6A;
+                        padding: 8px 36px;
+                        border: solid 1px #193A6A;
+                        font-size: 13px;
+                        cursor: pointer;" class="nominal" value="500000" onclick="setAmount(500000); return false;">Rp {{ number_format(500000, 0, ',', '.') }}</button>
+                    </div>
+                    <div class="mb-3">
+                      <label for="code" class="form-label">code <span style="color: red">*</span></label>
+                      <input name="code" class="form-control @error('code') is-invalid @enderror" id="code" value="{{ old('code') }}">
+                      @error('code')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="mb-3">
+                      <label for="comment" class="form-label">Comment <span style="color: red">*</span></label>
+                      <textarea name="comment" class="form-control @error('comment') is-invalid @enderror" id="comment" value="{{ old('comment') }}" rows="4" placeholder="Donate" style="resize: none"></textarea>
+                      @error('comment')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="mb-3">
+                      <input type="hidden" class="form-control @error('adoption_id') is-invalid @enderror" id="adoption_id" name="adoption_id"  value="{{ old('adoption_id', $adoption->id) }}">
                       @error('adoption_id')
                           <div class="invalid-feedback">
                             {{ $message }}
                           </div>
                       @enderror
                     </div>
-                  
-                  <div class="mb-3">
-                    <label for="amount" class="form-label">Amount</label>
-                    <input type="number" name="amount"  class="form-control rounded-0 @error('amount') is-invalid @enderror"  id="amount" min="50000" step="1000" required value="{{ old('amount') }}">
-                    
-                    @error('amount')
-                    <div class="invalid-feedback">
-                        {{ $message }}
+                 
+                    <div class="row justify-content-between">
+                      <div class="col-auto">
+                        <button type="button" id="reset-btn" style=" 
+                        color: #193A6A;
+                        padding: 8px 36px;
+                        border-radius: .3rem;
+                        border: solid 1px #193A6A;
+                        font-size: 13px;
+                        cursor: pointer;">Cancel</button>
                       </div>
-                      @enderror
-      
-                      <br>
-      <button style=" 
-      color: #193A6A;
-      padding: 8px 36px;
-      border: solid 1px #193A6A;
-      font-size: 13px;
-      cursor: pointer;" class="nominal" value="50000" onclick="setAmount(50000); return false;">Rp {{ number_format(50000, 0, ',', '.') }}</button>
-      <button style=" 
-      color: #193A6A;
-      padding: 8px 36px;
-      border: solid 1px #193A6A;
-      font-size: 13px;
-      cursor: pointer;" class="nominal" value="100000" onclick="setAmount(100000); return false;">Rp {{ number_format(100000, 0, ',', '.') }}</button>
-      <button style=" 
-      color: #193A6A;
-      padding: 8px 36px;
-      border: solid 1px #193A6A;
-      font-size: 13px;
-      cursor: pointer;" class="nominal" value="500000" onclick="setAmount(500000); return false;">Rp {{ number_format(500000, 0, ',', '.') }}</button>
-                  </div>
-                  <div class="mb-3" id="adoption-input">
-                    <label for="code" class="form-label">Code</label>
-                    <input type="text" class="form-control rounded-0 @error('code') is-invalid @enderror" id="code" name="code"  value="{{ old('code') }}" required>
-                    @error('code')
-                        <div class="invalid-feedback">
-                          {{ $message }}
-                        </div>
-                    @enderror
-                  </div>
-                  <div class="mb-3">
-                    <label for="comment" class="form-label">comment</label>
-                    <textarea class="form-control rounded-0 @error('comment') is-invalid @enderror" id="comment" name="comment" rows="3"value="{{ old('comment') }}" style="resize: none"></textarea>
-                    @error('comment')
-                        <div class="invalid-feedback">
-                          {{ $message }}
-                        </div>
-                    @enderror
-                  </div>   
-             </div>
-             <div class="modal-footer">
-               <button type="submit" style=" 
-               color: #193A6A;
-               padding: 8px 36px;
-               border: solid 1px #193A6A;
-               font-size: 13px;
-               cursor: pointer;" class="rounded-0">Donate Now</button>
-                @else
-                    
-                @endif
+                      <div class="col-auto">
+                    <button type="submit" id="submit-btn"  style="background-color: #193A6A; 
+                    color: white;
+                    padding: 8px 36px;
+                    border-radius: .3rem;
+                    border: solid 1px #193A6A;
+                    font-size: 13px;
+                    cursor: pointer;">Submit</button>
+                      </div>
+                    </div>
+                </form>
+              </div>
             </div>
+            @else
+                
+            @endif
         </div>
-    </div>
   </div>
   <script>
     let nominal = document.querySelectorAll('.nominal');

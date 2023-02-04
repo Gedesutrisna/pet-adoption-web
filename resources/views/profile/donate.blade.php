@@ -1,5 +1,8 @@
 @extends('layouts.main')
 @section('container')
+<div class="back mt-3 mb-3">
+  <a href="/data/donations"><i   style="font-size: 2rem; color:#193A6A" class="bi bi-arrow-left-circle-fill"></i></a>
+</div>
 <div class="row">        
     <div class="col-sm-4 mb-3 mb-sm-0">
         <div class="card  rounded-0">

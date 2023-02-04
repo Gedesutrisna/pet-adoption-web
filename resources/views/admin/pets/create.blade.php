@@ -1,5 +1,8 @@
 @extends('admin.layouts.main')
 @section('container')
+<div class="back mt-3">
+  <a href="/dashboard/pets"><i   style="font-size: 2rem; color:#193A6A" class="bi bi-arrow-left-circle-fill"></i></a>
+</div>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Create New Pet</h1>
     </div>
@@ -66,11 +69,14 @@
         @enderror
       </div>
 
-      <button type="submit" class="btn btn-primary">Create Post</button>
+      <button type="submit" style="background-color: #193A6A; 
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      font-size: 13px;
+      cursor: pointer;">Create Post</button>
     </form>
-    <div class="back">
-      <a href="/dashboard/pets">back</a>
-    </div>
+
   </div>
   <script>
     const name = document.querySelector('#name');

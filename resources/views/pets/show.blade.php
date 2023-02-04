@@ -6,12 +6,19 @@
   </div>
   <div class="row mb-4">
     <div class="col-lg-5">
-    <div style="max-height: 350px; overflow: hidden; ">
-      <div class="position-absolute px-4 py-4 text-white">
-        {{ $pet->status }}
-                </div>
-      <img src="{{ asset('storage/' . $pet->image ) }}" alt="{{ $pet->category->name }}"
-      class="img-fluid mt-2">
+    <div class="mb-3">
+      <div class="position-absolute px-2 py-2 text-white">
+        <p style="background-color: #193A6A; 
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        font-size: 13px;
+        cursor: pointer;">{{ $pet->status }}</p> 
+      </div>
+      <div class="mb-3">
+        <img src="{{ asset('storage/' . $pet->image ) }}" alt="{{ $pet->category->name }}"
+        class="img-fluid" style="width:800px; height:300px;">
+      </div>
       
     </div>
       </div>

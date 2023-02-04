@@ -6,6 +6,7 @@ use App\Models\Pet;
 use App\Models\Adoption;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -14,8 +15,10 @@ class AdoptionController extends Controller
 {
     public function dataAdoption()
     {
+        
         return view('admin.adoptions.index',[
-            'adoptions' =>  Adoption::latest()->filter(request(['search', 'category']))->paginate(7)->withQueryString(),
+            
+            'adoptions' =>  Adoption::latest('adoptions.created_at')->filter(request(['search', 'category']))->paginate(7)->withQueryString(),
             'categories' => Category::all()
         ]);       
     
@@ -64,13 +67,32 @@ class AdoptionController extends Controller
         $adoption->approve();
         $adoption->code = rand(5,99999); // generate kode unik
         $adoption->save();
-        return redirect()->back()->with('succes', 'adoption request approved!');
+        $notification = new Notification([
+            'user_id' => $adoption->user_id,
+            'notifiable_type' => Adoption::class,
+            'type' => 'Adoption Approved',
+            'notifiable_id' => $adoption->id,
+            'data' => 'Congratulations Your Adoption is Approved, Please Do The Next Step',
+        ]);
+        $notification->save();
+        
+        return redirect()->back()->with('success', 'adoption request approved!');
     }
     public function decline($id)
     {
         $adoption = Adoption::findOrFail($id);
         $adoption->decline();
-        return redirect()->back()->with('succes', 'adoption request declined!');
+
+        $notification = new Notification([
+            'user_id' => $adoption->user_id,
+            'notifiable_type' => Adoption::class,
+            'type' => 'Adoption Declined',
+            'notifiable_id' => $adoption->id,
+            'data' => 'Sorry Your Adoption is Declined, Try It Next Time',
+        ]);
+        $notification->save();
+    
+        return redirect()->back()->with('success', 'adoption request declined!');
     }
 
 

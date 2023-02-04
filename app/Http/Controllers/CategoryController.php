@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('admin.categories.index',[
-            'categories' => Category::all(),
+            'categories' => Category::latest()->filter(request(['search', 'category']))->paginate(7)->withQueryString(),
         ]);
     }
 
@@ -68,7 +68,7 @@ class CategoryController extends Controller
 
         Category::where('id', $category->id)->update($validatedData);
 
-        return redirect('dashboard/categories')->with('success', 'Ctategory Has Been Updated !');
+        return redirect('dashboard/categories')->with('success', 'Category Has Been Updated !');
 
     }
 

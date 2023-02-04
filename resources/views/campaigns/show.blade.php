@@ -7,13 +7,18 @@
     <div class="row my-3">
       <h1>{{ $campaign->title}}</h1>
       <p class="mb-3">{{ $campaign->category->name}}</p>
-      <div class="col-lg-5">
-        <div class="position-absolute px-4 py-4 text-white">
-          {{ $campaign->status }}
-        </div>
-      <div class="mb-3" style="max-height: 350px; overflow: hidden; ">
+      <div class="col-lg-6">
+        <div class="position-absolute px-2 py-2 text-white">
+          <p style="background-color: #193A6A; 
+          color: white;
+          padding: 8px 20px;
+          border: none;
+          font-size: 18px;
+          cursor: pointer;">{{ $campaign->status }}</p> 
+          </div>
+      <div class="mb-3">
         <img src="{{ asset('storage/' . $campaign->image ) }}" alt="{{ $campaign->category->name }}"
-        class="img-fluid mt-2">
+        class="img-fluid" style="width:800px; height:350px;">
       </div>
       <div class="progress">
         <div class="progress-bar" role="progressbar" style="width: {{ $campaign->percentage() }}%" aria-valuenow="{{ $campaign->percentage() }}" aria-valuemin="0" aria-valuemax="100"></div>

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Shelter;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -24,7 +25,7 @@ class ShelterController extends Controller
     public function dataShelter(Request $request)
     {
         return view('admin.shelters.index',[
-            "shelters" => Shelter::latest()->filter(request(['search' , 'category']))->paginate(7)->withQueryString(),
+            'shelters' =>  Shelter::latest('shelters.created_at')->filter(request(['search', 'category']))->paginate(7)->withQueryString(),
             'categories' => Category::all()
         ]);       
  
@@ -73,13 +74,30 @@ class ShelterController extends Controller
         $shelter->approve();
         $shelter->code = rand(5,99999); // generate kode unik
         $shelter->save();
-        return redirect()->back()->with('succes', 'shelter request approved!');
+        $notification = new Notification([
+            'user_id' => $shelter->user_id,
+            'notifiable_type' => Shelter::class,
+            'type' => 'Shelter Approved',
+            'notifiable_id' => $shelter->id,
+            'data' => 'Congratulations Your Shelter is Approved, Please Do The Next Step',
+        ]);
+        $notification->save();
+        return redirect()->back()->with('success', 'shelter request approved!');
     }
     public function decline($id)
     {
         $shelter = Shelter::findOrFail($id);
         $shelter->decline();
-        return redirect()->back()->with('succes', 'shelter request declined!');
+        $notification = new Notification([
+            'user_id' => $shelter->user_id,
+            'notifiable_type' => Shelter::class,
+            'type' => 'Shelter Declined',
+            'notifiable_id' => $shelter->id,
+            'data' => 'Sorry Your Shelter is Declined, Try It Next Time',
+        ]);
+        $notification->save();
+
+        return redirect()->back()->with('success', 'shelter request declined!');
     }
 
 

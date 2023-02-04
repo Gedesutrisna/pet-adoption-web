@@ -154,7 +154,7 @@ cursor: pointer;" class="nominal" value="500000" onclick="setAmount(500000); ret
          </div>
        </div>
     </div>
-    <div class="row mt-4">
+    <div class="row">
       <h3>How to <span style="color: #193A6A">Donate</span></h3>
       <p>Ada 4 cara donate yang tersedia di website kami</p>
       <ol>

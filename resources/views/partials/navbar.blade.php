@@ -10,9 +10,6 @@
             <a class="nav-link" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item-custom ms-5">
-            <a class="nav-link" aria-current="page" href="/donates">Donate</a>
-          </li>  
-          <li class="nav-item-custom ms-5">
             <a class="nav-link" aria-current="page" href="/pets">Pets</a>
           </li>  
           <li class="nav-item-custom ms-5">

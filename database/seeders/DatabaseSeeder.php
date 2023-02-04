@@ -6,7 +6,6 @@ namespace Database\Seeders;
 use App\Models\Pet;
 use App\Models\User;
 use App\Models\Admin;
-use App\Models\Donate;
 use App\Models\Shelter;
 use App\Models\Adoption;
 use App\Models\Campaign;
@@ -29,7 +28,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $date_target = "2023-02-01";
+        $date_target = "2023-03-01";
 
         Admin::create([
             'name' => 'admin',
@@ -61,15 +60,15 @@ class DatabaseSeeder extends Seeder
         Pet::create([
             'name' => 'Hewan Kucing',
             'slug' => 'hewan-kucing',
-            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
              laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
+             'image' => 'images/cat1.png',
              'quantity' => 9,
              'category_id' => 2,
              'admin_id' => 1,
@@ -78,15 +77,15 @@ class DatabaseSeeder extends Seeder
         Pet::create([
             'name' => 'Hewan Kucing2',
             'slug' => 'hewan-kucing2',
-            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
              laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
+             'image' => 'images/cat2.png',
              'quantity' => 9,
              'category_id' => 2,
              'admin_id' => 1,
@@ -95,15 +94,15 @@ class DatabaseSeeder extends Seeder
         Pet::create([
             'name' => 'Hewan Kucing3',
             'slug' => 'hewan-kucing3',
-            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
              laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
+             'image' => 'images/cat3.png',
              'quantity' => 9,
              'category_id' => 2,
              'admin_id' => 1,
@@ -112,15 +111,15 @@ class DatabaseSeeder extends Seeder
         Pet::create([
             'name' => 'Hewan Anjing',
             'slug' => 'hewan-anjing',
-            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
              laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
+             'image' => 'images/dog1.png',
              'quantity' => 8,
              'category_id' => 1,
              'admin_id' => 1,
@@ -129,15 +128,15 @@ class DatabaseSeeder extends Seeder
         Pet::create([
             'name' => 'Hewan Anjing2',
             'slug' => 'hewan-anjing2',
-            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
              laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
+             'image' => 'images/dog2.png',
              'quantity' => 8,
              'category_id' => 1,
              'admin_id' => 1,
@@ -146,15 +145,15 @@ class DatabaseSeeder extends Seeder
         Pet::create([
             'name' => 'Hewan Anjing3',
             'slug' => 'hewan-anjing3',
-            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
              laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
+             'image' => 'images/dog3.png',
              'quantity' => 8,
              'category_id' => 1,
              'admin_id' => 1,
@@ -164,16 +163,16 @@ class DatabaseSeeder extends Seeder
         Campaign::create([
             'title' => 'Penyelamatan Anjing Jalanan',
             'slug' => 'penyelamatan-anjing-jalanan',
-            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
              laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
+             'image' => 'images/cam1.png',
              'category_id' => 1,
              'admin_id' => 1,
              'status' => 'ongoing',
@@ -183,16 +182,16 @@ class DatabaseSeeder extends Seeder
         Campaign::create([
             'title' => 'Penyelamatan Anjing Rabies',
             'slug' => 'penyelamatan-anjing-rabies',
-            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
              laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
+             'image' => 'images/cam2.png',
              'category_id' => 1,
              'admin_id' => 1,
              'status' => 'ongoing',
@@ -202,16 +201,16 @@ class DatabaseSeeder extends Seeder
         Campaign::create([
             'title' => 'Penyelamatan Anjing Sakit',
             'slug' => 'penyelamatan-anjing-sakit',
-            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
              laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
+             'image' => 'images/cam3.png',
              'category_id' => 1,
              'admin_id' => 1,
              'status' => 'ongoing',
@@ -221,16 +220,16 @@ class DatabaseSeeder extends Seeder
         Campaign::create([
             'title' => 'Penyelamatan Kucing Jalanan',
             'slug' => 'penyelamatan-kucing-jalanan',
-            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
              laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
+             'image' => 'images/cam4.png',
              'category_id' => 2,
              'admin_id' => 1,
              'status' => 'ongoing',
@@ -240,16 +239,16 @@ class DatabaseSeeder extends Seeder
         Campaign::create([
             'title' => 'Penyelamatan Kucing Rabies',
             'slug' => 'penyelamatan-kucing-rabies',
-            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
              laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
+             'image' => 'images/cam5.png',
              'category_id' => 2,
              'admin_id' => 1,
              'status' => 'ongoing',
@@ -259,16 +258,16 @@ class DatabaseSeeder extends Seeder
         Campaign::create([
             'title' => 'Penyelamatan Kucing Sakit',
             'slug' => 'penyelamatan-kucing-sakit',
-            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam?
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque omnis quo soluta adipisci nam? Reiciendis
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
              laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/61Jjzp75Ookla8AMM9Xk8bYzRtax3Is8PPqrO3T9.jpg',
+             'image' => 'images/TdD6BprPFHWGD6xVnP3sp7fiZdARtk8Xw9VNBneW.png',
              'category_id' => 2,
              'admin_id' => 1,
              'status' => 'ongoing',
