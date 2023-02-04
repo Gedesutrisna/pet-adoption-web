@@ -84,16 +84,16 @@ class DonateController extends Controller
         if ($hashed == $request->signature_key) {
             if ($request->transaction_status == 'capture') {
                 if (!empty($donate = AdoptionDonate::find($request->order_id))) {
-                    $donate->update(['status' => 'paid']);
-                    if ($donate->adoption->status == 'approved') {
-                        $donate->adoption->update(['status' => 'completed']);
+                    $donate->update(['status' => 'Paid']);
+                    if ($donate->adoption->status == 'Approved') {
+                        $donate->adoption->update(['status' => 'Completed']);
                     }
                 } elseif (!empty($donate = CampaignDonate::find($request->order_id))) {
-                    $donate->update(['status' => 'paid']);
+                    $donate->update(['status' => 'Paid']);
                 } elseif (!empty($donate = DonateShelter::find($request->order_id))) {
-                    $donate->update(['status' => 'paid']);
-                    if ($donate->shelter->status == 'approved') {
-                        $donate->shelter->update(['status' => 'completed']);
+                    $donate->update(['status' => 'Paid']);
+                    if ($donate->shelter->status == 'Approved') {
+                        $donate->shelter->update(['status' => 'Completed']);
                     }
                 }
                 
@@ -118,9 +118,9 @@ class DonateController extends Controller
         $adoptions = Adoption::all();
             //chart
 
-            $campaignDonate = CampaignDonate::where('status', 'paid')->sum('amount');
-            $adoptionDonate = AdoptionDonate::where('status', 'paid')->sum('amount');
-            $donateShelter = DonateShelter::where('status', 'paid')->sum('amount');
+            $campaignDonate = CampaignDonate::where('status', 'Paid')->sum('amount');
+            $adoptionDonate = AdoptionDonate::where('status', 'Paid')->sum('amount');
+            $donateShelter = DonateShelter::where('status', 'Paid')->sum('amount');
 
         return view('admin.index', compact( 'pets','campaignDonate','adoptionDonate','donateShelter','campaigns','shelters','adoptions',));
 
@@ -155,7 +155,7 @@ class DonateController extends Controller
         ]);
 
         $validatedData['user_id'] = Auth()->user()->id;
-    
+        
         if ($request->campaign_id) {
             $campaign = Campaign::find($request->campaign_id);
             if ($validatedData['amount'] >= $campaign->donation_target) {
@@ -166,14 +166,16 @@ class DonateController extends Controller
         } else if ($request->adoption_id) {
             $adoption = Adoption::find($request->adoption_id);
             $validatedData['adoption_id'] = $adoption->id;
+            $validatedData['code'] = $adoption->code;
             $donate = new AdoptionDonate();
-
+            
         } else if ($request->shelter_id) {
             $shelter = Shelter::find($request->shelter_id);
             $validatedData['shelter_id'] = $shelter->id;
+            $validatedData['code'] = $shelter->code;
             $donate = new DonateShelter();
         }
-
+        
         $donate->fill($validatedData);
         $donate->save();
 
@@ -212,12 +214,24 @@ $snapToken = \Midtrans\Snap::getSnapToken($params);
     }
 
 
-    // public function destroy($id)    
-    // {
-    //     $donate = Donate::find($id);
-    //     $donate->delete($donate);
-    //     return back()->with('success', 'donate Berhasil Dihapus');
-    // } 
+    public function destroyShelter($id)    
+    {
+        $donateShelter = DonateShelter::find($id);
+        $donateShelter->delete($donateShelter);
+        return back()->with('success', 'donate Berhasil Dihapus');
+    } 
+    public function destroyAdoption($id)    
+    {
+        $adoptionDonate = AdoptionDonate::find($id);
+        $adoptionDonate->delete($adoptionDonate);
+        return back()->with('success', 'donate Berhasil Dihapus');
+    } 
+    public function destroyCampaign($id)    
+    {
+        $campaignDonate = CampaignDonate::find($id);
+        $campaignDonate->delete($campaignDonate);
+        return back()->with('success', 'donate Berhasil Dihapus');
+    } 
 
 
 }

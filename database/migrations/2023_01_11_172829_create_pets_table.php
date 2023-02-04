@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->foreignId('category_id');
             $table->foreignId('admin_id');
-            $table->enum('status', ['available', 'unavailable'])->default('available');
+            $table->enum('status', ['Available', 'Unavailable'])->default('Available');
             $table->timestamps();
         });
     }

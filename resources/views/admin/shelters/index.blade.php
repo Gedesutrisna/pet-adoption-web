@@ -66,16 +66,31 @@
 
                                 
                 <a href="/dashboard/shelter/{{ $shelter->id }}" class="btn btn-primary rounded-0"><i class="bi bi-eye"></i></a>
-                {{-- <form action="/dashboard/shelters/{{ $shelters->id }}" method="POST" class="d-inline">
-                  @method('delete')
-                  @csrf
-                  <button class="btn btn-danger" onclick="return confirm('Are U Sure ?')"><span data-feather="x-circle"></span> Delete</button>
-                  </form> --}}
-     
-                @if($shelter->status === 'inprogress')
-                <a href="{{ route('shelters.approve', $shelter->id) }}" class="btn btn-success" id="approve-{{ $shelter->id }}">Approve</a>
-                <a href="{{ route('shelters.decline', $shelter->id )}}" class="btn btn-danger" id="decline-{{ $shelter->id }}">Decline</a>
-              @endif
+                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header d-block">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Shelter</h5>
+                        <p class="text-muted">Are U Sure Delete This Submission ?</p>
+                      </div>
+                      <div class="modal-body d-flex justify-content-between">
+                        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
+              
+                        <form action="/dashboard/shelter/{{ $shelter->id }}" method="POST" class="d-inline">
+                          @method('delete')
+                          @csrf
+                          <button class="btn btn-danger rounded-0"><i class="bi bi-trash"></i></button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+               <button type="button" class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                <i class="bi bi-trash"></i>
+                </button>
+              
+ 
             </td>
             
             

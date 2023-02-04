@@ -60,7 +60,7 @@ class AdoptionController extends Controller
         $pet = Pet::findOrFail($adoption->pet_id); 
         $pet->decrement('quantity', $adoption->quantity); // mengurangi quantity pada tabel pet
         if($pet->quantity == 0){
-            $pet->status = 'unavailable';
+            $pet->status = 'Unavailable';
             $pet->save();
         }
  
@@ -113,7 +113,7 @@ class AdoptionController extends Controller
     $validatedData['user_id'] = Auth()->user()->id;
     Adoption::where('id', $adoption->id)
     ->update($validatedData);
-    $adoption->status = 'inprogress'; // generate kode unik
+    $adoption->status = 'Inprogress'; // generate kode unik
         $adoption->save();
     return back()->with('success', 'file has been Submited!');
     }

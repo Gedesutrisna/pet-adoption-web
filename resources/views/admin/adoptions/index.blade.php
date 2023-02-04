@@ -70,16 +70,30 @@
 
                                 
                 <a href="/dashboard/adoption/{{ $adoption->id }}" class="btn btn-primary rounded-0"><i class="bi bi-eye"></i></a>
-                {{-- <form action="/dashboard/adoptions/{{ $adoptions->id }}" method="POST" class="d-inline">
-                  @method('delete')
-                  @csrf
-                  <button class="btn btn-danger" onclick="return confirm('Are U Sure ?')"><span data-feather="x-circle"></span> Delete</button>
-                  </form> --}}
+                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header d-block">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Adoption</h5>
+                        <p class="text-muted">Are U Sure Delete This Submission ?</p>
+                      </div>
+                      <div class="modal-body d-flex justify-content-between">
+                        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
+              
+                        <form action="/dashboard/adoption/{{ $adoption->id }}" method="POST" class="d-inline">
+                          @method('delete')
+                          @csrf
+                          <button class="btn btn-danger rounded-0"><i class="bi bi-trash"></i></button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+               <button type="button" class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                <i class="bi bi-trash"></i>
+                </button>
 
-     
-                @if($adoption->status === 'inprogress')
-                <a href="{{ route('adoptions.approve', $adoption->id) }}" class="btn btn-success" id="approve-{{ $adoption->id }}" onclick="return confirm('Apakah Anda yakin ingin menyetujui?');">Approve</a>
-                <a href="{{ route('adoptions.decline', $adoption->id )}}" class="btn btn-danger" id="decline-{{ $adoption->id }}" onclick="return confirm('Apakah Anda yakin ingin Menolak?');">Decline</a>              @endif
             </td>
             </tr>
         @endforeach

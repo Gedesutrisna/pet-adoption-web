@@ -56,6 +56,7 @@ class ProfileController extends Controller
                 'username' => 'nullable|max:255',
                 'email' => 'nullable|max:100|email:dns',
                 'phone' => 'nullable|digits_between:10,15',
+                'address' => 'nullable|max:255',
                 'image' => 'nullable|image|file',
                 'ktp' => 'nullable|file',
             ]);

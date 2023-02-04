@@ -69,11 +69,30 @@
               <td>
                 <a href="/dashboard/campaigns/{{ $campaign->slug }}" class="btn btn-primary rounded-0"><i class="bi bi-eye"></i></a>
                 <a href="/dashboard/campaigns/{{ $campaign->slug }}/edit" class="btn btn-warning rounded-0"><i class="bi bi-pen"></i></a>
-                <form action="/dashboard/campaigns/{{ $campaign->slug }}" method="POST" class="d-inline">
-                @method('delete')
-                @csrf
-                <button class="btn btn-danger rounded-0" onclick="return confirm('Are U Sure ?')"><i class="bi bi-trash"></i></button>
-                </form>
+                                           <!-- Modal -->
+  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header d-block">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Campaign</h5>
+          <p class="text-muted">Are U Sure Delete This Campaign ?</p>
+        </div>
+        <div class="modal-body d-flex justify-content-between">
+          <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
+          <form action="/dashboard/campaigns/{{ $campaign->slug }}" method="POST" class="d-inline">
+            @method('delete')
+            @csrf
+            <button class="btn btn-danger rounded-0"><i class="bi bi-trash"></i></button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <button type="button" class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+  <i class="bi bi-trash"></i>
+  </button>
+
               </td>
             </tr>
         @endforeach

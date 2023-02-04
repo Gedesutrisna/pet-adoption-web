@@ -55,21 +55,26 @@ class Campaign extends Model
             ]
         ];
     }
-
     public function percentage()
     {
-        $total_donation = CampaignDonate::where('campaign_id', $this->id)->sum('amount');
-    
+        $total_donation = CampaignDonate::where('campaign_id', $this->id)
+                                         ->where('status', 'Paid')
+                                         ->sum('amount');
+        
         if($total_donation == $this->donation_target || $this->date_target <= now()){
-            $this->update(['status' => 'completed']);
+            $this->update(['status' => 'Completed']);
         }
         return round($total_donation / $this->donation_target * 100, 2);
     }
+    
     public function remaining()
-{
-    $total_donation = CampaignDonate::where('campaign_id', $this->id)->sum('amount');
-    return number_format($this->donation_target - $total_donation);
-}
+    {
+        $total_donation = CampaignDonate::where('campaign_id', $this->id)
+                                         ->where('status', 'Paid')
+                                         ->sum('amount');
+        return number_format($this->donation_target - $total_donation);
+    }
+    
 
     
 

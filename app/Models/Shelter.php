@@ -41,16 +41,16 @@ class Shelter extends Model
     
     public function approve()
     {
-        $this->status = 'approved';
+        $this->status = 'Approved';
         $this->save();
     }
     public function decline()
     {
-        $this->status = 'declined';
+        $this->status = 'Declined';
         $this->save();
     }
 
     protected $attributes = [
-        'status' => 'inprogress'
+        'status' => 'Inprogress'
     ];
 }

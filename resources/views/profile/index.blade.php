@@ -10,34 +10,7 @@
   @endif
   
 
-<ul class="list-unstyled">
-  @foreach (Auth::user()->notification as $notification)
-  @if (!$notification->read_at)
-  @if ($notification->type == 'Adoption Declined')
-  <div class="alert alert-danger d-flex justify-content-between" role="alert">
-    {{ $notification->data }}
-    <form action="{{ route('notification.read', $notification) }}" method="post">
-      @csrf
-      @method('PATCH')
-      <button class="btn btn-sm btn-primary" type="submit">Mark as Read</button>
-    </form>
-  </div>
-      
-  @else
-      
-      
-  <div class="alert alert-success d-flex justify-content-between" role="alert">
-    {{ $notification->data }}
-    <form action="{{ route('notification.read', $notification) }}" method="post">
-      @csrf
-      @method('PATCH')
-      <button class="btn btn-sm btn-primary" type="submit">Mark as Read</button>
-    </form>
-  </div>
-  @endif
-  @endif
-  @endforeach
-</ul> 
+
 
 
     
@@ -171,6 +144,15 @@
               </div>
               @enderror     
             </div>  
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Address</label>
+              <input name="address" type="text" class="form-control @error('address') is-invalid @enderror" id="address" aria-describedby="emailHelp" value="{{ old('address', Auth::user()->address ) }}">    
+              @error('address')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+              @enderror           
+            </div>
               <div class="modal-footer">
                 <button type="submit" style="background-color: #193A6A; 
               color: white;

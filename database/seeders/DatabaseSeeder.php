@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
              'quantity' => 9,
              'category_id' => 2,
              'admin_id' => 1,
-             'status' => 'available',
+             'status' => 'Available',
         ]);
         Pet::create([
             'name' => 'Hewan Kucing2',
@@ -89,7 +89,7 @@ class DatabaseSeeder extends Seeder
              'quantity' => 9,
              'category_id' => 2,
              'admin_id' => 1,
-             'status' => 'available',
+             'status' => 'Available',
         ]);
         Pet::create([
             'name' => 'Hewan Kucing3',
@@ -106,7 +106,7 @@ class DatabaseSeeder extends Seeder
              'quantity' => 9,
              'category_id' => 2,
              'admin_id' => 1,
-             'status' => 'available',
+             'status' => 'Available',
         ]);
         Pet::create([
             'name' => 'Hewan Anjing',
@@ -123,7 +123,7 @@ class DatabaseSeeder extends Seeder
              'quantity' => 8,
              'category_id' => 1,
              'admin_id' => 1,
-             'status' => 'available',
+             'status' => 'Available',
         ]);
         Pet::create([
             'name' => 'Hewan Anjing2',
@@ -140,7 +140,7 @@ class DatabaseSeeder extends Seeder
              'quantity' => 8,
              'category_id' => 1,
              'admin_id' => 1,
-             'status' => 'available',
+             'status' => 'Available',
         ]);
         Pet::create([
             'name' => 'Hewan Anjing3',
@@ -157,7 +157,7 @@ class DatabaseSeeder extends Seeder
              'quantity' => 8,
              'category_id' => 1,
              'admin_id' => 1,
-             'status' => 'available',
+             'status' => 'Available',
         ]);
 
         Campaign::create([
@@ -175,7 +175,7 @@ class DatabaseSeeder extends Seeder
              'image' => 'images/cam1.png',
              'category_id' => 1,
              'admin_id' => 1,
-             'status' => 'ongoing',
+             'status' => 'Ongoing',
              'donation_target' => 5000000,
              'date_target' => $date_target,
         ]);
@@ -194,7 +194,7 @@ class DatabaseSeeder extends Seeder
              'image' => 'images/cam2.png',
              'category_id' => 1,
              'admin_id' => 1,
-             'status' => 'ongoing',
+             'status' => 'Ongoing',
              'donation_target' => 6000000,
              'date_target' => $date_target,
         ]);
@@ -213,7 +213,7 @@ class DatabaseSeeder extends Seeder
              'image' => 'images/cam3.png',
              'category_id' => 1,
              'admin_id' => 1,
-             'status' => 'ongoing',
+             'status' => 'Ongoing',
              'donation_target' => 7000000,
              'date_target' => $date_target,
         ]);
@@ -232,7 +232,7 @@ class DatabaseSeeder extends Seeder
              'image' => 'images/cam4.png',
              'category_id' => 2,
              'admin_id' => 1,
-             'status' => 'ongoing',
+             'status' => 'Ongoing',
              'donation_target' => 5000000,
              'date_target' => $date_target,
         ]);
@@ -251,7 +251,7 @@ class DatabaseSeeder extends Seeder
              'image' => 'images/cam5.png',
              'category_id' => 2,
              'admin_id' => 1,
-             'status' => 'ongoing',
+             'status' => 'Ongoing',
              'donation_target' => 6000000,
              'date_target' => $date_target,
         ]);
@@ -270,7 +270,7 @@ class DatabaseSeeder extends Seeder
              'image' => 'images/TdD6BprPFHWGD6xVnP3sp7fiZdARtk8Xw9VNBneW.png',
              'category_id' => 2,
              'admin_id' => 1,
-             'status' => 'ongoing',
+             'status' => 'Ongoing',
              'donation_target' => 7000000,
              'date_target' => $date_target,
         ]);

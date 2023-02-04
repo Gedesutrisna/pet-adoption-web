@@ -73,7 +73,9 @@ Route::get('/dashboard', [DonateController::class, 'data'])->middleware('auth:ad
     
 Route::get('/dashboard/donates', [DonateController::class, 'datadonate'])->middleware('auth:admin')->name('donates.index');
 Route::get('/dashboard/donate/{type}/{id}', [DonateController::class, 'show'])->middleware('auth:admin');
-Route::delete('/dashboard/donates/{id}', [DonateController::class, 'destroy'])->middleware('auth:admin');
+Route::delete('/donate/shelter/{id}', [DonateController::class, 'destroyShelter'])->name('shelter.destroy');
+Route::delete('/donate/adoption/{id}', [DonateController::class, 'destroyAdoption'])->name('adoption.destroy');
+Route::delete('/donate/campaign/{id}', [DonateController::class, 'destroyCampaign'])->name('campaign.destroy');
 
 Route::get('/dashboard/adoptions', [AdoptionController::class, 'dataadoption'])->middleware('auth:admin');
 Route::get('/dashboard/adoption/{id}', [AdoptionController::class, 'show'])->middleware('auth:admin');

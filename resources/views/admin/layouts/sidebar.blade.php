@@ -2,7 +2,7 @@
   <div class="profile mb-3">
     <div class="row ">
       <div class="col-3">
-        <img src="/assets/avatar.png" class="rounded-circle" style="padding-left: 8px" alt="">
+        <img src="/assets/avatar.png" class="rounded-circle" style="padding-left: 10px" alt="">
       </div>
       <div class="col mx-0">
         <button class="dropdown-btn rounded-5">  
@@ -10,10 +10,10 @@
             {{ Auth::guard('admin')->user()->name }}
           </a>
         </button>
-        <div class="dropdown-container">
+        <div class="dropdown-container" style="margin-left: 2px">
           <form action="/logout" method="POST">
             @csrf
-            <button style="margin-left: 23px" type="submit" class="dropdown-item text-muted">Logout</button>
+            <button style="margin-left: 28px" type="submit" class="dropdown-item text-muted">Logout</button>
           </form>
         </div>
       </div>

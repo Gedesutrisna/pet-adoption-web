@@ -48,7 +48,7 @@
     </div>
     
     </div>
-  @if ($campaign->status !== 'completed')
+  @if ($campaign->status !== 'Completed')
   @if (auth()->check())
       
   <div class="row">

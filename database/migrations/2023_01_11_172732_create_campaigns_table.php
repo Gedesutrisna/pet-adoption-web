@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreignId('admin_id');
             $table->integer('donation_target')->nullable();
             $table->date('date_target')->nullable();
-            $table->enum('status', ['ongoing', 'completed'])->default('ongoing');
+            $table->enum('status', ['Ongoing', 'Completed'])->default('Ongoing');
             $table->timestamps();
         });
     }

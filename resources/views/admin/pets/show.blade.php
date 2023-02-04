@@ -12,7 +12,7 @@
         <img src="{{ asset('storage/' . $pet->image ) }}" alt="{{ $pet->category->name }}"
         class="img-fluid mt-2">
       </div>
-
+<p>Quantity : {{ $pet->quantity }}</p>
 
   <article class="my-3 fs-5">
     {!! $pet->description !!}

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('pet_id');
             $table->foreignId('category_id');
             $table->integer('quantity');
-            $table->enum('status', ['inprogress', 'declined','approved','completed'])->default('inprogress');
+            $table->enum('status', ['Inprogress', 'Declined', 'Approved', 'Completed'])->default('Inprogress');
             $table->text('reason')->nullable();
             $table->string('code')->nullable();
             $table->string('approval_file')->nullable();

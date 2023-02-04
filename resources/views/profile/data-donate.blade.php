@@ -18,7 +18,7 @@
 
                 <p class="card-text">Comment : {{ $campaignDonate->comment }}</p>
         </div>
-            @if ($campaignDonate->status == 'paid')
+            @if ($campaignDonate->status == 'Paid')
                 
             @else
             <a style="background-color: #193A6A; 
@@ -72,7 +72,7 @@
 
                 <p class="card-text">Comment : {{ $donateshelter->comment }}</p>
         </div>
-            @if ($donateshelter->status == 'paid')
+            @if ($donateshelter->status == 'Paid')
                 
             @else
             <a style="background-color: #193A6A; 

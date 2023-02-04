@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('amount');
             $table->string('code')->nullable();
             $table->text('comment')->nullable();
-            $table->enum('status', ['unpaid', 'paid'])->default('unpaid');
+            $table->enum('status', ['Unpaid', 'Paid'])->default('Unpaid');
             $table->timestamps();
         });
     }

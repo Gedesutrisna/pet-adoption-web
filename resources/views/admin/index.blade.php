@@ -6,28 +6,28 @@
                 <div class="card-body" >
                   <img src="/assets/icon/pet.png" style="width:80px" alt="">
                   <p class="text-muted mb-0">Total Pets</p>
-                  <h5 class="card-title">{{ $pets->count() }} Pets</h5>
+                  <h5 class="card-title"><span style="color: #193A6A;">{{ $pets->count() }} </span> Pets</h5>
                 </div>
               </div>
             <div class="card mb-3 mx-auto" style="width: 14rem;height:10rem;border:solid 1px #193A6A">
                 <div class="card-body" >
                   <img src="/assets/icon/campaign.png" style="width:80px" alt="">
                   <p class="text-muted mb-0">Total Campaigns</p>
-                  <h5 class="card-title">{{ $campaigns->count() }} Campaigns</h5>
+                  <h5 class="card-title"><span style="color: #193A6A;">{{ $campaigns->count() }} </span> Campaigns</h5>
                 </div>
               </div>
             <div class="card mb-3 mx-auto" style="width: 14rem;height:10rem;border:solid 1px #193A6A">
                 <div class="card-body" >
                   <img src="/assets/icon/adoption.png" style="width:80px" alt="">
                   <p class="text-muted mb-0">Total Adoptions</p>
-                  <h5 class="card-title">{{ $adoptions->count() }} Adoptions</h5>
+                  <h5 class="card-title"><span style="color: #193A6A;">{{ $adoptions->count() }} </span> Adoptions</h5>
                 </div>
               </div>
             <div class="card mb-3 mx-auto" style="width: 14rem;height:10rem;border:solid 1px #193A6A">
                 <div class="card-body" >
                   <img src="/assets/icon/shelter.png" style="width:80px" alt="">
                   <p class="text-muted mb-0">Total Shelters</p>
-                  <h5 class="card-title">{{ $shelters->count() }} Shelters</h5>
+                  <h5 class="card-title"><span style="color: #193A6A;">{{ $shelters->count() }} </span> Shelters</h5>
                 </div>
               </div>       
     </div>

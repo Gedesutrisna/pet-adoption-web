@@ -25,7 +25,7 @@
   padding: 8px 16px;
   border: none;
   font-size: 13px;
-  cursor: pointer;" class="btn rounded-0 btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+  cursor: pointer;" class="btn rounded-0 btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal1">
     Create New Category 
   </button>
 

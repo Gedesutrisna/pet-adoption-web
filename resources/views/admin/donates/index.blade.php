@@ -61,12 +61,62 @@
             </td>
             <td>{{$adoptionDonate->status }}</td>
             <td>
-              <a href="/dashboard/donate/adoptiondonate/{{ $adoptionDonate->id }}" class="btn btn-primary rounded-0"><i class="bi bi-eye"></i></a>
-              <form action="/dashboard/donates/{{$adoptionDonate->id }}" method="POST" class="d-inline">
-                @method('delete')
-                @csrf
-                <button class="btn btn-danger rounded-0" onclick="return confirm('Are U Sure ?')"><i class="bi bi-trash"></i></button>
-                </form>
+              <button type="button"class="btn btn-primary rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                <i class="bi bi-eye"></i>
+              </button>
+            
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Payment Details</h5>
+                    </div>
+                    <div class="modal-body">
+                      <p class="text-muted mb-0 text-center" style="font-size: 13px">---User Datails---</p>
+                      <p class="mb-0">Name  : {{$adoptionDonate->user->name}}</p>
+                      <p class="mb-0">Email : {{$adoptionDonate->user->email}}</p>
+                      <p class="mb-0">Phone : {{$adoptionDonate->user->phone}}</p>
+                      <p class="mb-0">Address : {{$adoptionDonate->user->address}}</p>
+                      <p class="text-muted mb-0 text-center" style="font-size: 13px">---Donate Datails---</p>
+                      <p class="mb-0">Amount : Rp{{ number_format($adoptionDonate->amount, 0, ',', '.') }}</p>
+                      <p class="mb-0">Code : {{$adoptionDonate->code}}</p>
+                      <p class="mb-0">Status : {{$adoptionDonate->status}}</p>
+                      <p class="mb-0">Comment : {{$adoptionDonate->comment}}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <div class="button d-flex justify-content-between">        
+                        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>                      
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>          
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal-dialog">
+                 <div class="modal-content">
+                   <div class="modal-header d-block">
+                     <h5 class="modal-title" id="exampleModalLabel">Delete Donate</h5>
+                     <p class="text-muted">Are U Sure Delete This Donate ?</p>
+                   </div>
+                   <div class="modal-body d-flex justify-content-between">
+                     <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
+                     <form action="{{ route('adoption.destroy', $adoptionDonate->id) }}" method="post">
+                      @csrf
+                      @method('delete')
+                      <button class="btn btn-danger rounded-0"><i class="bi bi-trash"></i></button>
+                    </form>
+                   </div>
+                 </div>
+               </div>
+              </div>
+                                        
+              <button type="button" class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal4">
+              <i class="bi bi-trash"></i>
+              </button>                            
+             
+           
               </td>
           </tr>
           @endforeach
@@ -104,12 +154,60 @@
             </td>
             <td>{{$campaignDonate->status }}</td>
             <td>
-              <a href="/dashboard/donate/campaigndonate/{{ $campaignDonate->id }}" class="btn btn-primary rounded-0"><i class="bi bi-eye"></i></a>
-              <form action="/dashboard/donates/{{$campaignDonate->id }}" method="POST" class="d-inline">
-                @method('delete')
-                @csrf
-                <button class="btn btn-danger rounded-0" onclick="return confirm('Are U Sure ?')"><i class="bi bi-trash"></i></button>
-                </form>
+              <button type="button"class="btn btn-primary rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                <i class="bi bi-eye"></i>
+              </button>
+            
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Payment Details</h5>
+                    </div>
+                    <div class="modal-body">
+                      <p class="text-muted mb-0 text-center" style="font-size: 13px">---User Datails---</p>
+                      <p class="mb-0">Name  : {{$campaignDonate->user->name}}</p>
+                      <p class="mb-0">Email : {{$campaignDonate->user->email}}</p>
+                      <p class="mb-0">Phone : {{$campaignDonate->user->phone}}</p>
+                      <p class="mb-0">Address : {{$campaignDonate->user->address}}</p>
+                      <p class="text-muted mb-0 text-center" style="font-size: 13px">---Donate Datails---</p>
+                      <p class="mb-0">Amount : Rp{{ number_format($campaignDonate->amount, 0, ',', '.') }}</p>
+                      <p class="mb-0">Status : {{$campaignDonate->status}}</p>
+                      <p class="mb-0">Comment : {{$campaignDonate->comment}}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <div class="button d-flex justify-content-between">        
+                        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>                      
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>    
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header d-block">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Donate</h5>
+                        <p class="text-muted">Are U Sure Delete This Donate ?</p>
+                      </div>
+                      <div class="modal-body d-flex justify-content-between">
+                        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
+                        <form action="{{ route('campaign.destroy', $campaignDonate->id) }}" method="post">
+                          @csrf
+                          @method('delete')
+                         <button class="btn btn-danger rounded-0"><i class="bi bi-trash"></i></button>
+                       </form>
+                      </div>
+                    </div>
+                  </div>
+                 </div>
+                                           
+                 <button type="button" class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal5">
+                 <i class="bi bi-trash"></i>
+                 </button>     
+            
               </td>
           </tr>
           @endforeach
@@ -148,12 +246,61 @@
             </td>
             <td>{{$donateShelter->status }}</td>
             <td>
-              <a href="/dashboard/donate/donnateshelter/{{ $donateShelter->id }}" class="btn btn-primary rounded-0"><i class="bi bi-eye"></i></a>
-              <form action="/dashboard/donates/{{$donateShelter->id }}" method="POST" class="d-inline">
-                @method('delete')
-                @csrf
-                <button class="btn btn-danger rounded-0" onclick="return confirm('Are U Sure ?')"><i class="bi bi-trash"></i></button>
-                </form>
+              <button type="button"class="btn btn-primary rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                <i class="bi bi-eye"></i>
+              </button>
+            
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Payment Details</h5>
+                    </div>
+                    <div class="modal-body">
+                      <p class="text-muted mb-0 text-center" style="font-size: 13px">---User Datails---</p>
+                      <p class="mb-0">Name  : {{$donateShelter->user->name}}</p>
+                      <p class="mb-0">Email : {{$donateShelter->user->email}}</p>
+                      <p class="mb-0">Phone : {{$donateShelter->user->phone}}</p>
+                      <p class="mb-0">Address : {{$donateShelter->user->address}}</p>
+                      <p class="text-muted mb-0 text-center" style="font-size: 13px">---Donate Datails---</p>
+                      <p class="mb-0">Amount : Rp{{ number_format($donateShelter->amount, 0, ',', '.') }}</p>
+                      <p class="mb-0">Code : {{$donateShelter->code}}</p>
+                      <p class="mb-0">Status : {{$donateShelter->status}}</p>
+                      <p class="mb-0">Comment : {{$donateShelter->comment}}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <div class="button d-flex justify-content-between">        
+                        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>                      
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>   
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header d-block">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Donate</h5>
+                        <p class="text-muted">Are U Sure Delete This Donate ?</p>
+                      </div>
+                      <div class="modal-body d-flex justify-content-between">
+                        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
+                        <form action="{{ route('shelter.destroy', $donateShelter->id) }}" method="post">
+                          @csrf
+                          @method('delete')
+                         <button class="btn btn-danger rounded-0"><i class="bi bi-trash"></i></button>
+                       </form>
+                      </div>
+                    </div>
+                  </div>
+                 </div>
+                                           
+                 <button type="button" class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal6">
+                 <i class="bi bi-trash"></i>
+                 </button>     
+            
               </td>
           </tr>
           @endforeach

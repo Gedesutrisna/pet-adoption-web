@@ -18,13 +18,55 @@
           <li class="nav-item-custom ms-5">
             <a class="nav-link" aria-current="page" href="/shelters">Shelters</a>
           </li>
+          <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header d-block">
+                      
+                  @foreach (Auth::user()->notification as $notification)
+                  @if (!$notification->read_at)
+
+                  @if ($notification->type == 'Adoption Declined'|| $notification->type == 'Adoption Declined')
+
+                  <div class="alert alert-danger d-flex justify-content-between" role="alert">
+                   <p style="font-size: 14px;">{{ $notification->data }}</p> 
+                    <form action="{{ route('notification.read', $notification) }}" method="post">
+                      @csrf
+                      @method('PATCH')
+                      <button class="btn btn-sm btn-primary" type="submit" style="font-size: 14px">Mark as Read</button>
+                    </form>
+                  </div>
+                      
+                  @else
+                                          
+                  <div class="alert alert-success d-flex justify-content-between" role="alert">
+                    <p style="font-size: 14px;">{{ $notification->data }}</p> 
+                    <form style="margin-left: 30px" action="{{ route('notification.read', $notification) }}" method="post">
+                      @csrf
+                      @method('PATCH')
+                      <button class="btn btn-sm btn-primary" type="submit" style="font-size: 14px">Mark as Read</button>
+                    </form>
+                  </div>
+
+                  @endif
+
+                  @endif
+                  @endforeach
+         
+                </div>
+                <div class="modal-body">
+                  <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        
         </ul>
-        <form class="Search me-5" role="search">
-          <div class="input-group">
-            <button class="input-group-text border-end-0 bg-white"><i class="bi bi-search"></i></button>
-            <input class="form-control border-start-0" type="text" placeholder="Search" aria-label="Search">
-        </div>
-        </form>
+        <button class="mx-20" type="button" style="border: 0px;background:none;margin-right:20px" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+         <i class="bi bi-bell"></i>
+         </button>
+
         <div class="profile-img my-3">
           @auth
             <a class="text-decoration-none " style="color:black;" href="/profile"> 

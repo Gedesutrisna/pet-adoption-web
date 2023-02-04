@@ -31,7 +31,7 @@
 </article>
       </div>
   </div>
-        @if ($pet->status == 'available')
+        @if ($pet->status == 'Available')
         @if (auth()->check())
             
         <div class="row">

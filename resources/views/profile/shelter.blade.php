@@ -49,7 +49,7 @@
       </div>
     </div>
     <div class="col-sm-6 mb-3 mb-sm-0">
-      @if ($shelter->status == 'approved')      
+      @if ($shelter->status == 'Approved')      
       <div class="card">
         <div class="card-body">
                 <form method="POST" action="/donates/create">
@@ -157,16 +157,16 @@ const step3 = document.getElementById("step-3");
 
 function updateProgress(status) {
   switch (status) {
-    case "inprogress":
+    case "Inprogress":
       progressBar.style.width = "33.33%";
       step1.style.color = "black";
       break;
-    case "approved":
+    case "Approved":
       progressBar.style.width = "66.66%";
       step1.style.color = "black";
       step2.style.color = "black";
       break;
-    case "completed":
+    case "Completed":
       progressBar.style.width = "100%";
       step1.style.color = "black";
       step2.style.color = "black";
