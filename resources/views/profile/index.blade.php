@@ -18,16 +18,17 @@
         <div class="card-body border border-1 rounded-start">
 
             <h3>Profile         <button id="toggle-view-button" onclick="toggleView()" class="border-0" style="background: none;"><i class="bi bi-gear"></i></button>
-              @if(Auth::user()->image)
-              <img class="image rounded-circle" src="{{ asset('storage/' . Auth::user()->image ) }}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+              @if(auth()->user()->image)
+              <img class="image rounded-circle" src="{{ asset('storage/' . auth()->user()->image ) }}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
          @endif  
             </h3>
         <!-- Tombol untuk menampilkan tampilan edit profile -->
             <hr>
-          <p>Nama : {{ Auth::user()->name }}<p>
-          <p>Username : {{ Auth::user()->username }}<p>
-          <p>Email : {{ Auth::user()->email }}<p>
-          <p>Telepone : {{ Auth::user()->phone }}</p>
+          <p>Name : {{ auth()->user()->name }}<p>
+          <p>Username : {{ auth()->user()->username }}<p>
+          <p>Email : {{ auth()->user()->email }}<p>
+          <p>Phone : {{ auth()->user()->phone }}</p>
+          <p>Address : {{ auth()->user()->address }}</p>
           <hr>
         <form action="/logout" method="POST">
           @csrf
@@ -47,7 +48,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Data Donasi</h5>
-          <p class="card-text">{{ Auth::user()->campaigndonate->count() + Auth::user()->adoptiondonate->count() + Auth::user()->donateshelter->count() }}</p>
+          <p class="card-text">{{ auth()->user()->campaigndonate->count() + auth()->user()->adoptiondonate->count() + auth()->user()->donateshelter->count() }}</p>
           <a  style="background-color: #193A6A; 
               color: white;
               padding: 8px 16px;
@@ -61,7 +62,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Data Adopsi</h5>
-          <p class="card-text">{{ Auth::user()->adoption->count() }}</p>
+          <p class="card-text">{{ auth()->user()->adoption->count() }}</p>
           <a  style="background-color: #193A6A; 
               color: white;
               padding: 8px 16px;
@@ -75,7 +76,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Data Shelter</h5>
-          <p class="card-text">{{ Auth::user()->shelter->count() }}</p>
+          <p class="card-text">{{ auth()->user()->shelter->count() }}</p>
           <a  style="background-color: #193A6A; 
               color: white;
               padding: 8px 16px;
@@ -94,12 +95,12 @@
   <div class="row g-5">
     <div class="col-sm-6">
       <div class="card border border-0">
-          <form action="/profile/{{ Auth::user()->id }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('update.profile') }}" method="POST" enctype="multipart/form-data">
             @method('put')
             @csrf
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Nama</label>
-              <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" autofocus value="{{ old('name', Auth::user()->name ) }}">    
+              <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" autofocus value="{{ old('name', auth()->user()->name ) }}">    
               @error('name')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -108,7 +109,7 @@
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Username</label>
-              <input name="username" type="text" class="form-control @error('username') is-invalid @enderror" id="username" aria-describedby="emailHelp" value="{{ old('username', Auth::user()->username ) }}">    
+              <input name="username" type="text" class="form-control @error('username') is-invalid @enderror" id="username" aria-describedby="emailHelp" value="{{ old('username', auth()->user()->username ) }}">    
               @error('username')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -137,7 +138,7 @@
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">No Telp</label>
-              <input name="phone" type="text" class="form-control  @error('phone') is-invalid @enderror" id="phone" aria-describedby="emailHelp" value="{{ old('phone', Auth::user()->phone ) }}">               
+              <input name="phone" type="text" class="form-control  @error('phone') is-invalid @enderror" id="phone" aria-describedby="emailHelp" value="{{ old('phone', auth()->user()->phone ) }}">               
               @error('phone')
               <div class="invalid-feedback">
                 {{ $message }}
@@ -146,7 +147,7 @@
             </div>  
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Address</label>
-              <input name="address" type="text" class="form-control @error('address') is-invalid @enderror" id="address" aria-describedby="emailHelp" value="{{ old('address', Auth::user()->address ) }}">    
+              <input name="address" type="text" class="form-control @error('address') is-invalid @enderror" id="address" aria-describedby="emailHelp" value="{{ old('address', auth()->user()->address ) }}">    
               @error('address')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -167,6 +168,7 @@
     <div class="col-sm-4">
       <div class="card border border-0">
         <form method="POST" action="{{ route('change.password') }}">
+          @method('PATCH')
           @csrf 
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Curent Password</label>

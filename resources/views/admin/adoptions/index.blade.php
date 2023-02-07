@@ -35,10 +35,10 @@
       font-size: 13px;
       cursor: pointer;"  id="status-select">
         <option value="all">All</option>
-        <option value="inprogress">Inprogress</option>
-        <option value="approved">Approved</option>
-        <option value="declined">Declined</option>
-        <option value="completed">Complete</option>
+        <option value="Inprogress">Inprogress</option>
+        <option value="Approved">Approved</option>
+        <option value="Declined">Declined</option>
+        <option value="Completed">Complete</option>
     </select>
 @if ($adoptions->count())
 

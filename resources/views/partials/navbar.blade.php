@@ -22,7 +22,9 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header d-block">
-                      
+                  @if (auth()->check())
+                          
+                     
                   @foreach (Auth::user()->notification as $notification)
                   @if (!$notification->read_at)
 
@@ -52,20 +54,28 @@
 
                   @endif
                   @endforeach
-         
                 </div>
                 <div class="modal-body">
                   <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
-
+                  
                 </div>
+                @else
+                        
+                @endif
               </div>
             </div>
           </div>
         
         </ul>
+        @if (auth()->check())
+            
         <button class="mx-20" type="button" style="border: 0px;background:none;margin-right:20px" data-bs-toggle="modal" data-bs-target="#exampleModal1">
          <i class="bi bi-bell"></i>
          </button>
+        @else
+<a href="login"  style="border: 0px;background:none;margin-right:20px;color: black;">  <i class="bi bi-bell"></i></a>       
+            
+        @endif
 
         <div class="profile-img my-3">
           @auth
@@ -82,7 +92,7 @@
               @endcan
               @else
       <div class="profile">
-          <a href="/login" class="nav-link"><i class="bi bi-person" style="font-size: 25px; color: black;"></i></a>
+          <a href="/login" class="nav-link"><i class="bi bi-person" style="font-size: 25px; color: black;width: 50px;height: 50px; padding: 10px; margin: 0px;"></i></a>
       </div>
       @endauth
         </div>

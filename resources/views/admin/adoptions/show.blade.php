@@ -72,7 +72,11 @@
                                                         </div>
                                                         <div class="modal-body d-flex justify-content-between">
                                                           <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
-                                                          <a href="{{ route('adoptions.approve', $adoption->id) }}" class="btn btn-success rounded-0" id="approve-{{ $adoption->id }}">Approve</a>
+                                                          <form action="{{ route('adoptions.approve', $adoption->id) }}" method="post">
+                                                            @method('patch')
+                                                            @csrf
+                                                          <button class="btn btn-success rounded-0"  id="approve-{{ $adoption->id }}">Approve</button>
+                                                          </form>
                                                         </div>
                                                       </div>
                                                     </div>
@@ -87,7 +91,11 @@
                                                         </div>
                                                         <div class="modal-body d-flex justify-content-between">
                                                           <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
-                                                          <a href="{{ route('adoptions.decline', $adoption->id )}}" class="btn btn-danger rounded-0"  id="decline-{{ $adoption->id }}">Decline</a>
+                                                          <form action="{{ route('adoptions.decline', $adoption->id )}}" method="post">
+                                                            @method('patch')
+                                                            @csrf
+                                                          <button class="btn btn-danger rounded-0"  id="decline-{{ $adoption->id }}">Decline</button>
+                                                          </form>
                                                         </div>
                                                       </div>
                                                     </div>

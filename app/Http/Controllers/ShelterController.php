@@ -25,7 +25,7 @@ class ShelterController extends Controller
     public function dataShelter(Request $request)
     {
         return view('admin.shelters.index',[
-            'shelters' =>  Shelter::latest('shelters.created_at')->filter(request(['search', 'category']))->paginate(7)->withQueryString(),
+            'shelters' =>  Shelter::with(['category'])->latest('shelters.created_at')->filter(request(['search', 'category']))->paginate(7)->withQueryString(),
             'categories' => Category::all()
         ]);       
  
@@ -45,7 +45,7 @@ class ShelterController extends Controller
     {
         $validatedData = $request->validate([
             'category_id' => 'required',
-            'image' => 'required|file',
+            'image' => 'required|image:png,jpg,',
             'file' => 'required|file:pdf,word',
             'approval_file' => 'required|file:pdf,word',
             'reason' => 'nullable',

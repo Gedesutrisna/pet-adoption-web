@@ -17,15 +17,64 @@ class CampaignController extends Controller
     public function index()
     {
         return view('admin.campaigns.index',[
-            'campaigns' =>  Campaign::latest()->filter(request(['search', 'category']))->paginate(7)->withQueryString(),
+            'campaigns' =>  Campaign::with(['category', 'campaignDonate'])->latest()->filter(request(['search', 'category']))->paginate(7)->withQueryString(),
             'categories' => Category::all()
         ]);
+    }
+    
+    public function search(Request $request)
+    {
+    if($request->ajax())
+    {
+    $output="";
+    $campaigns= Campaign::where('title', 'like', '%' . $request->search . '%')->get();
+    if($campaigns)
+    {
+    foreach ($campaigns as $key => $campaign) {
+    $output.='<tr>'.
+    '<td>'.$campaign->id.'</td>'.
+    '<td>'.$campaign->title.'</td>'.
+    '<td>'.$campaign->category->name.'</td>'.
+    '<td>'.$campaign->status.'</td>'.
+    '<td>'
+    .'<a href="/dashboard/campaigns/'. $campaign->slug.' " class="btn btn-primary rounded-0"><i class="bi bi-eye"></i></a>
+    <a href="/dashboard/campaigns/'. $campaign->slug.' /edit" class="btn btn-warning rounded-0"><i class="bi bi-pen"></i></a>
+    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header d-block">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Campaign</h5>
+          <p class="text-muted">Are U Sure Delete This Campaign ?</p>
+        </div>
+        <div class="modal-body d-flex justify-content-between">
+          <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
+          <form action="/dashboard/campaigns/'. $campaign->slug.' " method="POST" class="d-inline">
+          <?php echo csrf_field(); ?>
+            <?php echo method_field("delete"); ?>
+            <button class="btn btn-danger rounded-0"><i class="bi bi-trash"></i></button>
+            </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <button type="button" class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+    <i class="bi bi-trash"></i>
+    </button>'
+.'</td>'.
+
+
+    '</tr>';
+    }
+    return Response($output);
+       }
+       }
     }
 
     public function campaignAll(){
         $categories = Category::all();
         return view('campaigns.index', compact('categories'), [
-            "campaigns" => Campaign::latest()->Paginate(4)->withQueryString()
+            "campaigns" => Campaign::with(['category', 'campaignDonate'])->latest()->filter(request(['search' , 'category']))->paginate(6)->withQueryString(),
         ]);
     }
     public function campaign(Campaign $campaign){

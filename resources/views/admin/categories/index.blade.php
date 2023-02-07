@@ -66,7 +66,7 @@
               padding: 8px 16px;
               border: none;
               font-size: 13px;
-              cursor: pointer;">Create new categories</button>
+              cursor: pointer;">Create new Category</button>
               </div>
           </form>
         </div>
@@ -133,7 +133,7 @@
             padding: 8px 16px;
             border: none;
             font-size: 13px;
-            cursor: pointer;">Update categories</button>
+            cursor: pointer;">Update Category</button>
             </div>
           </form>
         </div>

@@ -23,8 +23,8 @@
     font-size: 13px;
     cursor: pointer;"  id="status-select">
       <option value="all">All</option>
-      <option value="unpaid">Unpaid</option>
-      <option value="paid">Paid</option>
+      <option value="Unpaid">Unpaid</option>
+      <option value="Paid">Paid</option>
   </select>
   <select style=" 
   color: #193A6A;
@@ -316,6 +316,7 @@
     @endif
   </div>
   </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <script>
 
@@ -362,6 +363,24 @@ selectDonateType.addEventListener("change", function() {
   }
 });
 
-  </script>
 
+  $(document).ready(function() {
+    $("input[name='search']").on("keyup", function() {
+      var searchValue = $(this).val();
+      var categoryValue = $("input[name='category']").val();
+
+      $.ajax({
+        type: "GET",
+        url: "/dashboard/campaigns",
+        data: {
+          search: searchValue,
+          category: categoryValue
+        },
+        success: function(data) {
+          // Tambahkan kode untuk memperbarui hasil pencarian disini (misalnya dengan mengubah isi elemen HTML)
+        }
+      });
+    });
+  });
+</script>
 @endsection

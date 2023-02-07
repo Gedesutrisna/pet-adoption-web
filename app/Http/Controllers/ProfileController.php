@@ -15,27 +15,32 @@ use Illuminate\Support\Facades\Storage;
 class ProfileController extends Controller
 {
     public function index()
-    {       
-        $notifications = Notification::all();
-        return view('profile.index',compact('notifications'));
+    {    
+        $user = Auth::user();
+        $user->with(['campaignDonate', 'adoptionDonate', 'donateShelter','adoption','shelter']);
+   
+        return view('profile.index',compact('user'));
     }
-    public function read(Notification $notification)
-{
-    $notification->update(['read_at' => now()]);
-    return back();
-}
-
+    
+    
     public function dataDonate()
     {    
-        return view('profile.data-Donate');
+        $user = Auth::user();
+        $user->with(['campaignDonate', 'adoptionDonate', 'donateShelter']);
+        
+        return view('profile.data-Donate',compact('user'));
     }
     public function dataAdoption()
     {  
-        return view('profile.data-Adoption');
+        $user = Auth::user();
+        $user->with(['adoption']);
+        return view('profile.data-Adoption',compact('user'));
     }
     public function dataShelter()
     {    
-        return view('profile.data-Shelter');
+        $user = Auth::user();
+        $user->with(['shelter']);
+        return view('profile.data-Shelter',compact('user'));
     }
     public function adoptionSingle($id)
     {

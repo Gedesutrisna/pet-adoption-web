@@ -267,7 +267,7 @@ class DatabaseSeeder extends Seeder
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
              elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/TdD6BprPFHWGD6xVnP3sp7fiZdARtk8Xw9VNBneW.png',
+             'image' => 'images/cam6.png',
              'category_id' => 2,
              'admin_id' => 1,
              'status' => 'Ongoing',

@@ -38,7 +38,7 @@
           <h1 class="mb-3">Form Adoption</h1>
           <a  name="rules" href="{{ asset('storage/files/file.pdf') }}" id="download-btn" style="text-decoration: none; margin-bottom:2rem" download required>Download Rules before input form<span style="color: red">*</span></a>
           <div class="col-lg-8">
-          <form method="POST" action="/adoptions/create/{{ $pet->id }}" class="mb-5" enctype="multipart/form-data">
+          <form method="POST" action="/adoptions/create" class="mb-5" enctype="multipart/form-data">
               @csrf
               <div class="mb-3">
                 <label for="approval_file" class="form-label">File Aproval <span style="color: red">*</span></label>

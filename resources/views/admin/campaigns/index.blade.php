@@ -2,21 +2,20 @@
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Campaign Page</h1>
-    <form action="/dashboard/campaigns" method="get" style="display: inline-block;">
+    {{-- <form action="/dashboard/campaigns" method="get" style="display: inline-block;">
       @if (request('category'))
       <input type="hidden" name="category" value="{{ request('category') }}" >
-  @endif
-  <div class="input-group mb-3">
-    <input type="text" name="search" style="      border: solid 1px #193A6A  ;
-    " class="form-control rounded-0" placeholder="Search campaigns" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ request('search') }}">
-    <button class="input-group-text rounded-0" style="background-color: #193A6A; 
+  @endif --}}
+  {{-- <div class="input-group mb-3"> --}}
+    <input type="text" name="search" id="search" style="      border: solid 1px #193A6A  ;" class="form-control rounded-0" placeholder="Search Campaigns" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ request('search') }}">
+    {{-- <button class="input-group-text rounded-0" style="background-color: #193A6A; 
     color: white;
     padding: 10px 20px;
     border: none;
     font-size: 16px;
     cursor: pointer;"  type="submit"><i class="bi bi-search"></i></button>
   </div>
-    </form>
+    </form> --}}
     </div>
     <div class="col mb-3" style="display: inline-block; ">
       <select  style=" 
@@ -26,8 +25,8 @@
       font-size: 13px;
       cursor: pointer;"  id="status-select">
         <option value="all">All</option>
-        <option value="ongoing">Ongoing</option>
-        <option value="completed">Completed</option>
+        <option value="Ongoing">Ongoing</option>
+        <option value="Completed">Completed</option>
         
       </select>
       @foreach ($categories as $category)
@@ -40,8 +39,8 @@
   @endforeach
   </div>
 
-
-<div class="table-responsive">
+<div  id="search_container" >
+<div class="table-responsive" >
   <a href="/dashboard/campaigns/create"  style="background-color: #193A6A; 
   color: white;
   padding: 10px 16px;
@@ -99,6 +98,7 @@
       </tbody>
     </table>
   </div>
+</div>
   @else
   <p class="text-center fs-4">No. Campaign Found.</p>
 @endif
@@ -106,6 +106,8 @@
   <div class="justify-content-center">
     {{ $campaigns->links() }}
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
 <script>
  
   let tabSelect = document.getElementById("status-select");
@@ -129,5 +131,20 @@
    });
  });
  
- </script>
+ $('#search').on('keyup',function(){
+$value=$(this).val();
+$.ajax({
+type : 'get',
+url : '{{URL::to('/campaigns/search')}}',
+data:{'search':$value},
+success:function(data){
+$('tbody').html(data);
+}
+});
+
+})
+
+</script>
+
+
 @endsection

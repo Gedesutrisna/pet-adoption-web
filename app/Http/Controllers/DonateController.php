@@ -20,17 +20,7 @@ use Illuminate\Http\Client\Events\RequestSending;
 
 class DonateController extends Controller
 {
-    public function index()
-    {
-        
-        return view('donates.index',[
-            'campaigndonate' => CampaignDonate::all(),
-            'donateshelter' => DonateShelter::all(),
-            'mainCampaigns' => Campaign::latest()->take(1)->get(),
-            'submainCampaigns' => Campaign::latest()->take(5)->get()
 
-        ]);
-    }
     public function transaction(AdoptionDonate $adoptionDonate, CampaignDonate $campaignDonate, DonateShelter $donateShelter, $id, $type)
     {
         // Set your Merchant Server Key
@@ -126,30 +116,12 @@ class DonateController extends Controller
 
     } 
 
-    public function show($type, $id)
-    {
-        if ($type === 'donateshelter') {
-            $instance = DonateShelter::find($id);
-        } else if ($type === 'adoptiondonate') {
-            $instance = AdoptionDonate::find($id);
-        } else if ($type === 'campaigndonate') {
-            $instance = CampaignDonate::find($id);
-        }
-        
-        return view('admin.donates.show', [
-            'donate' => $instance
-        ]);
-    }
-    
 
     public function store(Request $request)
     {
 
         $validatedData = $request->validate([
             'code' => 'nullable',
-            'campaign_id' => 'nullable',
-            'adoption_id' => 'nullable',
-            'shelter_id' => 'nullable',
             'amount' => 'required|numeric|min:50000',
             'comment' => 'nullable',            
         ]);
@@ -158,6 +130,7 @@ class DonateController extends Controller
         
         if ($request->campaign_id) {
             $campaign = Campaign::find($request->campaign_id);
+            $validatedData['campaign_id'] = $campaign->id;
             if ($validatedData['amount'] >= $campaign->donation_target) {
                 return redirect()->back()->with(['error' => 'Jumlah donasi melebihi target donasi campaign']);
             }

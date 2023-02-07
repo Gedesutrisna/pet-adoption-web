@@ -18,7 +18,7 @@ class AdoptionController extends Controller
         
         return view('admin.adoptions.index',[
             
-            'adoptions' =>  Adoption::latest('adoptions.created_at')->filter(request(['search', 'category']))->paginate(7)->withQueryString(),
+            'adoptions' =>  Adoption::with(['category'])->latest('adoptions.created_at')->filter(request(['search', 'category']))->paginate(7)->withQueryString(),
             'categories' => Category::all()
         ]);       
     
@@ -33,7 +33,7 @@ class AdoptionController extends Controller
         ]);
     }
 
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {       
         $validatedData = $request->validate([
             'reason' => 'required',
@@ -45,7 +45,8 @@ class AdoptionController extends Controller
         if($request->file('approval_file')){
             $validatedData['approval_file'] = $request->file('approval_file')->store('files');
         }
-        $pet = Pet::find($id);
+        
+        $pet = Pet::find($request->pet_id);
         $validatedData['pet_id'] = $pet->id;
         $validatedData['category_id'] = $pet->category->id;
         $validatedData['user_id'] = Auth()->user()->id;
@@ -96,27 +97,27 @@ class AdoptionController extends Controller
     }
 
 
-    public function update(Request $request,$id)
-    {
-        $adoption = Adoption::findOrFail($id);
+    // public function update(Request $request,$id)
+    // {
+    //     $adoption = Adoption::findOrFail($id);
 
 
-        $rules = [
-            'approval_file' => 'required|file:pdf,word',
-        ];
+    //     $rules = [
+    //         'approval_file' => 'required|file:pdf,word',
+    //     ];
 
-    $validatedData = $request->validate($rules);
-    if($request->file('approval_file')){
-        $validatedData['approval_file'] = $request->file('approval_file')->store('files');
-    }
+    // $validatedData = $request->validate($rules);
+    // if($request->file('approval_file')){
+    //     $validatedData['approval_file'] = $request->file('approval_file')->store('files');
+    // }
 
-    $validatedData['user_id'] = Auth()->user()->id;
-    Adoption::where('id', $adoption->id)
-    ->update($validatedData);
-    $adoption->status = 'Inprogress'; // generate kode unik
-        $adoption->save();
-    return back()->with('success', 'file has been Submited!');
-    }
+    // $validatedData['user_id'] = Auth()->user()->id;
+    // Adoption::where('id', $adoption->id)
+    // ->update($validatedData);
+    // $adoption->status = 'Inprogress'; // generate kode unik
+    //     $adoption->save();
+    // return back()->with('success', 'file has been Submited!');
+    // }
 
     public function destroy($id)    
     {
