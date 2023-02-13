@@ -77,17 +77,21 @@ Route::get('/dashboard/donate/{type}/{id}', [DonateController::class, 'show'])->
 Route::delete('/donate/shelter/{id}', [DonateController::class, 'destroyShelter'])->name('shelter.destroy');
 Route::delete('/donate/adoption/{id}', [DonateController::class, 'destroyAdoption'])->name('adoption.destroy');
 Route::delete('/donate/campaign/{id}', [DonateController::class, 'destroyCampaign'])->name('campaign.destroy');
+Route::get('/donates/search', [DonateController::class, 'search']);
 
 Route::get('/dashboard/adoptions', [AdoptionController::class, 'dataadoption'])->middleware('auth:admin');
 Route::get('/dashboard/adoption/{id}', [AdoptionController::class, 'show'])->middleware('auth:admin');
-Route::delete('/dashboard/adoptions/{id}', [AdoptionController::class, 'destroy'])->middleware('auth:admin');
+Route::delete('/dashboard/adoptions/{id}', [AdoptionController::class, 'destroy']);
+Route::get('/adoptions/search', [AdoptionController::class, 'search']);
 
 Route::get('/dashboard/shelters', [ShelterController::class, 'datashelter'])->middleware('auth:admin');
 Route::get('/dashboard/shelter/{id}', [ShelterController::class, 'show'])->middleware('auth:admin');
-Route::delete('/dashboard/shelters/{id}', [ShelterController::class, 'destroy'])->middleware('auth:admin');
+Route::delete('/dashboard/shelters/{id}', [ShelterController::class, 'destroy']);
+Route::get('/shelters/search', [ShelterController::class, 'search']);
 
 Route::get('/dashboard/pets/checkSlug', [PetController::class, 'checkSlug' ])->middleware('auth:admin');
 Route::resource('/dashboard/pets', PetController::class)->middleware('auth:admin');
+Route::get('/pets/search', [PetController::class, 'search']);
 
 Route::get('/dashboard/campaigns/checkSlug', [CampaignController::class, 'checkSlug'])->middleware('auth:admin');
 Route::resource('/dashboard/campaigns', CampaignController::class)->middleware('auth:admin');
@@ -95,6 +99,7 @@ Route::get('/campaigns/search', [CampaignController::class, 'search']);
 
 Route::get('/dashboard/categories/checkSlug', [CategoryController::class, 'checkSlug'])->middleware('auth:admin');
 Route::resource('/dashboard/categories', CategoryController::class)->middleware('auth:admin');
+Route::get('/categories/search', [CategoryController::class, 'search']);
 
 Route::get('/pets', [PetController::class, 'petall']);
 Route::get('/pet/{pet:slug}', [PetController::class, "pet"]);

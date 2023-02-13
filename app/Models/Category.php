@@ -22,12 +22,6 @@ class Category extends Model
             return $query->where('name', 'like', '%' . $search . '%')
                 ->orWhere('slug', 'like', '%' . $search . '%');
         });
-        $query->when($filters['category'] ?? false, function ($query, $category) {
-            return $query->whereHas('category', function ($query) use ($category) {
-                $query->where('slug', $category);
-            }
-            );
-        });
     }
 
 

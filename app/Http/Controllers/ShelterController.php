@@ -25,7 +25,7 @@ class ShelterController extends Controller
     public function dataShelter(Request $request)
     {
         return view('admin.shelters.index',[
-            'shelters' =>  Shelter::with(['category'])->latest('shelters.created_at')->filter(request(['search', 'category']))->paginate(7)->withQueryString(),
+            'shelters' =>  Shelter::with(['category'])->latest('shelters.created_at')->filter(request(['search']))->paginate(7)->withQueryString(),
             'categories' => Category::all()
         ]);       
  
@@ -108,6 +108,59 @@ class ShelterController extends Controller
         return back()->with('success', 'shelter Berhasil Dihapus');
     } 
 
+    public function search(Request $request)
+    {
+    if($request->ajax())
+    {
+    $output="";
+            $shelters = Shelter::with(['category'])->latest('shelters.created_at')->filter(request(['search']))->paginate(7)->withQueryString();
+
+if($shelters)
+    {
+        foreach ($shelters as $key => $shelter) {
+            $output .= '<tr>'.
+            '<td>'.($key+1).'</td>'.
+            '<td>'.$shelter->user->name.'</td>'.
+            '<td>'.$shelter->user->email.'</td>'.
+            '<td>'.$shelter->category->name.'</td>'.
+            '<td>'.$shelter->status.'</td>'.
+            '<td>'
+            .'<a href="/dashboard/shelter/'. $shelter->id.' " class="btn btn-primary rounded-0"><i class="bi bi-eye"></i></a>
+            <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header d-block">
+                  <h5 class="modal-title" id="exampleModalLabel">Delete Shelter</h5>
+                  <p class="text-muted">Are You Sure Delete This Submission ?</p>
+                </div>
+                <div class="modal-body d-flex justify-content-between">
+                  <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
+                  <form action="/dashboard/shelters/'. $shelter->id .'" method="post">
+                  '. csrf_field() .'
+                  '. method_field('DELETE') .'
+                  <button type="submit" class="btn btn-danger rounded-0">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                  
+                </form>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+            <button type="button" class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+            <i class="bi bi-trash"></i>
+            </button>'
+        .'</td>'.
+        
+        
+            '</tr>';
+        }
+        return Response($output);
+        }
+        
+       }
+    }
 
 }
 

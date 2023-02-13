@@ -2,30 +2,30 @@
 @section('container')
     <div class="row mt-4">
         <h1 class="mb-5">Dashboard Page</h1>
-            <div class="card mb-3 mx-auto" style="width: 14rem;height:10rem;border:solid 1px #193A6A">
-                <div class="card-body" >
-                  <img src="/assets/icon/pet.png" style="width:80px" alt="">
+            <div class="card mb-3 mx-auto" style="width: 14rem;height:10rem;border:none;box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;">
+                <div class="card-body text-center" >
+                  <img src="/assets/icon/pet.png" style="width:80px;" alt="">
                   <p class="text-muted mb-0">Total Pets</p>
                   <h5 class="card-title"><span style="color: #193A6A;">{{ $pets->count() }} </span> Pets</h5>
                 </div>
               </div>
-            <div class="card mb-3 mx-auto" style="width: 14rem;height:10rem;border:solid 1px #193A6A">
-                <div class="card-body" >
-                  <img src="/assets/icon/campaign.png" style="width:80px" alt="">
+            <div class="card mb-3 mx-auto" style="width: 14rem;height:10rem;border:none;box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;">
+                <div class="card-body text-center" >
+                  <img src="/assets/icon/campaign.png" style="width:80px;" alt="">
                   <p class="text-muted mb-0">Total Campaigns</p>
                   <h5 class="card-title"><span style="color: #193A6A;">{{ $campaigns->count() }} </span> Campaigns</h5>
                 </div>
               </div>
-            <div class="card mb-3 mx-auto" style="width: 14rem;height:10rem;border:solid 1px #193A6A">
-                <div class="card-body" >
-                  <img src="/assets/icon/adoption.png" style="width:80px" alt="">
+            <div class="card mb-3 mx-auto" style="width: 14rem;height:10rem;border:none;box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;">
+                <div class="card-body text-center" >
+                  <img src="/assets/icon/adoption.png" style="width:80px;" alt="">
                   <p class="text-muted mb-0">Total Adoptions</p>
                   <h5 class="card-title"><span style="color: #193A6A;">{{ $adoptions->count() }} </span> Adoptions</h5>
                 </div>
               </div>
-            <div class="card mb-3 mx-auto" style="width: 14rem;height:10rem;border:solid 1px #193A6A">
-                <div class="card-body" >
-                  <img src="/assets/icon/shelter.png" style="width:80px" alt="">
+            <div class="card mb-3 mx-auto" style="width: 14rem;height:10rem;border:none;box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;">
+                <div class="card-body text-center" >
+                  <img src="/assets/icon/shelter.png" style="width:80px;" alt="">
                   <p class="text-muted mb-0">Total Shelters</p>
                   <h5 class="card-title"><span style="color: #193A6A;">{{ $shelters->count() }} </span> Shelters</h5>
                 </div>

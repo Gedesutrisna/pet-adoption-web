@@ -1,143 +1,183 @@
-@extends('layouts.main')
+@extends('layouts.main-single')
 @section('container')
 <style>
     .progress-container {
       display: flex;
+      position: relative;
       align-items: center;
       width: 100%;
       height: 20px;
       background-color: #e0e0e0;
-      border-radius: 10px;
-      margin-top: 30px;
+      margin-top: 10px;
     }
     
     .progress-bar {
       height: 100%;
-      border-radius: 10px;
-      background-color: #4CAF50;
+      border-radius: 0px 10px 10px 0px;
+      background-color: #157347;
       width: 0%;
     }
     
     .step {
-      flex-grow: 1;
+      position: absolute;
+      width: 33.33%;
       text-align: center;
       color: #ffffff;
       font-weight: bold;
     }
+
   </style>
 <div class="back mt-3 mb-3">
-  <a href="/data/shelters"><i   style="font-size: 2rem; color:#193A6A" class="bi bi-arrow-left-circle-fill"></i></a>
+  <a href="/data/shelters"><i   style="font-size: 3rem; color:#193A6A" class="bi bi-arrow-left-circle-fill"></i></a>
     </div>
-<div class="row">        
-    <div class="col-sm-4 mb-3 mb-sm-0">
-        <div class="card">
+    <div class="row justify-content-center" style="margin-bottom: 100px">        
+      <div class="col-sm-4 mb-3 mb-sm-0">
+        <div class="card rounded-0" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
             <div class="card-body">
-                <div class="progress-container">
+                <div class="progress-container mb-3">
                     <div class="progress-bar" id="progress-bar"></div>
-                    <div class="step" id="step-1">In Progress</div>
-                    <div class="step" id="step-2">Approved</div>
-                    <div class="step" id="step-3">Completed</div>
+                    <div class="step text-white" id="step-1">In Progress</div>
+                    <div class="step text-white" id="step-2">Approved</div>
+                    <div class="step text-white" id="step-3">Completed</div>
                   </div>
-
-                    <div class="position-absolute px-3 py-2 text-white">
-                      {{ $shelter->status }}
-                    </div>
+                  
+                  <div class="row d-flex justify-content-center">
                     
-                  <p> kode untuk donasi : {{ $shelter->code }}</p>
-                <p class="card-text">{{ $shelter->reason }}</p>
+                    <div class="col" style="font-size: 1.5rem">
+                      <h3 class="text-center">Submission Details</h3>
+                      <hr>
+                      <li>Pet Photo</li>
+                      <div class="mb-3 text-center" style="max-height: 150px; overflow: hidden; ">
+                        <img src="{{ asset('storage/' . $shelter->image ) }}" alt="{{ $shelter->category->name }}"
+                        class="img-fluid mt-2">
+                      </div>
+                      <li class="mb-3">
+                        <a href="{{ asset('storage/' . $shelter->approval_file ) }}" target="_blank"><i class="bi bi-file-earmark-arrow-down"></i>Approval File</a>
+                      </li>
+                      <li class="mb-3">
+                        <a href="{{ asset('storage/' . $shelter->file ) }}" target="_blank"><i class="bi bi-file-earmark-arrow-down"></i>File Information</a>
+                      </li>
+                      <li>Reason :
+                        
+                        {{ $shelter->reason }}
+                      </li>
+                      <hr>
+                      <p class="mb-0 text-center">Code For Donation : {{ $shelter->code }}</p>
+                    </div>
+                  </div>
         </div>
-      </div>
-    </div>
-    <div class="col-sm-6 mb-3 mb-sm-0">
-      @if ($shelter->status == 'Approved')      
-      <div class="card">
-        <div class="card-body">
-                <form method="POST" action="/donates/create">
-                  @csrf
-                  <div class="mb-3">
-                      <label for="amount" class="form-label">Amount</label>
-                      <input type="number" name="amount"  class="form-control @error('amount') is-invalid @enderror"  id="amount" min="50000" step="10000" required value="{{ old('amount') }}">
-                      
-                      @error('amount')
-                      <div class="invalid-feedback">
-                          {{ $message }}
-                        </div>
-                        @enderror
-                        <br>
-                        <button style=" 
-                        color: #193A6A;
-                        padding: 8px 36px;
-                        border: solid 1px #193A6A;
-                        font-size: 13px;
-                        cursor: pointer;" class="nominal" value="50000" onclick="setAmount(50000); return false;">Rp {{ number_format(50000, 0, ',', '.') }}</button>
-                        <button style=" 
-                        color: #193A6A;
-                        padding: 8px 36px;
-                        border: solid 1px #193A6A;
-                        font-size: 13px;
-                        cursor: pointer;" class="nominal" value="100000" onclick="setAmount(100000); return false;">Rp {{ number_format(100000, 0, ',', '.') }}</button>
-                        <button style=" 
-                        color: #193A6A;
-                        padding: 8px 36px;
-                        border: solid 1px #193A6A;
-                        font-size: 13px;
-                        cursor: pointer;" class="nominal" value="500000" onclick="setAmount(500000); return false;">Rp {{ number_format(500000, 0, ',', '.') }}</button>
+        @if ($shelter->status == 'Approved')      
+           <!-- Button trigger modal -->
+  <button type="button" style="background-color: #193A6A; 
+  color: white;
+  padding: 8px 36px;
+  border-radius: .3rem;
+  border: solid 1px #193A6A;
+  font-size: 13px;
+  cursor: pointer;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" class="btn rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Donate Now !
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Donate</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="/donates/create">
+            @csrf
+            <div class="mb-3">
+                <label for="amount" class="form-label">Amount</label>
+                <input type="number" name="amount"  class="form-control @error('amount') is-invalid @enderror"  id="amount" min="50000" step="10000" required value="{{ old('amount') }}">
+                
+                @error('amount')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
+                  <br>
+                  <button style=" 
+                  color: #193A6A;
+                  padding: 8px 36px;
+                  border: solid 1px #193A6A;
+                  font-size: 13px;
+                  cursor: pointer;" class="nominal" value="50000" onclick="setAmount(50000); return false;">Rp {{ number_format(50000, 0, ',', '.') }}</button>
+                  <button style=" 
+                  color: #193A6A;
+                  padding: 8px 36px;
+                  border: solid 1px #193A6A;
+                  font-size: 13px;
+                  cursor: pointer;" class="nominal" value="100000" onclick="setAmount(100000); return false;">Rp {{ number_format(100000, 0, ',', '.') }}</button>
+                  <button style=" 
+                  color: #193A6A;
+                  padding: 6px 20px;
+                  border: solid 1px #193A6A;
+                  font-size: 13px;
+                  cursor: pointer; " class="nominal" value="250000" onclick="setAmount(250000); return false;">Rp {{ number_format(250000, 0, ',', '.') }}</button>
+                  <button style=" 
+                  color: #193A6A;
+                  padding: 8px 36px;
+                  border: solid 1px #193A6A;
+                  font-size: 13px;
+                  cursor: pointer;" class="nominal" value="500000" onclick="setAmount(500000); return false;">Rp {{ number_format(500000, 0, ',', '.') }}</button>
+              </div>
+              <div class="mb-3">
+                <label for="code" class="form-label">code <span style="color: red">*</span></label>
+                <input type="text" name="code" class="form-control @error('code') is-invalid @enderror" id="code" value="{{ old('code') }}">
+                @error('code')
+                    <div class="invalid-feedback">
+                      {{ $message }}
                     </div>
-                    <div class="mb-3">
-                      <label for="code" class="form-label">code <span style="color: red">*</span></label>
-                      <input name="code" class="form-control @error('code') is-invalid @enderror" id="code" value="{{ old('code') }}">
-                      @error('code')
-                          <div class="invalid-feedback">
-                            {{ $message }}
-                          </div>
-                      @enderror
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label for="comment" class="form-label">Comment <span style="color: red">*</span></label>
+                <textarea name="comment" class="form-control @error('comment') is-invalid @enderror" id="comment" value="{{ old('comment') }}" rows="4" placeholder="Type your comment" style="resize: none"></textarea>
+                @error('comment')
+                    <div class="invalid-feedback">
+                      {{ $message }}
                     </div>
-                    <div class="mb-3">
-                      <label for="comment" class="form-label">Comment <span style="color: red">*</span></label>
-                      <textarea name="comment" class="form-control @error('comment') is-invalid @enderror" id="comment" value="{{ old('comment') }}" rows="4" placeholder="Donate" style="resize: none"></textarea>
-                      @error('comment')
-                          <div class="invalid-feedback">
-                            {{ $message }}
-                          </div>
-                      @enderror
+                @enderror
+              </div>
+              <div class="mb-3">
+                <input type="hidden" class="form-control @error('shelter_id') is-invalid @enderror" id="shelter_id" name="shelter_id"  value="{{ old('shelter_id', $shelter->id) }}">
+                @error('shelter_id')
+                    <div class="invalid-feedback">
+                      {{ $message }}
                     </div>
-                    <div class="mb-3">
-                      <input type="hidden" class="form-control @error('shelter_id') is-invalid @enderror" id="shelter_id" name="shelter_id"  value="{{ old('shelter_id', $shelter->id) }}">
-                      @error('shelter_id')
-                          <div class="invalid-feedback">
-                            {{ $message }}
-                          </div>
-                      @enderror
-                    </div>
-                 
-                    <div class="row justify-content-between">
-                      <div class="col-auto">
-                        <button type="button" id="reset-btn" style=" 
-                        color: #193A6A;
-                        padding: 8px 36px;
-                        border-radius: .3rem;
-                        border: solid 1px #193A6A;
-                        font-size: 13px;
-                        cursor: pointer;">Cancel</button>
-                      </div>
-                      <div class="col-auto">
-                    <button type="submit" id="submit-btn"  style="background-color: #193A6A; 
-                    color: white;
-                    padding: 8px 36px;
-                    border-radius: .3rem;
-                    border: solid 1px #193A6A;
-                    font-size: 13px;
-                    cursor: pointer;">Submit</button>
-                      </div>
-                    </div>
-                </form>
+                @enderror
               </div>
             </div>
-            @else
-                
-            @endif
+            <div class="modal-footer justify-content-between">
+              <button type="button" id="reset-btn" style=" 
+          color: #193A6A;
+          padding: 8px 36px;
+          border-radius: .3rem;
+          border: solid 1px #193A6A;
+          font-size: 13px;
+          cursor: pointer;">Cancel</button> 
+           <button type="submit" id="submit-btn"  style="background-color: #193A6A; 
+           color: white;
+           padding: 8px 36px;
+           border-radius: .3rem;
+           border: solid 1px #193A6A;
+           font-size: 13px;
+           cursor: pointer;">Submit</button>
         </div>
+      </form>
+      </div>
+    </div>
   </div>
+
+@else
+
+@endif
+</div>
+        </div>
+        </div>
   <script>
     let nominal = document.querySelectorAll('.nominal');
     let amount = document.getElementById('amount');
@@ -150,7 +190,7 @@
       });
     });
 
-const progressBar = document.getElementById("progress-bar");
+    const progressBar = document.getElementById("progress-bar");
 const step1 = document.getElementById("step-1");
 const step2 = document.getElementById("step-2");
 const step3 = document.getElementById("step-3");
@@ -159,23 +199,46 @@ function updateProgress(status) {
   switch (status) {
     case "Inprogress":
       progressBar.style.width = "33.33%";
-      step1.style.color = "black";
+      step1.style.left = "0%";
+      step2.style.left = "33.33%";
+      step3.style.left = "66.66%";
       break;
     case "Approved":
       progressBar.style.width = "66.66%";
-      step1.style.color = "black";
-      step2.style.color = "black";
+      step1.style.left = "0%";
+      step2.style.left = "33.33%";
+      step3.style.left = "66.66%";
       break;
     case "Completed":
       progressBar.style.width = "100%";
-      step1.style.color = "black";
-      step2.style.color = "black";
-      step3.style.color = "black";
+      step1.style.left = "0%";
+      step2.style.left = "33.33%";
+      step3.style.left = "66.66%";
       break;
   }
 }
-
 updateProgress("{{ $shelter->status }}");
 
+
+const resetBtn = document.getElementById("reset-btn");
+
+resetBtn.addEventListener("click", function() {
+  
+  const textInputs = document.querySelectorAll("form input[type='text']");
+  textInputs.forEach(input => {
+    input.value = "";
+  });
+  
+  const textAreas = document.querySelectorAll("form textarea");
+  textAreas.forEach(textarea => {
+    textarea.value = "";
+  });
+
+  const numberInputs = document.querySelectorAll("form input[type='number']");
+numberInputs.forEach(input => {
+  input.value = "";
+});
+  
+});
   </script>
 @endsection

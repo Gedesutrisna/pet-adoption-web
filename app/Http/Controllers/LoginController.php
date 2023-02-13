@@ -14,21 +14,32 @@ class LoginController extends Controller
     }
     public function login(Request $request)
     {
-            $credentials = $request->validate([
-                 'email' => 'required|email',
-                 'password' => 'required',
-             ]);
+        $credentials = $request->validate([
+             'email' => 'required|email',
+             'password' => 'required',
+         ]);
      
+         if ($request->has('remember-me')) {
+             if(Auth::attempt($credentials, true)){
+                 $request->session()->regenerate();
+                 return redirect()->intended('/')->with('success', 'Login Successfully!');  
+             }elseif(Auth::guard('admin')->attempt($credentials, true)){
+                 $request->session()->regenerate();
+                 return redirect()->intended('/dashboard')->with('success', 'Login Successfully!');
+             }
+         } else {
              if(Auth::attempt($credentials)){
                  $request->session()->regenerate();
                  return redirect()->intended('/')->with('success', 'Login Successfully!');  
              }elseif(Auth::guard('admin')->attempt($credentials)){
-                $request->session()->regenerate();
-                return redirect()->intended('/dashboard')->with('success', 'Login Successfully!');
+                 $request->session()->regenerate();
+                 return redirect()->intended('/dashboard')->with('success', 'Login Successfully!');
              }
-             return back()->with('loginError', 'login failed!');
-
+         }
+    
+         return back()->with('loginError', 'Login failed!');
     }
+    
     public function logout(Request $request){
         Auth::logout();
         $request->session()->invalidate();

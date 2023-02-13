@@ -74,7 +74,7 @@
       padding: 10px 16px;
       border: none;
       font-size: 13px;
-      cursor: pointer;">Create Post</button>
+      cursor: pointer;">Create Pet</button>
     </form>
 
   </div>

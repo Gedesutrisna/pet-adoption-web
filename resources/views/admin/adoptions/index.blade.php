@@ -4,7 +4,7 @@
     <h1 class="h2">Adoption Page</h1>
     <form action="/dashboard/adoptions" method="get" style="display: inline-block;">
       <div class="input-group mb-3">
-        <input type="text" name="search" style="      border: solid 1px #193A6A  ;
+        <input type="text" name="search" id="search-adoption" style="      border: solid 1px #193A6A  ;
         " class="form-control rounded-0" placeholder="Search Adoptions" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ request('search') }}">
         <button class="input-group-text rounded-0" style="background-color: #193A6A; 
         color: white;
@@ -27,6 +27,7 @@
   </div>
 
 @endforeach
+<div  id="search_container" >
 <div class="table-responsive">
     <select  style=" 
       color: #193A6A;
@@ -75,7 +76,7 @@
                     <div class="modal-content">
                       <div class="modal-header d-block">
                         <h5 class="modal-title" id="exampleModalLabel">Delete Adoption</h5>
-                        <p class="text-muted">Are U Sure Delete This Submission ?</p>
+                        <p class="text-muted">Are You Sure Delete This Submission ?</p>
                       </div>
                       <div class="modal-body d-flex justify-content-between">
                         <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
@@ -100,6 +101,7 @@
       </tbody>
     </table>
   </div>
+  </div>
   @else
   <p class="text-center fs-4">No. Adoption Found.</p>
 @endif
@@ -107,6 +109,7 @@
   <div class="justify-content-center">
     {{ $adoptions->links() }}
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script>
 let tabSelect = document.getElementById("status-select");
 let adoptionRows = document.querySelectorAll('.adoption-row');
@@ -129,5 +132,18 @@ tabSelect.addEventListener('change', event => {
   });
 });
 
-  </script>
+$('#search-adoption').on('keyup',function(){
+  $value=$(this).val();
+  $.ajax({
+  type : 'get',
+  url : '{{URL::to('/adoptions/search')}}',
+  data:{'search':$value},
+  success:function(data){
+  $('tbody').html(data);
+  }
+  });
+
+  })
+
+</script>
 @endsection

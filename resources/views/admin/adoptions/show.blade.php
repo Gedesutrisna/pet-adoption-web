@@ -68,7 +68,7 @@
                                                       <div class="modal-content">
                                                         <div class="modal-header d-block">
                                                           <h5 class="modal-title" id="exampleModalLabel">Approved Submission {{ $adoption->user->name }}</h5>
-                                                          <p class="text-muted">Are U Sure Approved This Submission ?</p>
+                                                          <p class="text-muted">Are You Sure Approved This Submission ?</p>
                                                         </div>
                                                         <div class="modal-body d-flex justify-content-between">
                                                           <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
@@ -87,7 +87,7 @@
                                                       <div class="modal-content">
                                                         <div class="modal-header d-block">
                                                           <h5 class="modal-title" id="exampleModalLabel">Declined Submission {{ $adoption->user->name }}</h5>
-                                                          <p class="text-muted">Are U Sure Declined This Submission ?</p>
+                                                          <p class="text-muted">Are You Sure Declined This Submission ?</p>
                                                         </div>
                                                         <div class="modal-body d-flex justify-content-between">
                                                           <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>

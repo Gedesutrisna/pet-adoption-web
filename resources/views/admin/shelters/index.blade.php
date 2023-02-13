@@ -5,7 +5,7 @@
     <form action="/dashboard/shelters" method="get" style="display: inline-block;">
       <div class="input-group mb-3">
         <input type="text" style="      border: solid 1px #193A6A  ;
-        " name="search" class="form-control rounded-0" placeholder="Search Shelters" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ request('search') }}">
+        " name="search" id="search-shelter" class="form-control rounded-0" placeholder="Search Shelters" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ request('search') }}">
         <button class="input-group-text rounded-0" style="background-color: #193A6A; 
         color: white;
         padding: 10px 20px;
@@ -27,6 +27,8 @@
   </div>
 
 @endforeach
+<div  id="search_container" >
+
 <div class="table-responsive">
   <select  style=" 
   color: #193A6A;
@@ -71,7 +73,7 @@
                     <div class="modal-content">
                       <div class="modal-header d-block">
                         <h5 class="modal-title" id="exampleModalLabel">Delete Shelter</h5>
-                        <p class="text-muted">Are U Sure Delete This Submission ?</p>
+                        <p class="text-muted">Are You Sure Delete This Submission ?</p>
                       </div>
                       <div class="modal-body d-flex justify-content-between">
                         <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
@@ -105,6 +107,8 @@
   <div class="justify-content-center">
     {{ $shelters->links() }}
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
 <script>
  
  let tabSelect = document.getElementById("status-select");
@@ -128,5 +132,17 @@ tabSelect.addEventListener('change', event => {
   });
 });
 
+    $('#search-shelter').on('keyup',function(){
+    $value=$(this).val();
+    $.ajax({
+    type : 'get',
+    url : '{{URL::to('/shelters/search')}}',
+    data:{'search':$value},
+    success:function(data){
+    $('tbody').html(data);
+    }
+    });
+
+    })
 </script>
 @endsection

@@ -6,11 +6,15 @@ use App\Models\Pet;
 use App\Models\User;
 use App\Models\Shelter;
 use App\Models\Adoption;
+use App\Models\Category;
 use App\Models\Notification;
 use Illuminate\Http\Request;
+use App\Models\AdoptionDonate;
+use App\Models\CampaignDonate;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\DonateShelter;
 
 class ProfileController extends Controller
 {
@@ -25,22 +29,26 @@ class ProfileController extends Controller
     
     public function dataDonate()
     {    
-        $user = Auth::user();
-        $user->with(['campaignDonate', 'adoptionDonate', 'donateShelter']);
-        
-        return view('profile.data-Donate',compact('user'));
+        $adoptionDonates = AdoptionDonate::latest('adoption_donates.created_at')->filter(request(['search']))->paginate(7)->withQueryString();
+        $campaignDonates = CampaignDonate::latest('campaign_donates.created_at')->filter(request(['search']))->paginate(7)->withQueryString();
+        $donateShelters = DonateShelter::latest('donate_shelters.created_at')->filter(request(['search']))->paginate(7)->withQueryString();
+        return view('profile.data-Donate', compact('campaignDonates', 'adoptionDonates', 'donateShelters'), [
+
+        ]);
     }
     public function dataAdoption()
     {  
-        $user = Auth::user();
-        $user->with(['adoption']);
-        return view('profile.data-Adoption',compact('user'));
+        return view('profile.data-Adoption',[
+            'adoptions' =>  Adoption::with(['category'])->latest('adoptions.created_at')->filter(request(['search']))->paginate(7)->withQueryString(),
+            'categories' => Category::all()
+        ]);       
     }
     public function dataShelter()
     {    
-        $user = Auth::user();
-        $user->with(['shelter']);
-        return view('profile.data-Shelter',compact('user'));
+        return view('profile.data-Shelter',[
+            'shelters' =>  Shelter::with(['category'])->latest('shelters.created_at')->filter(request(['search']))->paginate(7)->withQueryString(),
+            'categories' => Category::all()
+        ]);       
     }
     public function adoptionSingle($id)
     {
@@ -62,7 +70,7 @@ class ProfileController extends Controller
                 'email' => 'nullable|max:100|email:dns',
                 'phone' => 'nullable|digits_between:10,15',
                 'address' => 'nullable|max:255',
-                'image' => 'nullable|image|file',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg', 
                 'ktp' => 'nullable|file',
             ]);
             if($request->file('image')){

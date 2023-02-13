@@ -22,7 +22,9 @@ class CampaignDonate extends Model
         ->orWhere('users.email', 'like', '%' . $search . '%');
     });
 
+
 }
+
     //uuid
     public $incrementing = false;
     protected $keyType = 'string';

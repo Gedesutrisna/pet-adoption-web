@@ -1,6 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.main-single')
 @section('container')
-<div class="card mb-3 border-0" style="margin-top:100px;">
+<div class="card mb-3 border-0" style="margin-top:100px;margin-bottom:100px;">
   
   <div class="row g-5" >
     @if (session('success'))
@@ -9,30 +9,38 @@
     </div>
   @endif
   
-
-
-
-
-    
       <div class="col-md-4 mt-3">
-        <div class="card-body border border-1 rounded-start">
-
-            <h3>Profile         <button id="toggle-view-button" onclick="toggleView()" class="border-0" style="background: none;"><i class="bi bi-gear"></i></button>
-              @if(auth()->user()->image)
-              <img class="image rounded-circle" src="{{ asset('storage/' . auth()->user()->image ) }}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
-         @endif  
-            </h3>
-        <!-- Tombol untuk menampilkan tampilan edit profile -->
-            <hr>
-          <p>Name : {{ auth()->user()->name }}<p>
-          <p>Username : {{ auth()->user()->username }}<p>
-          <p>Email : {{ auth()->user()->email }}<p>
-          <p>Phone : {{ auth()->user()->phone }}</p>
-          <p>Address : {{ auth()->user()->address }}</p>
-          <hr>
-        <form action="/logout" method="POST">
+        <div class="card-body rounded" style="margin-bottom:100px;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+          <h3 class="text-center" style="position: relative;">
+            @if(auth()->user()->image)
+            <form id="update-form" action="{{ route('update.profile') }}" method="POST" enctype="multipart/form-data">
+              @method('put')
+              @csrf
+              <img id="profile-image" class="image rounded-circle" src="{{ asset('storage/' . auth()->user()->image ) }}" alt="profile_image" style="width: 100px; height: 100px; padding: 10px; margin: 0 auto;  cursor: pointer;">
+              <input type="file" id="image" name="image" style="display: none;">
+            </form>
+            @else
+            <form action="{{ route('update.profile') }}" method="POST" enctype="multipart/form-data">
+              @method('put')
+              @csrf
+              <img id="profile-image" class="image rounded-circle" src="/assets/profile.png" alt="profile_image" style="width: 100px;height: 100px; padding: 10px; margin: 0px;  cursor: pointer;">   
+              <input type="file" id="image" name="image" style="display: none;">
+            </form>
+            @endif
+            <button id="toggle-view-button" onclick="toggleView()" class="border-0" style="background: none; position: absolute; top: 10px; right: 10px; z-index: 1;">
+              <i class="bi bi-gear" style="font-size: 24px;"></i>
+            </button>
+          </h3>
+     
+          <h3 class="text-center mb-3" style="font-size: 2rem">{{ auth()->user()->name }}</h3>
+          <p style="margin-left: 1rem;font-size:14px;">Username : {{ auth()->user()->username }}</p>
+          <p style="margin-left: 1rem;font-size:14px;">Email : {{ auth()->user()->email }}</p>
+          <p style="margin-left: 1rem;font-size:14px;">Phone : {{ auth()->user()->phone }}</p>
+          <p style="margin-left: 1rem;font-size:14px;margin-bottom:3rem">Address : {{ auth()->user()->address }}</p>
+         
+        <form style="text-center" class="text-center" action="/logout" method="POST">
           @csrf
-          <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</button>
+          <button type="submit" class="dropdown-item rounded" style="padding:8px 16px;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;background-color:#193A6A;color:white;font-size:14px"><i class="bi bi-box-arrow-right"></i> Logout</button>
         </form>
       </div>
       </div>
@@ -40,61 +48,62 @@
 
 
 
-  <!-- HTML untuk tampilan dashboard -->
 <div id="dashboard">
-  <h1>Dashboard</h1>
-  <div class="row">
+  <h1 style="font-size: 3rem">Dashboard</h1>
+  <div class="row mt-3">
     <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Data Donasi</h5>
-          <p class="card-text">{{ auth()->user()->campaigndonate->count() + auth()->user()->adoptiondonate->count() + auth()->user()->donateshelter->count() }}</p>
+      <div class="card mb-3 mx-auto" style="width: 14rem;width:15rem;height:15rem;border:none;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+        <div class="card-body text-center" >
+          <img src="/assets/icon/donate.png" style="width:80px;" alt="">
+          <p class="text-muted mb-0 mt-2" style="font-size: 13px">Total Donations</p>
+          <h5 class="card-title" style="font-size: 1.8rem"><span style="color: #193A6A;">{{ auth()->user()->campaigndonate->count() + auth()->user()->adoptiondonate->count() + auth()->user()->donateshelter->count() }}</span> Donations</h5>
+          </div>
           <a  style="background-color: #193A6A; 
-              color: white;
-              padding: 8px 16px;
-              border: none;
-              font-size: 13px;
-              cursor: pointer;" class="text-decoration-none" href="/data/donations">See</a>
-        </div>
+            color: white;
+            padding: 8px 24px;
+            border: none;
+            font-size: 13px;
+            cursor: pointer;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" class="text-decoration-none rounded-bottom d-flex justify-content-between align-items-center" href="/data/donations">See <i class="bi bi-arrow-right"></i></a>
       </div>
     </div>
     <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Data Adopsi</h5>
-          <p class="card-text">{{ auth()->user()->adoption->count() }}</p>
-          <a  style="background-color: #193A6A; 
-              color: white;
-              padding: 8px 16px;
-              border: none;
-              font-size: 13px;
-              cursor: pointer;" class="text-decoration-none" href="/data/adoptions">See</a>
+      <div class="card mb-3 mx-auto" style="width: 14rem;width:15rem;height:15rem;border:none;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+        <div class="card-body text-center" >
+          <img src="/assets/icon/adoption.png" style="width:80px;" alt="">
+          <p class="text-muted mb-0 mt-2" style="font-size: 13px">Total Adoptions</p>
+          <h5 class="card-title" style="font-size: 1.8rem"><span style="color: #193A6A;">{{ auth()->user()->adoption->count() }} </span> Adoptions</h5>
         </div>
+        <a  style="background-color: #193A6A; 
+            color: white;
+            padding: 8px 24px;
+            border: none;
+            font-size: 13px;
+            cursor: pointer;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" class="text-decoration-none rounded-bottom d-flex justify-content-between align-items-center" href="/data/adoptions">See <i class="bi bi-arrow-right"></i></a>
       </div>
     </div>
     <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Data Shelter</h5>
-          <p class="card-text">{{ auth()->user()->shelter->count() }}</p>
+      <div class="card mb-3 mx-auto" style="width: 14rem;width:15rem;height:15rem;border:none;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+        <div class="card-body text-center" >
+          <img src="/assets/icon/shelter.png" style="width:80px;" alt="">
+          <p class="text-muted mb-0 mt-2" style="font-size: 13px">Total Shelters</p>
+          <h5 class="card-title" style="font-size: 1.8rem"><span style="color: #193A6A;">{{ auth()->user()->shelter->count() }} </span> Shelters</h5>
+          </div>
           <a  style="background-color: #193A6A; 
-              color: white;
-              padding: 8px 16px;
-              border: none;
-              font-size: 13px;
-              cursor: pointer;" class="text-decoration-none" href="/data/shelters">See</a>
-        </div>
-      </div>
+            color: white;
+            padding: 8px 24px;
+            border: none;
+            font-size: 13px;
+            cursor: pointer;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" class="text-decoration-none rounded-bottom d-flex justify-content-between align-items-center" href="/data/shelters">See <i class="bi bi-arrow-right"></i></a>
+      </div>   
     </div>
   </div>  
 </div>
 
-<!-- HTML untuk tampilan edit profile -->
 <div id="edit-profile" style="display:none;">
-  <h1>Edit Profile</h1>
-  <div class="row g-5">
+  <h1 style="font-size: 3rem">Edit Profile</h1>
+  <div class="row g-4 d-flex justify-content-between">
     <div class="col-sm-6">
-      <div class="card border border-0">
+      <div class="card border border-0" style="font-size: 1.5rem">
           <form action="{{ route('update.profile') }}" method="POST" enctype="multipart/form-data">
             @method('put')
             @csrf
@@ -115,16 +124,6 @@
                     {{ $message }}
                   </div>
               @enderror           
-            </div>
-            <div class="mb-3">
-              <label for="image" class="form-label">Photo Profile</label>
-              <img class="img-preview img-fluid mb-3 col-sm-5">
-              <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()">
-              @error('image')
-              <div class="invalid-feedback">
-                {{ $message }}
-              </div>
-              @enderror
             </div>
             <div class="mb-3">
               <label for="ktp" class="form-label">Ktp</label>
@@ -166,7 +165,7 @@
       </div>
     </div>
     <div class="col-sm-4">
-      <div class="card border border-0">
+      <div class="card border border-0" style="font-size: 1.5rem">
         <form method="POST" action="{{ route('change.password') }}">
           @method('PATCH')
           @csrf 
@@ -200,22 +199,12 @@
   </div>
 </div>
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
 
   <script>
 
     function previewImage(){
-      const image = document.querySelector('#image');
-      const imgPreview = document.querySelector('.img-preview');
-
-      imgPreview.style.display = 'block';
-
-      const blob = URL.createObjectURL(image.files[0]);
-imgPreview.src = blob;
-      
-    
       const ktp = document  .querySelector('#ktp');
       const ktpPreview = document.querySelector('#ktp-preview');
       ktpPreview.style.display = 'block';
@@ -231,15 +220,35 @@ imgPreview.src = blob;
   if (currentView == "dashboard") {
     document.getElementById("dashboard").style.display = "none";
     document.getElementById("edit-profile").style.display = "block";
-    document.getElementById("toggle-view-button").innerHTML = '<i class="bi bi-gear-fill"></i>';
+    document.getElementById("toggle-view-button").innerHTML = '<i class="bi bi-gear-fill" style="font-size: 24px;color:#193A6A">';
     currentView = "edit-profile";
   } else {
     document.getElementById("edit-profile").style.display = "none";
     document.getElementById("dashboard").style.display = "block";
-    document.getElementById("toggle-view-button").innerHTML = '<i class="bi bi-gear"></i>';
+    document.getElementById("toggle-view-button").innerHTML = '<i class="bi bi-gear" style="font-size: 24px">';
     currentView = "dashboard";
   }
 }
+var profileImage = document.getElementById('profile-image');
+
+if (profileImage) {
+  profileImage.addEventListener("click", function() {
+    document.getElementById('image').click();
+  });
+}
+
+
+const imageInput = document.getElementById("image");
+  const form = document.getElementById("update-form");
+
+  imageInput.addEventListener("change", function() {
+    const confirmation = confirm("Apakah Anda yakin ingin mengupdate profil?");
+
+    if (confirmation) {
+      form.submit();
+    }
+  });
+
 </script>
 
 

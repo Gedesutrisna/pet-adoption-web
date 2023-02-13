@@ -31,12 +31,12 @@ class DatabaseSeeder extends Seeder
         $date_target = "2023-03-01";
 
         Admin::create([
-            'name' => 'admin',
+            'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('12345678'),
         ]);
         User::create([
-            'name' => 'user',
+            'name' => 'User',
             'username' => 'user',
             'phone' => 1234512345123,
             'email' => 'user@gmail.com',
@@ -45,115 +45,135 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Category::create([
-            'name' => 'Anjing',
-            'slug' => 'anjing',
+            'name' => 'Dog',
+            'slug' => 'dog',
             'admin_id' => 1,
 
         ]);
         Category::create([
-            'name' => 'Kucing',
-            'slug' => 'kucing',
+            'name' => 'Cat',
+            'slug' => 'cat',
             'admin_id' => 1,
 
         ]);
+        Pet::create([
+            'name' => 'Jack',
+            'slug' => 'jack',
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
+        ',
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             elit.',
+             'image' => '/pet/cat4.png',
+             'quantity' => 9,
+             'category_id' => 2,
+             'admin_id' => 1,
+             'status' => 'Available',
+        ]);
         
+      
         Pet::create([
-            'name' => 'Hewan Kucing',
-            'slug' => 'hewan-kucing',
+            'name' => 'Sigit',
+            'slug' => 'sigit',
             'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
-             voluptas blanditiis, perferendis illo 
-             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
-             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/cat1.png',
+             elit.',
+             'image' => '/pet/cat2.png',
              'quantity' => 9,
              'category_id' => 2,
              'admin_id' => 1,
              'status' => 'Available',
         ]);
         Pet::create([
-            'name' => 'Hewan Kucing2',
-            'slug' => 'hewan-kucing2',
+            'name' => 'Tom',
+            'slug' => 'tom',
             'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
-             voluptas blanditiis, perferendis illo 
-             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
-             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/cat2.png',
+             elit.',
+             'image' => '/pet/cat3.png',
+             'quantity' => 9,
+             'category_id' => 2,
+             'admin_id' => 1,
+             'status' => 'Available',
+        ]);
+       
+        Pet::create([
+            'name' => 'Whiskers',
+            'slug' => 'whiskers',
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
+        ',
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             elit.',
+             'image' => '/pet/cat1.png',
              'quantity' => 9,
              'category_id' => 2,
              'admin_id' => 1,
              'status' => 'Available',
         ]);
         Pet::create([
-            'name' => 'Hewan Kucing3',
-            'slug' => 'hewan-kucing3',
+            'name' => 'Max',
+            'slug' => 'max',
             'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
-             voluptas blanditiis, perferendis illo 
-             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
-             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/cat3.png',
-             'quantity' => 9,
-             'category_id' => 2,
-             'admin_id' => 1,
-             'status' => 'Available',
-        ]);
-        Pet::create([
-            'name' => 'Hewan Anjing',
-            'slug' => 'hewan-anjing',
-            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
-        ',
-            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
-             voluptas blanditiis, perferendis illo 
-             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
-             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
-             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
-             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/dog1.png',
+             elit.',
+             'image' => '/pet/dog1.png',
              'quantity' => 8,
              'category_id' => 1,
              'admin_id' => 1,
              'status' => 'Available',
         ]);
         Pet::create([
-            'name' => 'Hewan Anjing2',
-            'slug' => 'hewan-anjing2',
+            'name' => 'Bella',
+            'slug' => 'bella',
             'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
-             voluptas blanditiis, perferendis illo 
-             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
-             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/dog2.png',
+             elit.',
+             'image' => '/pet/dog2.png',
              'quantity' => 8,
              'category_id' => 1,
              'admin_id' => 1,
              'status' => 'Available',
         ]);
         Pet::create([
-            'name' => 'Hewan Anjing3',
-            'slug' => 'hewan-anjing3',
+            'name' => 'Bob',
+            'slug' => 'bob',
             'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
-            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
-             voluptas blanditiis, perferendis illo 
-             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis 
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
-             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/dog3.png',
+             elit.',
+             'image' => '/pet/dog5.png',
+             'quantity' => 8,
+             'category_id' => 1,
+             'admin_id' => 1,
+             'status' => 'Available',
+        ]);
+        Pet::create([
+            'name' => 'Brembo',
+            'slug' => 'brembo',
+            'short_description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
+        ',
+            'description' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis 
+             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
+             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
+             elit.',
+             'image' => '/pet/dog4.png',
              'quantity' => 8,
              'category_id' => 1,
              'admin_id' => 1,
@@ -161,37 +181,89 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Campaign::create([
-            'title' => 'Penyelamatan Anjing Jalanan',
-            'slug' => 'penyelamatan-anjing-jalanan',
+            'title' => 'Rescue Stray Cats',
+            'slug' => 'Rescue-Stray-Cats',
             'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
             'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
-             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
-             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
-             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
-             voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
-             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/cam1.png',
-             'category_id' => 1,
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa ',
+             'image' => '/cam/cam1.png',
+             'category_id' => 2,
              'admin_id' => 1,
              'status' => 'Ongoing',
              'donation_target' => 5000000,
              'date_target' => $date_target,
         ]);
         Campaign::create([
-            'title' => 'Penyelamatan Anjing Rabies',
-            'slug' => 'penyelamatan-anjing-rabies',
+            'title' => 'Love for Felines   ',
+            'slug' => 'Love-for-Felines',
             'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
             'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
-             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
-             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
-             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
-             voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
-             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/cam2.png',
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa ',
+             'image' => '/cam/cam2.png',
+             'category_id' => 2,
+             'admin_id' => 1,
+             'status' => 'Ongoing',
+             'donation_target' => 6000000,
+             'date_target' => $date_target,
+        ]);
+        Campaign::create([
+            'title' => 'Save the Cats',
+            'slug' => 'save-the-cats',
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
+        ',
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa ',
+             'image' => '/cam/cam3.png',
+             'category_id' => 2,
+             'admin_id' => 1,
+             'status' => 'Ongoing',
+             'donation_target' => 7000000,
+             'date_target' => $date_target,
+        ]);
+        Campaign::create([
+            'title' => 'Pity the Street Cat',
+            'slug' => 'pity-the-street-cat',
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
+        ',
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa ',
+             'image' => '/cam/cam6.png',
+             'category_id' => 2,
+             'admin_id' => 1,
+             'status' => 'Ongoing',
+             'donation_target' => 7000000,
+             'date_target' => $date_target,
+        ]);
+        Campaign::create([
+            'title' => 'Caring for Abandoned Cats',
+            'slug' => 'Caring-for-Abandoned-Cats',
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
+        ',
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa ',
+             'image' => '/cam/cam7.png',
+             'category_id' => 2,
+             'admin_id' => 1,
+             'status' => 'Ongoing',
+             'donation_target' => 5000000,
+             'date_target' => $date_target,
+        ]);
+        Campaign::create([
+            'title' => 'Save Abandoned Dogs',
+            'slug' => 'Save-Abandoned-Dogs',
+            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
+        ',
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa ',
+             'image' => '/cam/cam4.png',
              'category_id' => 1,
              'admin_id' => 1,
              'status' => 'Ongoing',
@@ -199,18 +271,14 @@ class DatabaseSeeder extends Seeder
              'date_target' => $date_target,
         ]);
         Campaign::create([
-            'title' => 'Penyelamatan Anjing Sakit',
-            'slug' => 'penyelamatan-anjing-sakit',
+            'title' => 'Hope for Homeless Dogs',
+            'slug' => 'Hope-for-Homeless-Dogs',
             'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
             'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
-             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
-             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
-             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
-             voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
-             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/cam3.png',
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa ',
+             'image' => '/cam/cam5.png',
              'category_id' => 1,
              'admin_id' => 1,
              'status' => 'Ongoing',
@@ -218,57 +286,35 @@ class DatabaseSeeder extends Seeder
              'date_target' => $date_target,
         ]);
         Campaign::create([
-            'title' => 'Penyelamatan Kucing Jalanan',
-            'slug' => 'penyelamatan-kucing-jalanan',
+            'title' => 'Protect dogs and Donate Now',
+            'slug' => 'protect-dogs-and-donate-now',
             'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
             'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
-             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
-             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
-             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
-             voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
-             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/cam4.png',
-             'category_id' => 2,
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa ',
+             'image' => '/cam/cam8.png',
+             'category_id' => 1,
              'admin_id' => 1,
              'status' => 'Ongoing',
-             'donation_target' => 5000000,
+             'donation_target' => 7000000,
              'date_target' => $date_target,
         ]);
         Campaign::create([
-            'title' => 'Penyelamatan Kucing Rabies',
-            'slug' => 'penyelamatan-kucing-rabies',
+            'title' => 'Save Paws Rescue ',
+            'slug' => 'save-paws-rescue',
             'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
         ',
             'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
-             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
-             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
-             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
-             voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
-             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/cam5.png',
-             'category_id' => 2,
-             'admin_id' => 1,
-             'status' => 'Ongoing',
-             'donation_target' => 6000000,
-             'date_target' => $date_target,
-        ]);
-        Campaign::create([
-            'title' => 'Penyelamatan Kucing Sakit',
-            'slug' => 'penyelamatan-kucing-sakit',
-            'short_body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing
-        ',
-            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing Reiciendis
              voluptas blanditiis, perferendis illo 
-             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa 
-             neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
-             et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
-             voluptatum quo? Dicta qui iste ea rem eos? Pariatur quod officia nisi architecto voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing
-             elit. Odio, neque omnis quo soluta adipisci nam magnam praesentium omnis atque rem, laudantium voluptatum sunt recusandae',
-             'image' => 'images/cam6.png',
-             'category_id' => 2,
+             voluptas blanditiis, perferendis illo 
+             voluptas blanditiis, perferendis illo 
+             voluptas blanditiis, perferendis illo 
+             voluptas blanditiis, perferendis illo 
+             laborum nam officiis. Accusamus expedita maiores minima repudiandae explicabo iure, qui fugit tempore doloremque? Tempore provident ipsa ',
+             'image' => '/cam/cam9.png',
+             'category_id' => 1,
              'admin_id' => 1,
              'status' => 'Ongoing',
              'donation_target' => 7000000,

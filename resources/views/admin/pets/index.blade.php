@@ -7,7 +7,7 @@
       <input type="hidden" name="category" value="{{ request('category') }}" >
   @endif
   <div class="input-group mb-3">
-    <input type="text" name="search" style="      border: solid 1px #193A6A  ;
+    <input type="text" name="search" id="search-pet" style="      border: solid 1px #193A6A  ;
     " class="form-control rounded-0" placeholder="Search Pets" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ request('search') }}">
     <button class="input-group-text rounded-0" style="background-color: #193A6A; 
     color: white;
@@ -17,6 +17,7 @@
     cursor: pointer;"  type="submit"><i class="bi bi-search"></i></button>
   </div>
     </form>
+    
     </div>
     <div class="col mb-3" style="display: inline-block; ">
       <select  style=" 
@@ -39,6 +40,7 @@
       cursor: pointer;"  class="text-decoration-none mb-3">{{ $category->name }}</a>
   @endforeach
   </div>
+  <div  id="search_container" >
 
 <div class="table-responsive">
 
@@ -77,7 +79,7 @@
       <div class="modal-content">
         <div class="modal-header d-block">
           <h5 class="modal-title" id="exampleModalLabel">Delete Pet</h5>
-          <p class="text-muted">Are U Sure Delete This Pet ?</p>
+          <p class="text-muted">Are You Sure Delete This Pet ?</p>
         </div>
         <div class="modal-body d-flex justify-content-between">
           <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
@@ -102,6 +104,7 @@
       </tbody>
     </table>
   </div>
+  </div>
   @else
   <p class="text-center fs-4">No. Pet Found.</p>
 @endif
@@ -109,6 +112,8 @@
   <div class="justify-content-center">
     {{ $pets->links() }}
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
 <script>
  
   let tabSelect = document.getElementById("status-select");
@@ -132,5 +137,18 @@
    });
  });
  
- </script>
+    $('#search-pet').on('keyup',function(){
+    $value=$(this).val();
+    $.ajax({
+    type : 'get',
+    url : '{{URL::to('/pets/search')}}',
+    data:{'search':$value},
+    success:function(data){
+    $('tbody').html(data);
+    }
+    });
+
+    })
+
+</script>
 @endsection

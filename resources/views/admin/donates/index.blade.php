@@ -2,10 +2,10 @@
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Donate Page</h1>
-    <form id="search-form" action="/dashboard/donates" method="get" style="display: inline-block;">
+    <form action="/dashboard/donates" method="get" style="display: inline-block;">
   <div class="input-group mb-3">
-    <input id="search-input" type="text" name="search" style="      border: solid 1px #193A6A  ;
-    " class="form-control rounded-0" placeholder="Search donates" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ request('search') }}">
+    <input type="text" name="search" id="search-donates" style="      border: solid 1px #193A6A  ;
+    " class="form-control rounded-0" placeholder="Search Donates" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ request('search') }}">
     <button class="input-group-text rounded-0" style="background-color: #193A6A; 
     color: white;
     padding: 10px 20px;
@@ -98,7 +98,7 @@
                  <div class="modal-content">
                    <div class="modal-header d-block">
                      <h5 class="modal-title" id="exampleModalLabel">Delete Donate</h5>
-                     <p class="text-muted">Are U Sure Delete This Donate ?</p>
+                     <p class="text-muted">Are You Sure Delete This Donate ?</p>
                    </div>
                    <div class="modal-body d-flex justify-content-between">
                      <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
@@ -131,6 +131,8 @@
       <p class="text-center fs-4">No. Donate Found.</p>
     @endif
   </div>
+  <div  id="search_container" >
+
     <div class="mt-3" id="campaignDonate" style="display:block">
       @if ($campaignDonates->count())
       <table class="table table-striped table-sm">
@@ -190,7 +192,7 @@
                     <div class="modal-content">
                       <div class="modal-header d-block">
                         <h5 class="modal-title" id="exampleModalLabel">Delete Donate</h5>
-                        <p class="text-muted">Are U Sure Delete This Donate ?</p>
+                        <p class="text-muted">Are You Sure Delete This Donate ?</p>
                       </div>
                       <div class="modal-body d-flex justify-content-between">
                         <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
@@ -221,6 +223,7 @@
       @else
       <p class="text-center fs-4">No. Donate Found.</p>
     @endif
+  </div>
   </div>
   <div class="mt-3" id="donateShelter" style="display:none">
     @if ($donateShelters->count())
@@ -283,7 +286,7 @@
                     <div class="modal-content">
                       <div class="modal-header d-block">
                         <h5 class="modal-title" id="exampleModalLabel">Delete Donate</h5>
-                        <p class="text-muted">Are U Sure Delete This Donate ?</p>
+                        <p class="text-muted">Are You Sure Delete This Donate ?</p>
                       </div>
                       <div class="modal-body d-flex justify-content-between">
                         <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
@@ -316,7 +319,7 @@
     @endif
   </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
   <script>
 
@@ -364,23 +367,17 @@ selectDonateType.addEventListener("change", function() {
 });
 
 
-  $(document).ready(function() {
-    $("input[name='search']").on("keyup", function() {
-      var searchValue = $(this).val();
-      var categoryValue = $("input[name='category']").val();
-
-      $.ajax({
-        type: "GET",
-        url: "/dashboard/campaigns",
-        data: {
-          search: searchValue,
-          category: categoryValue
-        },
-        success: function(data) {
-          // Tambahkan kode untuk memperbarui hasil pencarian disini (misalnya dengan mengubah isi elemen HTML)
-        }
-      });
-    });
+$('#search-donates').on('keyup',function(){
+  $value=$(this).val();
+  $.ajax({
+  type : 'get',
+  url : '{{URL::to('/donates/search')}}',
+  data:{'search':$value},
+  success:function(data){
+  $('tbody').html(data);
+  }
   });
+
+  })
 </script>
 @endsection

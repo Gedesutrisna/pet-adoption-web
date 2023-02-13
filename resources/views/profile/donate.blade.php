@@ -1,26 +1,30 @@
-@extends('layouts.main')
+@extends('layouts.main-single')
 @section('container')
 <div class="back mt-3 mb-3">
-  <a href="/data/donations"><i   style="font-size: 2rem; color:#193A6A" class="bi bi-arrow-left-circle-fill"></i></a>
+  <a href="/data/donations"><i   style="font-size: 3rem; color:#193A6A" class="bi bi-arrow-left-circle-fill"></i></a>
 </div>
-<div class="row">        
-    <div class="col-sm-4 mb-3 mb-sm-0">
-        <div class="card  rounded-0">
+<div class="row justify-content-center" style="margin-bottom: 100px">        
+  <div class="col-sm-4 mb-3 mb-sm-0">
+        <div class="card  rounded-0" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
             <div class="card-body">
               <h1 class="text-center">Details Payment</h1>
               <hr>
-                <h5 class="card-title">Amount : {{ $donate->amount }}</h5>
-                <h5 class="card-title">Status : {{ $donate->status }}</h5>
-                <h5 class="card-title">Name : {{ Auth::user()->name }}</h5>
-                <h5 class="card-title">Email : {{ Auth::user()->email }}</h5>
-                <p class="card-text">Comment : {{ $donate->comment }}</p>
+              <p class="text-muted mb-0 text-center" style="font-size: 16px">---User Datails---</p>
+              <p class="mb-0" style="font-size: 14px">Name  : {{auth()->user()->name}}</p>
+              <p class="mb-0" style="font-size: 14px">Email : {{auth()->user()->email}}</p>
+              <p class="mb-0" style="font-size: 14px">Phone : {{auth()->user()->phone}}</p>
+              <p class="mb-2" style="font-size: 14px">Address : {{auth()->user()->address}}</p>
+              <p class="text-muted mb-0 text-center" style="font-size: 16px">---Donate Datails---</p>
+              <p class="mb-0" style="font-size: 14px">Amount : Rp{{ number_format($donate->amount, 0, ',', '.') }}</p>
+              <p class="mb-0" style="font-size: 14px">Status : {{$donate->status}}</p>
+              <p class="mb-0" style="font-size: 14px">Comment : {{$donate->comment}}</p>
             </div>
                 <button style="background-color: #193A6A; 
                 color: white;
                 padding: 10px 20px;
                 border: solid 1px #193A6A;
                 font-size: 16px;
-                cursor: pointer;"  id="pay-button">Pay Now !</button>
+                cursor: pointer;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;"  id="pay-button">Pay Now !</button>
         </div>
     </div>
   </div>

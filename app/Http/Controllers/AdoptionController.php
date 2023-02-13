@@ -18,7 +18,7 @@ class AdoptionController extends Controller
         
         return view('admin.adoptions.index',[
             
-            'adoptions' =>  Adoption::with(['category'])->latest('adoptions.created_at')->filter(request(['search', 'category']))->paginate(7)->withQueryString(),
+            'adoptions' =>  Adoption::with(['category'])->latest('adoptions.created_at')->filter(request(['search']))->paginate(7)->withQueryString(),
             'categories' => Category::all()
         ]);       
     
@@ -125,6 +125,64 @@ class AdoptionController extends Controller
         $adoption->delete($adoption);
         return back()->with('success', 'adoption Berhasil Dihapus');
     } 
+
+
+    public function search(Request $request)
+    {
+    if($request->ajax())
+    {
+    $output="";
+            $adoptions = Adoption::with(['category'])->latest('adoptions.created_at')->filter(request(['search']))->paginate(7)->withQueryString();
+
+if($adoptions)
+    {
+        foreach ($adoptions as $key => $adoption) {
+            $output .= ' <tr class="adoption-row" data-status="'. $adoption->status .'">'.
+
+            '<td>'.($key+1).'</td>'.
+            '<td>'.$adoption->user->name.'</td>'.
+            '<td>'.$adoption->user->email.'</td>'.
+            '<td>'.$adoption->category->name.'</td>'.
+            '<td>'.$adoption->pet->name.'</td>'.
+            '<td>'.$adoption->quantity.'</td>'.
+            '<td>'.$adoption->status.'</td>'.
+            '<td>'
+            .'<a href="/dashboard/adoption/'. $adoption->id.' " class="btn btn-primary rounded-0"><i class="bi bi-eye"></i></a>
+            <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header d-block">
+                  <h5 class="modal-title" id="exampleModalLabel">Delete Adoption</h5>
+                  <p class="text-muted">Are You Sure Delete This Submission ?</p>
+                </div>
+                <div class="modal-body d-flex justify-content-between">
+                  <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
+                  <form action="/dashboard/adoptions/'. $adoption->id .'" method="post">
+                  '. csrf_field() .'
+                  '. method_field('DELETE') .'
+                  <button type="submit" class="btn btn-danger rounded-0">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                  
+                </form>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+            <button type="button" class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+            <i class="bi bi-trash"></i>
+            </button>'
+        .'</td>'.
+        
+        
+            '</tr>';
+        }
+        return Response($output);
+        }
+        
+       }
+    }
 }
 
 

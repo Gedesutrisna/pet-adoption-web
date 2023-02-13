@@ -31,7 +31,7 @@ class DonateController extends Controller
         \Midtrans\Config::$isSanitized = true;
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
-     
+
         $donate = null;
         if ($type == 'adoption') {
             $donate = $adoptionDonate->find($id);
@@ -40,21 +40,21 @@ class DonateController extends Controller
         } elseif ($type == 'shelter') {
             $donate = $donateShelter->find($id);
         }
-     
+
         if ($donate) {
             $params = array(
                 'transaction_details' => array(
                     'order_id' => $donate->id,
                     'gross_amount' => $donate->amount,
                 ),
-    
+
                 'items_details' => array(
                     'campaign_id' => $donate->campaign_id,
                     'adoption_id' => $donate->adoption_id,
                     'shelter_id' => $donate->shelter_id,
                     'code' => $donate->code,
                 ),
-        
+
                 'customer_details' => array(
                     'name' => Auth::user()->name,
                     'email' => Auth::user()->email,
@@ -86,18 +86,18 @@ class DonateController extends Controller
                         $donate->shelter->update(['status' => 'Completed']);
                     }
                 }
-                
+
             }
         }
     }
-    
+
     public function dataDonate(AdoptionDonate $adoptionDonate, CampaignDonate $campaignDonate, DonateShelter $donateShelter)
     {
-        $adoptionDonates = AdoptionDonate::latest('adoption_donates.created_at')->filter(request(['search', 'category']))->paginate(7)->withQueryString();
-        $campaignDonates = CampaignDonate::latest('campaign_donates.created_at')->filter(request(['search', 'category']))->paginate(7)->withQueryString();
-        $donateShelters = DonateShelter::latest('donate_shelters.created_at')->filter(request(['search', 'category']))->paginate(7)->withQueryString();
-        return view('admin.donates.index', compact('campaignDonates','adoptionDonates','donateShelters'),[
-            
+        $adoptionDonates = AdoptionDonate::latest('adoption_donates.created_at')->filter(request(['search']))->paginate(7)->withQueryString();
+        $campaignDonates = CampaignDonate::latest('campaign_donates.created_at')->filter(request(['search']))->paginate(7)->withQueryString();
+        $donateShelters = DonateShelter::latest('donate_shelters.created_at')->filter(request(['search']))->paginate(7)->withQueryString();
+        return view('admin.donates.index', compact('campaignDonates', 'adoptionDonates', 'donateShelters'), [
+
         ]);
     }
     public function data()
@@ -106,15 +106,15 @@ class DonateController extends Controller
         $campaigns = Campaign::all();
         $shelters = Shelter::all();
         $adoptions = Adoption::all();
-            //chart
+        //chart
 
-            $campaignDonate = CampaignDonate::where('status', 'Paid')->sum('amount');
-            $adoptionDonate = AdoptionDonate::where('status', 'Paid')->sum('amount');
-            $donateShelter = DonateShelter::where('status', 'Paid')->sum('amount');
+        $campaignDonate = CampaignDonate::where('status', 'Paid')->sum('amount');
+        $adoptionDonate = AdoptionDonate::where('status', 'Paid')->sum('amount');
+        $donateShelter = DonateShelter::where('status', 'Paid')->sum('amount');
 
-        return view('admin.index', compact( 'pets','campaignDonate','adoptionDonate','donateShelter','campaigns','shelters','adoptions',));
+        return view('admin.index', compact('pets', 'campaignDonate', 'adoptionDonate', 'donateShelter', 'campaigns', 'shelters', 'adoptions', ));
 
-    } 
+    }
 
 
     public function store(Request $request)
@@ -123,11 +123,11 @@ class DonateController extends Controller
         $validatedData = $request->validate([
             'code' => 'nullable',
             'amount' => 'required|numeric|min:50000',
-            'comment' => 'nullable',            
+            'comment' => 'nullable',
         ]);
 
         $validatedData['user_id'] = Auth()->user()->id;
-        
+
         if ($request->campaign_id) {
             $campaign = Campaign::find($request->campaign_id);
             $validatedData['campaign_id'] = $campaign->id;
@@ -141,70 +141,100 @@ class DonateController extends Controller
             $validatedData['adoption_id'] = $adoption->id;
             $validatedData['code'] = $adoption->code;
             $donate = new AdoptionDonate();
-            
+
         } else if ($request->shelter_id) {
             $shelter = Shelter::find($request->shelter_id);
             $validatedData['shelter_id'] = $shelter->id;
             $validatedData['code'] = $shelter->code;
             $donate = new DonateShelter();
         }
-        
+
         $donate->fill($validatedData);
         $donate->save();
 
-// Set your Merchant Server Key
-\Midtrans\Config::$serverKey = config('app.server_key');
-// Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-\Midtrans\Config::$isProduction = false;
-// Set sanitization on (default)
-\Midtrans\Config::$isSanitized = true;
-// Set 3DS transaction for credit card to true
-\Midtrans\Config::$is3ds = true;
- 
-$params = array(
-    'transaction_details' => array(
-        'order_id' => $donate->id,
-        'gross_amount' => $request->amount,
-    ),
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('app.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
 
-    'items_details' => array(
-        'campaign_id' => $request->campaign_id,
-        'adoption_id' => $request->adoption_id,
-        'shelter_id' => $request->shelter_id,
-        'code' => $request->code,
-    ),
-    
-    'customer_details' => array(
-        'name' => Auth::user()->name,
-        'email' => Auth::user()->email,
-        'phone' => Auth::user()->phone,
-    ),
-);
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $donate->id,
+                'gross_amount' => $request->amount,
+            ),
 
-$snapToken = \Midtrans\Snap::getSnapToken($params);
+            'items_details' => array(
+                'campaign_id' => $request->campaign_id,
+                'adoption_id' => $request->adoption_id,
+                'shelter_id' => $request->shelter_id,
+                'code' => $request->code,
+            ),
+
+            'customer_details' => array(
+                'name' => Auth::user()->name,
+                'email' => Auth::user()->email,
+                'phone' => Auth::user()->phone,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
 
         return view('profile.donate', compact('snapToken', 'donate'))->with('success', 'Donate Succesfully');
     }
 
 
-    public function destroyShelter($id)    
+    public function destroyShelter($id)
     {
         $donateShelter = DonateShelter::find($id);
         $donateShelter->delete($donateShelter);
         return back()->with('success', 'donate Berhasil Dihapus');
-    } 
-    public function destroyAdoption($id)    
+    }
+    public function destroyAdoption($id)
     {
         $adoptionDonate = AdoptionDonate::find($id);
         $adoptionDonate->delete($adoptionDonate);
         return back()->with('success', 'donate Berhasil Dihapus');
-    } 
-    public function destroyCampaign($id)    
+    }
+    public function destroyCampaign($id)
     {
         $campaignDonate = CampaignDonate::find($id);
         $campaignDonate->delete($campaignDonate);
         return back()->with('success', 'donate Berhasil Dihapus');
-    } 
+    }
 
 
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $output = "";
+            $adoptionDonates = AdoptionDonate::latest('adoption_donates.created_at')->filter(request(['search']))->paginate(7)->withQueryString();
+            $campaignDonates = CampaignDonate::latest('campaign_donates.created_at')->filter(request(['search']))->paginate(7)->withQueryString();
+            $donateShelters = DonateShelter::latest('donate_shelters.created_at')->filter(request(['search']))->paginate(7)->withQueryString();
+            $allDonates = $adoptionDonates->concat($campaignDonates)->concat($donateShelters);
+
+        if ($allDonates) {
+            foreach ($allDonates as $key => $allDonates) {
+                    $output .= ' <tr class="donate-row" data-status="' . $allDonates->status . '">'
+                        .
+                        '<td>'.($key+1).'</td>'.
+                        '<td>' . $allDonates->user->name . '</td>' .
+                        '<td>' . $allDonates->user->email . '</td>' .
+                        '<td>Rp' . number_format($allDonates->amount, 0, ',', '.') . '</td>' .
+                        '<td>' . $allDonates->status . '</td>' .
+                        '<td>'
+                        . '<a href="/dashboard/donates/' . $allDonates->slug . ' " class="btn btn-primary rounded-0"><i class="bi bi-eye"></i></a>      
+                        <button type="button" class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                        <i class="bi bi-trash"></i>
+                        </button>'
+                        . '</td>' .
+                        '</tr>';
+                }
+                return Response($output);
+            }
+        }
+    }
 }

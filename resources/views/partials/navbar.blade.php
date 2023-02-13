@@ -1,101 +1,119 @@
-<nav class="navbar navbar-expand-lg bg-body-white">
-    <div class="container">
-      <a class="navbar-brand ms-2" href="#">Tw<span>&</span>ce</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav align-item-center mx-auto my-3 mb-2">
-          <li class="nav-item-custom ms-5">
-            <a class="nav-link" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item-custom ms-5">
-            <a class="nav-link" aria-current="page" href="/pets">Pets</a>
-          </li>  
-          <li class="nav-item-custom ms-5">
-            <a class="nav-link" aria-current="page" href="/campaigns">Campaign</a>
-          </li>  
-          <li class="nav-item-custom ms-5">
-            <a class="nav-link" aria-current="page" href="/shelters">Shelters</a>
-          </li>
-          <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header d-block">
-                  @if (auth()->check())
-                          
-                     
-                  @foreach (Auth::user()->notification as $notification)
-                  @if (!$notification->read_at)
+<header class="header">
 
-                  @if ($notification->type == 'Adoption Declined'|| $notification->type == 'Adoption Declined')
-
-                  <div class="alert alert-danger d-flex justify-content-between" role="alert">
-                   <p style="font-size: 14px;">{{ $notification->data }}</p> 
-                    <form action="{{ route('notification.read', $notification) }}" method="post">
-                      @csrf
-                      @method('PATCH')
-                      <button class="btn btn-sm btn-primary" type="submit" style="font-size: 14px">Mark as Read</button>
-                    </form>
-                  </div>
-                      
-                  @else
-                                          
-                  <div class="alert alert-success d-flex justify-content-between" role="alert">
-                    <p style="font-size: 14px;">{{ $notification->data }}</p> 
-                    <form style="margin-left: 30px" action="{{ route('notification.read', $notification) }}" method="post">
-                      @csrf
-                      @method('PATCH')
-                      <button class="btn btn-sm btn-primary" type="submit" style="font-size: 14px">Mark as Read</button>
-                    </form>
-                  </div>
-
-                  @endif
-
-                  @endif
-                  @endforeach
-                </div>
-                <div class="modal-body">
-                  <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
-                  
-                </div>
-                @else
-                        
-                @endif
-              </div>
-            </div>
-          </div>
-        
-        </ul>
-        @if (auth()->check())
-            
-        <button class="mx-20" type="button" style="border: 0px;background:none;margin-right:20px" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-         <i class="bi bi-bell"></i>
-         </button>
-        @else
-<a href="login"  style="border: 0px;background:none;margin-right:20px;color: black;">  <i class="bi bi-bell"></i></a>       
-            
-        @endif
-
-        <div class="profile-img my-3">
-          @auth
-            <a class="text-decoration-none " style="color:black;" href="/profile"> 
-             @if (empty(Auth::user()->image))
-             {{ Auth()->user()->name }}          
-              @else
-           <img class="image rounded-circle" src="{{ asset('storage/' . Auth::user()->image ) }}" alt="{{ Auth::user()->name }}" style="width: 50px;height: 50px; padding: 10px; margin: 0px; ">
-              @endif
-            </a>
-              @can('admin')
-              <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-window"></i> My Dashboard</a></li>
-              <li><hr class="dropdown-divider"></li>   
-              @endcan
-              @else
-      <div class="profile">
-          <a href="/login" class="nav-link"><i class="bi bi-person" style="font-size: 25px; color: black;width: 50px;height: 50px; padding: 10px; margin: 0px;"></i></a>
-      </div>
-      @endauth
-        </div>
-      </div>
-    </div>
+  <a href="#" class="logo">Twice</a>
+  
+  <nav class="navbar">
+  <a href="/">Home</a>
+  <a href="/pets">Pets</a>
+  <a href="/campaigns">Campaign</a>
+  <a href="/shelters">Shelters</a>
   </nav>
+  
+  <div class="icons d-flex align-items-center">
+    <div class="fas fa-bars" id="menu-btn"></div>
+    @if (auth()->check())            
+      <div class="notification-btn" style=" display: inline-block;
+      position: relative;">
+      <div class="fas fa-bell" id="notification-btn"></div>
+      <div class="notification-count rounded-circle" style=" position: absolute;
+        top: -1px;
+        right: -4px;
+        background-color: #e67e22;
+        color: white;
+        padding: 0px 6px;
+        font-size: 12px;border-radius:50%;">
+          <span>{{ Auth::user()->notification()->where('read_at')->count() }}</span>
+        </div>            
+      </div>
+    @else
+        
+    <a href="#"><i  class="fas fa-bell"></i></a>
+    @endif
+    <a href="/pets" ><i class="fas fa-shopping-cart"></i></a>
+    @auth
+    @if (empty(Auth::user()->image))
+    <a class="img text-decoration-none" style="color:black;display:inline-block;align-items:center  " href="/profile">        
+      <img class="img  rounded-circle" src="/assets/profile.png" alt="profile_image"style="width: 30px;height: 30px; display:inline-block; ">
+    </a>
+      @else
+      <a class="img text-decoration-none" style="color:black;display:inline-block;align-items:center  " href="/profile">        
+        <img class="img rounded-circle " src="{{ asset('storage/' . Auth::user()->image ) }}" alt="{{ Auth::user()->name }}" style="width: 30px;height: 30px; display:inline-block;">
+</a>
+    @endif
+              @else
+      <div class="fas fa-user" id="login-btn"></div>
+      @endauth
+  </div>
+  
+  <form action="/login" method="post" class="login-form sign-in-form">
+    @csrf
+    <h3>Sign in</h3>
+    <input type="email" name="email" placeholder="enter your email" id="" class="box">
+    <input type="password" name="password" placeholder="enter your Password" id="" class="box">
+    <div class="remember">
+      <input type="checkbox" name="" id="remember-me">
+      <label for="remember-me">remember-me</label>
+    </div>
+    <input type="submit" value="sign in" class="btn">
+    <div class="links">
+      <a href="#">forget password</a>
+      <div id="register-link">sign up</div>
+    </div>
+  </form>
+  <form action="/register" method="post" class="register-form sign-up-form">
+    @csrf
+    <h3>Sign up</h3>
+    <input type="name" name="name" placeholder="enter your name" id="" class="box">
+    <input type="email" name="email" placeholder="enter your email" id="" class="box">
+    <input type="password" name="password" placeholder="enter your Password" id="" class="box">
+    <input type="password" name="confirm_password" placeholder="enter your confirmation password" id="" class="box">
+
+    <input type="submit" value="sign up" class="btn">
+    <div class="links">
+      <a href="#">forget password</a>
+      <div id="login-link">sign in</div>
+    </div>
+  </form>
+
+  
+
+  <div class="notification">
+    <h3 class="mb-3">Notification</h3>
+    @if (auth()->check())
+
+    <div class="notification-content">
+      @foreach (Auth::user()->notification as $notification)
+      @if (!$notification->read_at)
+        @if ($notification->type == 'Adoption Declined'|| $notification->type == 'Shelter Declined')
+          <div class="alert alert-danger d-flex justify-content-between" style="color: #ff5555;margin-bottom:1.5rem" role="alert">
+            <p style="font-size: 14px;">{{ $notification->data }}</p> 
+            <form action="{{ route('notification.read', $notification) }}" method="post">
+              @csrf
+              @method('PATCH')
+              <button class="button" style="background-color: #ff5555;color:white;padding:5px 10px;margin-top:10px;border-radius:15px" type="submit" style="font-size: 14px">Mark as Read</button>
+            </form>
+          </div>                    
+        @else                                       
+          <div class="alert alert-success d-flex justify-content-between" role="alert" style="color: #3c763d;margin-bottom:1.5rem">
+            <p style="font-size: 14px;">{{ $notification->data }}</p> 
+            <form action="{{ route('notification.read', $notification) }} " method="post">
+              @csrf
+              @method('PATCH')
+              <button class="button" style="background-color: #3c763d;color:white;padding:5px 10px;margin-top:10px;border-radius:15px" type="submit" style="font-size: 14px">Mark as Read</button>
+            </form>
+          </div>
+        @endif
+      @endif
+    @endforeach
+    </div>
+    
+    @else
+    
+    @endif
+  </div>
+  </header>
+  <style>
+    a{
+      text-decoration: none;
+    }
+  </style>

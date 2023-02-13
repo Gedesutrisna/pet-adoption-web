@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('container')
 <div class="back mt-3">
-  <a href="/dashboard/pets"><i   style="font-size: 2rem; color:#193A6A" class="bi bi-arrow-left-circle-fill"></i></a>
+  <a href="/dashboard/pets" ><i   style="font-size: 2rem; color:#193A6A" class="bi bi-arrow-left-circle-fill"></i></a>
 </div>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Edit Pet</h1>

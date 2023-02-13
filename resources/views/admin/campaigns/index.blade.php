@@ -2,20 +2,20 @@
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Campaign Page</h1>
-    {{-- <form action="/dashboard/campaigns" method="get" style="display: inline-block;">
+    <form action="/dashboard/campaigns" method="get" style="display: inline-block;">
       @if (request('category'))
       <input type="hidden" name="category" value="{{ request('category') }}" >
-  @endif --}}
-  {{-- <div class="input-group mb-3"> --}}
+  @endif 
+   <div class="input-group mb-3">
     <input type="text" name="search" id="search" style="      border: solid 1px #193A6A  ;" class="form-control rounded-0" placeholder="Search Campaigns" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ request('search') }}">
-    {{-- <button class="input-group-text rounded-0" style="background-color: #193A6A; 
+    <button class="input-group-text rounded-0" style="background-color: #193A6A; 
     color: white;
     padding: 10px 20px;
     border: none;
     font-size: 16px;
     cursor: pointer;"  type="submit"><i class="bi bi-search"></i></button>
   </div>
-    </form> --}}
+    </form>
     </div>
     <div class="col mb-3" style="display: inline-block; ">
       <select  style=" 
@@ -74,7 +74,7 @@
       <div class="modal-content">
         <div class="modal-header d-block">
           <h5 class="modal-title" id="exampleModalLabel">Delete Campaign</h5>
-          <p class="text-muted">Are U Sure Delete This Campaign ?</p>
+          <p class="text-muted">Are You Sure Delete This Campaign ?</p>
         </div>
         <div class="modal-body d-flex justify-content-between">
           <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
@@ -131,18 +131,18 @@
    });
  });
  
- $('#search').on('keyup',function(){
-$value=$(this).val();
-$.ajax({
-type : 'get',
-url : '{{URL::to('/campaigns/search')}}',
-data:{'search':$value},
-success:function(data){
-$('tbody').html(data);
-}
-});
+  $('#search').on('keyup',function(){
+  $value=$(this).val();
+  $.ajax({
+  type : 'get',
+  url : '{{URL::to('/campaigns/search')}}',
+  data:{'search':$value},
+  success:function(data){
+  $('tbody').html(data);
+  }
+  });
 
-})
+  })
 
 </script>
 
