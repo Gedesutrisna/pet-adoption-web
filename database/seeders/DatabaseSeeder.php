@@ -28,19 +28,19 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $date_target = "2023-03-01";
+        $date_target = "2025-04-30";
 
         Admin::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'password' => bcrypt('12345678'),
+            'password' => bcrypt('123'),
         ]);
         User::create([
-            'name' => 'User',
+            'name' => 'user',
             'username' => 'user',
             'phone' => 1234512345123,
             'email' => 'user@gmail.com',
-            'password' => bcrypt('12345678'),
+            'password' => bcrypt('123'),
             'image' => '',
         ]);
 
@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              elit.',
-             'image' => '/pet/cat4.png',
+             'image' => '/pet/dog4.png',
              'quantity' => 9,
              'category_id' => 2,
              'admin_id' => 1,
@@ -173,7 +173,7 @@ class DatabaseSeeder extends Seeder
              neque architecto totam mollitia omnis corporis, aliquam quaerat maxime? Illum nostrum rerum voluptas cum, tenetur architecto reprehenderit,
              et fuga, delectus modi animi odit incidunt voluptates vel corrupti. Dolor in similique ipsum! Quia aut quasi, architecto harum officia
              elit.',
-             'image' => '/pet/dog4.png',
+             'image' => '/pet/dog3.png',
              'quantity' => 8,
              'category_id' => 1,
              'admin_id' => 1,

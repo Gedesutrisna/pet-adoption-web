@@ -81,12 +81,12 @@ Route::get('/donates/search', [DonateController::class, 'search']);
 
 Route::get('/dashboard/adoptions', [AdoptionController::class, 'dataadoption'])->middleware('auth:admin');
 Route::get('/dashboard/adoption/{id}', [AdoptionController::class, 'show'])->middleware('auth:admin');
-Route::delete('/dashboard/adoptions/{id}', [AdoptionController::class, 'destroy']);
+Route::delete('/dashboard/adoption/{id}', [AdoptionController::class, 'destroy']);
 Route::get('/adoptions/search', [AdoptionController::class, 'search']);
 
 Route::get('/dashboard/shelters', [ShelterController::class, 'datashelter'])->middleware('auth:admin');
 Route::get('/dashboard/shelter/{id}', [ShelterController::class, 'show'])->middleware('auth:admin');
-Route::delete('/dashboard/shelters/{id}', [ShelterController::class, 'destroy']);
+Route::delete('/dashboard/shelter/{id}', [ShelterController::class, 'destroy']);
 Route::get('/shelters/search', [ShelterController::class, 'search']);
 
 Route::get('/dashboard/pets/checkSlug', [PetController::class, 'checkSlug' ])->middleware('auth:admin');

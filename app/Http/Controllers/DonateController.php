@@ -64,7 +64,7 @@ class DonateController extends Controller
             $snapToken = \Midtrans\Snap::getSnapToken($params);
             return view('profile.donate', compact('snapToken', 'donate'))->with('success', 'Donate Succesfully');
         } else {
-            return redirect()->back()->with('error', 'Donate Not Found');
+            return back()->with('error', 'Donate Not Found');
         }
     }
     public function callBack(Request $request)

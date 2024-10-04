@@ -20,7 +20,7 @@
               <input type="file" id="image" name="image" style="display: none;">
             </form>
             @else
-            <form action="{{ route('update.profile') }}" method="POST" enctype="multipart/form-data">
+            <form id="update-form" action="{{ route('update.profile') }}" method="POST" enctype="multipart/form-data">
               @method('put')
               @csrf
               <img id="profile-image" class="image rounded-circle" src="/assets/profile.png" alt="profile_image" style="width: 100px;height: 100px; padding: 10px; margin: 0px;  cursor: pointer;">   
@@ -237,12 +237,11 @@ if (profileImage) {
   });
 }
 
-
 const imageInput = document.getElementById("image");
   const form = document.getElementById("update-form");
 
   imageInput.addEventListener("change", function() {
-    const confirmation = confirm("Apakah Anda yakin ingin mengupdate profil?");
+    const confirmation = confirm("Are you sure update your profile image ?");
 
     if (confirmation) {
       form.submit();

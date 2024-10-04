@@ -69,7 +69,7 @@
                 <a href="/dashboard/campaigns/{{ $campaign->slug }}" class="btn btn-primary rounded-0"><i class="bi bi-eye"></i></a>
                 <a href="/dashboard/campaigns/{{ $campaign->slug }}/edit" class="btn btn-warning rounded-0"><i class="bi bi-pen"></i></a>
                                            <!-- Modal -->
-  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal3-{{ $campaign->slug }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header d-block">
@@ -88,7 +88,7 @@
     </div>
   </div>
 
- <button type="button" class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+ <button type="button" class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal3-{{ $campaign->slug }}">
   <i class="bi bi-trash"></i>
   </button>
 

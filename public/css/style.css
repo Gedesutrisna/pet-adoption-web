@@ -32,7 +32,7 @@ html::-webkit-scrollbar-thumb {
   padding-bottom: 2rem;
   text-align: center;
   font-size: 3.5rem;
-  color: #193A6A;
+  color: #130f40;
 }
 .heading span {
   color: #e67e22;
@@ -50,11 +50,11 @@ section {
   border-top-left-radius: 0;
   cursor: pointer;
   background: none;
-  color: #193A6A;
+  color: #130f40;
   font-size: 1.7rem;
   overflow: hidden;
   z-index: 0;
-  border: 0.2rem solid #193A6A;
+  border: 0.2rem solid #130f40;
   position: relative;
 }
 .btn::before {
@@ -64,7 +64,7 @@ section {
   left: 0;
   height: 100%;
   width: 100%;
-  background: #193A6A;
+  background: #130f40;
   z-index: -1;
   transition: 0.2s linear;
   -webkit-clip-path: circle(0% at 0% 5%);
@@ -76,6 +76,13 @@ section {
 }
 .btn:hover {
   color: #fff;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    transform: translateY(3rem);
+    opacity: 0;
+  }
 }
 
 @keyframes fadeIn {
@@ -111,11 +118,12 @@ section {
   font-size: 1.7rem;
   color: #666;
 }
+
 .header .navbar a:hover {
   color: #e67e22;
 }
 .header .icons a,
-.header .icons div{
+.header .icons div {
   font-size: 2.5rem;
   margin-left: 1.5rem;
   color: #193A6A;
@@ -220,12 +228,12 @@ section {
   cursor: pointer;
   color: #666;
 }
-.header .login-form .btn {
+.header .login-form .btn-custom {
   width: 100%;
   text-align: center;
   margin: 1.5rem 0;
 }
-.header .login-form .btn:hover {
+.header .login-form .btn-custom:hover {
   background: #193A6A;
 }
 .header .login-form .links {
@@ -244,12 +252,12 @@ section {
   color: #193A6A;
   text-decoration: underline;
 }
-.header .register-form .btn {
+.header .register-form .btn-custom {
   width: 100%;
   text-align: center;
   margin: 1.5rem 0;
 }
-.header .register-form .btn:hover {
+.header .register-form .btn-custom:hover {
   background: #193A6A;
 }
 .header .register-form .links {
@@ -272,6 +280,7 @@ section {
 #menu-btn {
   display: none;
 }
+
 
 .home {
   min-height: 100vh;
@@ -299,7 +308,7 @@ section {
   border-color: #fff;
 }
 .home .content .btn:hover {
-  color: #193A6A;
+  color: #130f40;
 }
 .home .content .btn::before {
   background: #fff;
@@ -328,7 +337,7 @@ section {
   flex: 1 1 40rem;
 }
 .about .content h3 {
-  color: #193A6A;
+  color: #130f40;
   font-size: 4rem;
 }
 .about .content h3 span {
@@ -366,7 +375,7 @@ section {
 .dog-food .content h3,
 .cat-food .content h3 {
   font-size: 3.5rem;
-  color: #193A6A;
+  color: #130f40;
 }
 .dog-food .content h3 span,
 .cat-food .content h3 span {
@@ -434,7 +443,7 @@ section {
   font-size: 2.2rem;
   margin-top: 1rem;
   background: #fff;
-  color: #193A6A;
+  color: #130f40;
   text-align: center;
 }
 .shop .box-container .box .icons a:hover {
@@ -447,7 +456,7 @@ section {
 }
 .shop .box-container .box .content h3 {
   font-size: 2.2rem;
-  color: #193A6A;
+  color: #130f40;
   padding-bottom: 0.5rem;
 }
 
@@ -456,13 +465,6 @@ section {
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
   gap: 1.5rem;
 }
-
-@media only screen and (min-width: 767px) {
-  .services .box-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 .services .box-container .box {
   background: #eee;
   padding: 3rem;
@@ -487,7 +489,7 @@ section {
 }
 .services .box-container .box h3 {
   font-size: 2.2rem;
-  color: #193A6A;
+  color: #130f40;
   padding: 1rem 0;
 }
 
@@ -513,20 +515,20 @@ section {
   text-align: center;
 }
 .contact form .btn:hover {
-  background: #193A6A;
+  background: #130f40;
 }
 .contact form h3 {
   font-size: 3rem;
   padding-bottom: 1rem;
-  color: #193A6A;
+  color: #130f40;
 }
 .contact form .box, .contact form textarea {
   width: 100%;
-  border-bottom: 0.2rem solid #193A6A;
+  border-bottom: 0.2rem solid #130f40;
   border-width: 0.1rem;
   font-size: 1.6rem;
   text-transform: none;
-  color: #193A6A;
+  color: #130f40;
   padding: 1.5rem 0;
   margin: 1rem 0;
 }
@@ -561,7 +563,7 @@ section {
   border-color: #fff;
 }
 .footer .share a:hover {
-  color: #193A6A;
+  color: #130f40;
 }
 .footer .share a::before {
   background: #fff;

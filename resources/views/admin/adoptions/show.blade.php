@@ -6,6 +6,7 @@
   <div class="back mt-3 mb-4">
     <a href="/dashboard/adoptions"><i   style="font-size: 2rem; color:#193A6A" class="bi bi-arrow-left-circle-fill"></i></a>
   </div>
+  
   <div class="status">
     @if($adoption->status === 'Inprogress')
     <button type="button" class="btn btn-success rounded-0 " data-bs-toggle="modal" data-bs-target="#exampleModal1">

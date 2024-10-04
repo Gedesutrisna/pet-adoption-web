@@ -39,7 +39,7 @@
   <div class="content">
     <h3>For better life <span>cat and dog</span></h3>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo nemo aliquid veritatis iure, soluta voluptatum dolorum fugiat aspernatur exercitationem modi!</p>
-    <a href="#"> <img src="/assets/shop_now_dog.png" alt=""></a>
+    <a href="/campaigns"> <img src="/assets/shop_now_dog.png" alt=""></a>
   </div>
   
   </div>
@@ -49,7 +49,7 @@
     <div class="content">
       <h3>Help much of them <br> <span>cat and dog lovers</span></h3>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo nemo aliquid veritatis iure, soluta voluptatum dolorum fugiat aspernatur exercitationem modi!</p>
-      <a href="#"> <img src="/assets/shop_now_cat.png" alt=""></a>
+      <a href="/campaigns"> <img src="/assets/shop_now_cat.png" alt=""></a>
     </div>
   
     <div class="image">

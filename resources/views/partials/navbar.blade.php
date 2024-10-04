@@ -31,15 +31,15 @@
     @endif
     <a href="/pets" ><i class="fas fa-shopping-cart"></i></a>
     @auth
-    @if (empty(Auth::user()->image))
-    <a class="img text-decoration-none" style="color:black;display:inline-block;align-items:center  " href="/profile">        
-      <img class="img  rounded-circle" src="/assets/profile.png" alt="profile_image"style="width: 30px;height: 30px; display:inline-block; ">
-    </a>
-      @else
-      <a class="img text-decoration-none" style="color:black;display:inline-block;align-items:center  " href="/profile">        
-        <img class="img rounded-circle " src="{{ asset('storage/' . Auth::user()->image ) }}" alt="{{ Auth::user()->name }}" style="width: 30px;height: 30px; display:inline-block;">
-</a>
-    @endif
+              @if (empty(Auth::user()->image))
+              <a class="img text-decoration-none" style="color:black;display:inline-block;align-items:center  " href="/profile">        
+                <img class="img  rounded-circle" src="/assets/profile.png" alt="profile_image"style="width: 30px;height: 30px; display:inline-block; ">
+              </a>
+                @else
+                <a class="img text-decoration-none" style="color:black;display:inline-block;align-items:center  " href="/profile">        
+                  <img class="img rounded-circle " src="{{ asset('storage/' . Auth::user()->image ) }}" alt="{{ Auth::user()->name }}" style="width: 30px;height: 30px; display:inline-block;">
+          </a>
+              @endif
               @else
       <div class="fas fa-user" id="login-btn"></div>
       @endauth

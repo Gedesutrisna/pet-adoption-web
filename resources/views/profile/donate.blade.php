@@ -16,7 +16,12 @@
               <p class="mb-2" style="font-size: 14px">Address : {{auth()->user()->address}}</p>
               <p class="text-muted mb-0 text-center" style="font-size: 16px">---Donate Datails---</p>
               <p class="mb-0" style="font-size: 14px">Amount : Rp{{ number_format($donate->amount, 0, ',', '.') }}</p>
+              @if ($donate->status == null)
               <p class="mb-0" style="font-size: 14px">Status : {{$donate->status}}</p>
+              @else
+              <p class="mb-0" style="font-size: 14px">Status : -</p>
+                  
+              @endif
               <p class="mb-0" style="font-size: 14px">Comment : {{$donate->comment}}</p>
             </div>
                 <button style="background-color: #193A6A; 

@@ -82,7 +82,7 @@ class ShelterController extends Controller
             'data' => 'Congratulations Your Shelter is Approved, Please Do The Next Step',
         ]);
         $notification->save();
-        return redirect()->back()->with('success', 'shelter request approved!');
+        return redirect()->back()->with('success', 'Shelter Request Approved!');
     }
     public function decline($id)
     {
@@ -97,7 +97,7 @@ class ShelterController extends Controller
         ]);
         $notification->save();
 
-        return redirect()->back()->with('success', 'shelter request declined!');
+        return redirect()->back()->with('success', 'Shelter Request Declined!');
     }
 
 
@@ -105,7 +105,7 @@ class ShelterController extends Controller
     {
         $shelter = Shelter::find($id);
         $shelter->delete($shelter);
-        return back()->with('success', 'shelter Berhasil Dihapus');
+        return back()->with('success', 'Shelter Deleted Successfuly');
     } 
 
     public function search(Request $request)

@@ -93,15 +93,15 @@
         <td>{{ $loop->iteration }}</td>
         <td>{{ $category->name}}</td>
         <td>
-          <button type="button" class="btn btn-warning rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+          <button type="button" class="btn btn-warning rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal2-{{ $category->slug }}">
           <i class="bi bi-pen"></i>
           </button>
                   <!-- Modal -->
-  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal2-{{ $category->slug }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Create Category</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Update Category</h5>
         </div>
         <div class="modal-body">
           <form method="POST" action="/dashboard/categories/{{ $category->slug }}">
@@ -142,7 +142,7 @@
     </div>
   </div>
                   <!-- Modal -->
-  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal3-{{ $category->slug }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header d-block">
@@ -162,7 +162,7 @@
     </div>
   </div>
 
- <button type="button" class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+ <button type="button" class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#exampleModal3-{{ $category->slug }}">
   <i class="bi bi-trash"></i>
   </button>
 

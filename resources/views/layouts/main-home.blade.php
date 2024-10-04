@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
   </head>
   <body>
-   @include('partials.navbar')
+    @include('partials.navbar')
    @include('sweetalert::alert')
    <div class="container">
     @yield('container')

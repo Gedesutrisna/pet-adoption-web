@@ -153,7 +153,6 @@ class CampaignController extends Controller
         }
         $validatedData = $request->validate($rules);
 
-  
         if($request->file('image')){
             $validatedData['image'] = $request->file('image')->store('images');
             if($campaign->image){

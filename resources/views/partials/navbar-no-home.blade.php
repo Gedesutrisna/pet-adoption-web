@@ -9,7 +9,7 @@
   <a href="/shelters">Shelters</a>
   </nav>
   
-  <div class="icons">
+  <div class="icons d-flex align-items-center">
     <div class="fas fa-bars" id="menu-btn"></div>
     @if (auth()->check())            
     <div class="notification-btn" style=" display: inline-block;
@@ -83,21 +83,21 @@
           @foreach (Auth::user()->notification as $notification)
           @if (!$notification->read_at)
             @if ($notification->type == 'Adoption Declined'|| $notification->type == 'Shelter Declined')
-              <div class="alert alert-danger d-flex justify-content-between" style="color: #ff5555;margin-bottom:1.5rem" role="alert">
+              <div class="notif" style="color: #ff5555;margin-bottom:1.5rem" role="alert">
                 <p style="font-size: 14px;">{{ $notification->data }}</p> 
                 <form action="{{ route('notification.read', $notification) }}" method="post">
                   @csrf
                   @method('PATCH')
-                  <button class="button" style="background-color: #ff5555;color:white;padding:5px 10px;margin-top:10px;border-radius:15px" type="submit" style="font-size: 14px">Mark as Read</button>
+                  <button class="read" style="background-color: #ff5555;color:white;padding:6px 12px;margin-top:10px;border-radius:15px" type="submit" style="font-size: 14px">Mark as Read</button>
                 </form>
               </div>                    
             @else                                       
-              <div class="alert alert-success d-flex justify-content-between" role="alert" style="color: #3c763d;margin-bottom:1.5rem">
+              <div class="notif" role="alert" style="color: #3c763d;margin-bottom:1.5rem">
                 <p style="font-size: 14px;">{{ $notification->data }}</p> 
                 <form action="{{ route('notification.read', $notification) }} " method="post">
                   @csrf
                   @method('PATCH')
-                  <button class="button" style="background-color: #3c763d;color:white;padding:5px 10px;margin-top:10px;border-radius:15px" type="submit" style="font-size: 14px">Mark as Read</button>
+                  <button class="read" style="background-color: #3c763d;color:white;padding:6px 12px;margin-top:10px;border-radius:15px" type="submit" style="font-size: 14px">Mark as Read</button>
                 </form>
               </div>
             @endif

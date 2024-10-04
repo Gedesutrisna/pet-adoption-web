@@ -320,6 +320,9 @@ section {
 }
 
 @media (max-width: 991px) {
+  .header {
+    padding: 2rem;
+  }
   html {
     font-size: 55%;
   }

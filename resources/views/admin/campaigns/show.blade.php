@@ -1,8 +1,10 @@
 @extends('admin.layouts.main')
 @section('container')
-<div class="back mt-3">
+<div class="back mt-3 d-flex justify-content-between align-items-center">
   <a href="/dashboard/campaigns"><i   style="font-size: 2rem; color:#193A6A" class="bi bi-arrow-left-circle-fill"></i></a>
 </div>
+<h1 class="h2">Single Page</h1>
+<hr>
 <div class="container">
     <div class="row my-3">
       <div class="col-lg-8">

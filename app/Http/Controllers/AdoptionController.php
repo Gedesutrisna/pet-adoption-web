@@ -52,7 +52,7 @@ class AdoptionController extends Controller
         $validatedData['user_id'] = Auth()->user()->id;
         Adoption::create($validatedData);
 
-        return redirect('/profile')->with('success', 'adoption Succesfully');
+        return redirect('/profile')->with('success', 'Adoption Succesfully');
     }
     
     public function approve(Request $request,$id)
@@ -77,7 +77,7 @@ class AdoptionController extends Controller
         ]);
         $notification->save();
         
-        return redirect()->back()->with('success', 'adoption request approved!');
+        return redirect()->back()->with('success', 'Adoption Request Approved!');
     }
     public function decline($id)
     {
@@ -93,7 +93,7 @@ class AdoptionController extends Controller
         ]);
         $notification->save();
     
-        return redirect()->back()->with('success', 'adoption request declined!');
+        return redirect()->back()->with('success', 'Adoption Request Declined!');
     }
 
 
@@ -123,7 +123,7 @@ class AdoptionController extends Controller
     {
         $adoption = Adoption::find($id);
         $adoption->delete($adoption);
-        return back()->with('success', 'adoption Berhasil Dihapus');
+        return back()->with('success', 'Adoption Deleted Successfuly');
     } 
 
 
